@@ -2,10 +2,12 @@ public class Ladder {
 
     private final int[][] rows;
 
-    public Ladder(int row, int numberOfPerson) {
+    private Ladder(gameEntry entry) {
+        this.rows = new int[entry.getRow()][entry.getColumn()];
+    }
 
-        this.rows = new int[row][numberOfPerson];
-
+    public static Ladder of(int row, int column) {
+        return new Ladder(gameEntry.from(row,column));
     }
 
     public void drawLine (Position position) {

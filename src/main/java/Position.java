@@ -1,24 +1,22 @@
 public class Position {
-    private int row;
-    private int column;
+    private gameEntry entry;
     private Direction direction;
 
-    private Position(int row, int column, Direction direction) {
-        this.row = row;
-        this.column = column;
+    private Position(gameEntry entry, Direction direction) {
+        this.entry = entry;
         this.direction = direction;
     }
 
     public static Position of(int row, int column, Direction direction) {
-        return new Position(row, column, direction);
+        return new Position(gameEntry.from(row,column), direction);
     }
 
     public int getRow() {
-        return this.row;
+        return this.entry.getRow();
     }
 
     public int getColumn() {
-        return this.column;
+        return this.entry.getColumn();
     }
 
     public Direction getDirection() {
