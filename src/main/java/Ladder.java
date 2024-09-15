@@ -9,6 +9,10 @@ public class Ladder {
     }
 
     public void drawLine (Position position) {
+        //이미 가로줄이 있을 경우
+        if(rows[position.getRow()][position.getColumn()] == 1) {
+            throw new IllegalArgumentException();
+        }
 
         rows[position.getRow()][position.getColumn()] = 1;
 
