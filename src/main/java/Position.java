@@ -1,16 +1,16 @@
 public class Position {
     private int row;
     private int column;
-    private int ladderNumber;
+    private Direction direction;
 
-    private Position(int row, int column, int ladderNumber) {
+    private Position(int row, int column, Direction direction) {
         this.row = row;
         this.column = column;
-        this.ladderNumber = ladderNumber;
+        this.direction = direction;
     }
 
-    public static Position of(int row, int column, int ladderNumber) {
-        return new Position(row, column, ladderNumber);
+    public static Position of(int row, int column, Direction direction) {
+        return new Position(row, column, direction);
     }
 
     public int getRow() {
@@ -21,7 +21,7 @@ public class Position {
         return this.column;
     }
 
-    public int getLadderNumber() {
-        return this.ladderNumber;
+    public Direction getDirection() {
+        return this.direction;
     }
 }
