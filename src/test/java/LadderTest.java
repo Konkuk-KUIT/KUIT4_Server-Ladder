@@ -13,7 +13,7 @@ class LadderTest {
         Assertions.assertThat(len[0]).isEqualTo(3);
         Assertions.assertThat(len[1]).isEqualTo(3);
 
-        /* Assertions.assertThat(len).hasSize(3); 도 있는데 열 크기 검사가 넘 귀찮은..
+        /* Assertions.assertThat(len).hasSize(3); 도 있는데 열 크기 검사가 넘 귀찮은.. (반복문 써야함)
         Assertions.assertThat(len[0]).hasSize(3);   // 오류 뜸
         */
     }
@@ -42,7 +42,4 @@ class LadderTest {
 
         Assertions.assertThat(end).isEqualTo(3);
     }
-
-
-
 }

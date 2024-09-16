@@ -11,7 +11,7 @@ public class Ladder {
     }
 
     public void drawLine(PositionOfLine position) {
-        position.canDrawLine(rows.length, rows[0].length);
+        position.canDrawLine(rows);
         position.makeLine(rows);
     }
 

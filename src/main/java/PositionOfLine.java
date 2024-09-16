@@ -11,8 +11,8 @@ public class PositionOfLine {
         return new PositionOfLine(x, y);
     }
 
-    public void canDrawLine(int row_num, int col_num) {
-        if (x < 0 || y < 0 || x >= row_num || y >= col_num) {
+    public void canDrawLine(int[][] array) {
+        if (array[x][y] != 0 || x < 0 || y < 0 || x >= array.length || y >= array[0].length - 1) {
             throw new IllegalArgumentException("Can't draw a line in this position");
         }
     }
