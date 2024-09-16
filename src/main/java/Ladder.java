@@ -1,25 +1,21 @@
 public class Ladder {
 
     private final int[][] rows;
-    //private PositionOfRows position;
 
     public Ladder(int row, int numberOfPerson) {
         rows = new int[row][numberOfPerson];
     }
 
     public int[] getLadderLength() {
-        int[] ladderLength = {rows.length, rows[0].length};
-        return ladderLength;
+        return new int[]{rows.length, rows[0].length};
     }
 
-    public void drawLine(int x, int y) {
-        rows[x][y] = 1;
-        rows[x][y+1] = -1;
+    public void drawLine(PositionOfLine position) {
+        position.makeLine(rows);
     }
 
-    public boolean isLine(int x, int y) {
-        if ((rows[x][y] == 1) && (rows[x][y+1] == -1)) { return true;}
-        return false;
+    public boolean isLine(PositionOfLine position) {
+        return position.checkLine(rows);
     }
 
     public int run(int startLine) {
