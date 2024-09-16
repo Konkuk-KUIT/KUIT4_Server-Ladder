@@ -18,6 +18,8 @@ public class PositionOfLine {
     }
 
     public void makeLine(int[][] array) {
+        canDrawLine(array);
+
         array[x][y] = 1;
         array[x][y+1] = -1;
     }
