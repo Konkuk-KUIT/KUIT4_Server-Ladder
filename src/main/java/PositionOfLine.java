@@ -11,15 +11,13 @@ public class PositionOfLine {
         return new PositionOfLine(x, y);
     }
 
-    public void canDrawLine() {
-        if (x <= 0 || y < 0) {
+    public void canDrawLine(int row_num, int col_num) {
+        if (x < 0 || y < 0 || x >= row_num || y >= col_num) {
             throw new IllegalArgumentException("Can't draw a line in this position");
         }
     }
 
     public void makeLine(int[][] array) {
-        canDrawLine();
-
         array[x][y] = 1;
         array[x][y+1] = -1;
     }

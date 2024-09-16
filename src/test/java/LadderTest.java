@@ -22,20 +22,25 @@ class LadderTest {
     void drawLine() {
         Ladder ladder = new Ladder(3, 3);
 
-        ladder.drawLine(PositionOfLine.of(2, 3));
+        PositionOfLine position = PositionOfLine.of(1, 1);
 
-        Assertions.assertThat(ladder.isLine(PositionOfLine.of(2,3))).isEqualTo(true);
+        ladder.drawLine(position);
+
+        Assertions.assertThat(ladder.isLine(position)).isEqualTo(true);
     }
 
     @Test
     void arrive() {
-        Ladder ladder = new Ladder(3, 3);
+        Ladder ladder = new Ladder(3, 4);
 
+        ladder.drawLine(PositionOfLine.of(0, 1));
+        ladder.drawLine(PositionOfLine.of(1, 1));
         ladder.drawLine(PositionOfLine.of(2, 0));
+        ladder.drawLine(PositionOfLine.of(2, 2));
 
-        int end = ladder.run(0);
+        int end = ladder.run(2);
 
-        Assertions.assertThat(end).isEqualTo(1);
+        Assertions.assertThat(end).isEqualTo(3);
     }
 
 
