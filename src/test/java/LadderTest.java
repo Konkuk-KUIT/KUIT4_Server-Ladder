@@ -1,19 +1,16 @@
 import org.junit.jupiter.api.Test;
-import java.util.Scanner;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class LadderTest {
 
-    Scanner scanner = new Scanner(System.in);
-
     @Test
-    void selectLadder2(){
+    void selectLadder(){
 
         Ladder ladder = new Ladder(4, 3);
 
-        int answer = ladder.run(ladder.validLadderIndex(5));
-        System.out.println(answer);
+        int answer = ladder.run(ladder.validLadderIndex(2));
+        assertThat(answer).isEqualTo(2);
     }
 
     @Test
@@ -24,7 +21,7 @@ class LadderTest {
         ladder.drawLine(2,3);
         ladder.drawLine(1,4);
         int i = ladder.run(ladder.validLadderIndex(3));
-        System.out.println(i);
+        assertThat(i).isEqualTo(1);
     }
 
 }
