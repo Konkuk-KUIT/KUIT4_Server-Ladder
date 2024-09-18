@@ -6,9 +6,14 @@ public class Ladder {
         return rows;
     }
 
-    public Ladder(int row, int numberOfPerson) {
-        rows = new int[row][numberOfPerson];
-        resetLine(row, numberOfPerson);
+    private Ladder(int row, int numberOfPerson) {
+        this.rows = new int[row][numberOfPerson];
+    }
+
+    public static Ladder creatLadder(int row, int numberOfPerson) {
+        Ladder ladder =new Ladder(row,numberOfPerson);
+        ladder.resetLine(row, numberOfPerson);
+        return ladder;
     }
 
     //사다리 초기화
@@ -21,7 +26,7 @@ public class Ladder {
     }
 
     //사다리 라인 생성
-    public void drawLine(Position position,int direction){
+    public void drawLine(Position position,Direction direction){
 
         int row = position.getRow();
         int col = position.getCol();
@@ -32,16 +37,15 @@ public class Ladder {
             throw new IllegalArgumentException("잘못된 위치입니다. 사다리 높이 내에서 위치를 지정하세요.");
         }
 
-        //direction -1 왼쪽 +1 오른쪽
         //오른쪽으로 라인 생성
-        if(direction == 1) {
+        if (direction == Direction.RIGHT) {
             if(col == rows[row].length-1)
                 throw new IllegalArgumentException("오른쪽에 선을 그을수 없습니다.");
             rows[row][col] = 1;
             rows[row][col + 1] = -1;
         }
         //왼쪽으로 라인 생성
-        if(direction == -1){
+        if (direction == Direction.LEFT){
             if(col == 0)
                 throw new IllegalArgumentException("왼쪽에 선을 그을수 없습니다.");
             rows[row][col] = -1;
@@ -54,28 +58,6 @@ public class Ladder {
     public int run(int selectLineNum){
 
         int arriveLineNum = selectLineNum;
-
-//        for(int i = 0; i < rows.length; i++){
-//
-//            for(int j = arriveLineNum; j < rows[i].length; j++){
-//
-//                //연속해서 선이 그어져있을 경우 무조건 오른쪽으로 가도록
-//                if(rows[i][j] == 1){
-//                    arriveLineNum= j+1;
-//                    //연속으로 안그어져있을 경우에만 반복문 빠져나가기
-//                    if (arriveLineNum< rows[i].length && rows[i][arriveLineNum] != 1)
-//                        break;
-//                }
-//                if(rows[i][j] == -1){
-//                    arriveLineNum= j-1; //왼쪽이동
-//                    if (arriveLineNum > 0 && rows[i][arriveLineNum] != -1)
-//                        break;
-//                }
-//                if(rows[i][j] == 0){
-//                    break; //선없을경우 다음row로 이동하기
-//                }
-//            }
-//        }
 
         for (int i = 0; i < rows.length; i++) {
             // 현재 위치가 유효한지 확인
@@ -108,23 +90,6 @@ public class Ladder {
 
         return arriveLineNum;
     }
-//
-//
-//
-//    public void display() {
-//        for (int[] row : rows) {
-//            for (int cell : row) {
-//                System.out.print((cell == 1 ? "-" : " ") + " ");
-//            }
-//            System.out.println();
-//        }
-//    }
-//
-//    public static void main(String[] args) {
-//        Ladder ladder = new Ladder(3, 5);
-//        ladder.drawLine(0); // 첫 번째 라인 추가
-//        ladder.drawLine(1); // 두 번째 라인 추가
-//        ladder.display();    // 사다리 출력
-//    }
+
 
 }
