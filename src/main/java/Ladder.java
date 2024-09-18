@@ -2,18 +2,21 @@ public class Ladder {
 
     private final int[][] rows;
 
-    public Ladder(int row, int numberOfPerson) {
-        rows = new int[row][numberOfPerson];
+    public Ladder(UnsignedInteger row, UnsignedInteger numberOfPerson) {
+        rows = new int[row.getUnsignedInteger()][numberOfPerson.getUnsignedInteger()];
     }
 
-    public void drawLine(int x, int y) {
+    public void drawLine(Coordinate coordinate) {
+        UnsignedInteger x = coordinate.getX();
+        UnsignedInteger y = coordinate.getY();
         // check ladder index range
-        if (y + 1 >= rows[0].length || y < 0 || x >= rows.length || x < 0) {
+        if (y.getUnsignedInteger() + 1 >= rows[0].length || y.getUnsignedInteger() < 0
+                || x.getUnsignedInteger() >= rows.length || x.getUnsignedInteger() < 0) {
             throw new IllegalArgumentException("Line cannot be drawn: index is out of bounds.");
         }
 
-        rows[x][y] = 1;
-        rows[x][y + 1] = -1;
+        rows[x.getUnsignedInteger()][y.getUnsignedInteger()] = 1;
+        rows[x.getUnsignedInteger()][y.getUnsignedInteger() + 1] = -1;
     }
 
     public void printLadder() {

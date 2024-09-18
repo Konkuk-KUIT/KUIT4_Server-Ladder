@@ -10,43 +10,43 @@ class LadderTest {
     @Test
     @DisplayName("사다리 라인 작성 확인")
     void printLadder() {
-        Ladder ladder = new Ladder(4, 4);
+        Ladder ladder = new Ladder(UnsignedInteger.from(4), UnsignedInteger.from(4));
 
-        ladder.drawLine(0,0);
-        ladder.drawLine(1,0);
-        ladder.drawLine(2,1);
-        ladder.drawLine(0,2);
+        ladder.drawLine(new Coordinate(UnsignedInteger.from(0), UnsignedInteger.from(0)));
+        ladder.drawLine(new Coordinate(UnsignedInteger.from(1), UnsignedInteger.from(0)));
+        ladder.drawLine(new Coordinate(UnsignedInteger.from(2), UnsignedInteger.from(1)));
+        ladder.drawLine(new Coordinate(UnsignedInteger.from(0), UnsignedInteger.from(2)));
 
         ladder.printLadder();
     }
 
     @Test
-    @DisplayName("가장 바깥 사다리에는 라인을 그릴 수 없음")
+    @DisplayName("가장 바깥 사다리 라인 그리기 불가")
     void cannotDrawOutermost() {
-        Ladder ladder = new Ladder(4, 4);
+        Ladder ladder = new Ladder(UnsignedInteger.from(4), UnsignedInteger.from(4));
 
-        assertThatThrownBy(() -> ladder.drawLine(1,3))
+        assertThatThrownBy(() -> ladder.drawLine(new Coordinate(UnsignedInteger.from(1), UnsignedInteger.from(3))))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("사다리 범위 밖 접근")
     void ladderOutOfBound() {
-        Ladder ladder = new Ladder(4, 4);
+        Ladder ladder = new Ladder(UnsignedInteger.from(4), UnsignedInteger.from(4));
 
-        assertThatThrownBy(() -> ladder.drawLine(-1,4))
+        assertThatThrownBy(() -> ladder.drawLine(new Coordinate(UnsignedInteger.from(-1), UnsignedInteger.from(4))))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("사다리 타기 예시 (3->1)")
     void runLadder() {
-        Ladder ladder = new Ladder(4, 4);
+        Ladder ladder = new Ladder(UnsignedInteger.from(4), UnsignedInteger.from(4));
 
-        ladder.drawLine(0,0);
-        ladder.drawLine(1,0);
-        ladder.drawLine(2,1);
-        ladder.drawLine(0,2);
+        ladder.drawLine(new Coordinate(UnsignedInteger.from(0), UnsignedInteger.from(0)));
+        ladder.drawLine(new Coordinate(UnsignedInteger.from(1), UnsignedInteger.from(0)));
+        ladder.drawLine(new Coordinate(UnsignedInteger.from(2), UnsignedInteger.from(1)));
+        ladder.drawLine(new Coordinate(UnsignedInteger.from(0), UnsignedInteger.from(2)));
 
         assertThat(ladder.run(3)).isEqualTo(1);
     }
@@ -54,7 +54,7 @@ class LadderTest {
     @Test
     @DisplayName("사다리 타기 예시 (0->0)")
     void runOneLineLadder() {
-        Ladder ladder = new Ladder(1, 1);
+        Ladder ladder = new Ladder(UnsignedInteger.from(1), UnsignedInteger.from(1));
 
         assertThat(ladder.run(0)).isEqualTo(0);
     }
