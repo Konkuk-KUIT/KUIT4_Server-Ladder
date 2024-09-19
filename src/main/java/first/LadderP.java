@@ -1,3 +1,5 @@
+package first;
+
 public class LadderP {
 
     public final int[][] rows;

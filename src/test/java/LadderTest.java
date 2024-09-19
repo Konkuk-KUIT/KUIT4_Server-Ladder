@@ -1,5 +1,9 @@
+import first.LadderP;
+import first.PositionP;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import second.DrawPosition;
+import second.Ladder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -13,12 +17,12 @@ class LadderTest {
         Ladder ladder = new Ladder(4, 3);
 
         //when
-        ladder.drawline(new Position(1,1), new Position(1, 2));
+        ladder.drawline(0,0, 0, 1);
 
         //then
-        assertThat(ladder.rows[1][1]).isEqualTo(1);
-        assertThat(ladder.rows[1][2]).isEqualTo(1);
-        assertThat(ladder.rows[1][3]).isEqualTo(0);
+        assertThat(ladder.rows[0][0]).isEqualTo(1);
+        assertThat(ladder.rows[0][1]).isEqualTo(-1);
+        assertThat(ladder.rows[0][2]).isEqualTo(0);
     }
 
     @Test
@@ -29,7 +33,7 @@ class LadderTest {
 
         //when
         //then
-        assertThatThrownBy(()->ladder.drawline(new Position(0,1), new Position(0, 2)))
+        assertThatThrownBy(()->ladder.drawline(-1,1, -1, 2))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -41,7 +45,7 @@ class LadderTest {
 
         //when
         //then
-        assertThatThrownBy(()->ladder.drawline(new Position(2,3), new Position(2, 4)))
+        assertThatThrownBy(()->ladder.drawline(2,3, 2, 4))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -53,7 +57,7 @@ class LadderTest {
 
         //when
         //then
-        assertThatThrownBy(()->ladder.drawline(new Position(1,1), new Position(2, 3)))
+        assertThatThrownBy(()->ladder.drawline(1,1, 2, 3))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -64,10 +68,10 @@ class LadderTest {
         Ladder ladder = new Ladder(4, 3);
 
         //when
-        ladder.drawline(new Position(1,1), new Position(1, 2));
+        ladder.drawline(1,1, 1, 2);
 
         //then
-        assertThatThrownBy(()->ladder.drawline(new Position(1,2), new Position(1, 3)))
+        assertThatThrownBy(()->ladder.drawline(1,2, 1, 3))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -89,7 +93,7 @@ class LadderTest {
     void runTest2() {
         //given
         Ladder ladder = new Ladder(4, 3);
-        ladder.drawline(new Position(1,1), new Position(1, 2));
+        ladder.drawline(0,0, 0, 1);
 
         //when
         int end = ladder.run(1);
@@ -103,8 +107,8 @@ class LadderTest {
     void runTest3() {
         //given
         Ladder ladder = new Ladder(5, 3);
-        ladder.drawline(new Position(1,1), new Position(1, 2));
-        ladder.drawline(new Position(2,2), new Position(2, 3));
+        ladder.drawline(0,0, 0, 1);
+        ladder.drawline(1,1, 1, 2);
 
         //when
         int end1 = ladder.run(1);

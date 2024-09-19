@@ -1,3 +1,5 @@
+package first;
+
 public class PositionP {
     private int rowNum;
     private int colNum;
