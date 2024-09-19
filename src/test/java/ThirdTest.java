@@ -13,28 +13,28 @@ public class ThirdTest {
     @DisplayName("라인 생성 확인")
     void drawlineTest() {
         //given
-        LadderWrapper ladder = new LadderWrapper(3, 3);
-        LadderGameController controller = new LadderGameController(ladder);
+        LadderWrapper ladder = LadderWrapper.rowPersonOf(3, 3);
+        LadderGameController controller = LadderGameController.ladderFrom(ladder);
 
         //when
-        controller.drawline(new Position(0,0), new Position(0,1));
+        controller.drawline(Position.rowColOf(0,0), Position.rowColOf(0,1));
 
         //then
-        assertThat(ladder.rows[0][0]).isEqualTo(1);
-        assertThat(ladder.rows[0][1]).isEqualTo(-1);
-        assertThat(ladder.rows[0][2]).isEqualTo(0);
+        assertThat(ladder.getValue(Position.rowColOf(0,0))).isEqualTo(1);
+        assertThat(ladder.getValue(Position.rowColOf(0,1))).isEqualTo(-1);
+        assertThat(ladder.getValue(Position.rowColOf(0,2))).isEqualTo(0);
     }
 
     @Test
     @DisplayName("범위 초과로 인한 라인 생성 불가 확인1")
     void drawlineOutOfLimitTest1() {
         //given
-        LadderWrapper ladder = new LadderWrapper(3, 3);
-        LadderGameController controller = new LadderGameController(ladder);
+        LadderWrapper ladder = LadderWrapper.rowPersonOf(3, 3);
+        LadderGameController controller = LadderGameController.ladderFrom(ladder);
 
         //when
         //then
-        assertThatThrownBy(()->controller.drawline(new Position(-1,0), new Position(-1,1)))
+        assertThatThrownBy(()->controller.drawline(Position.rowColOf(-1,0), Position.rowColOf(-1,1)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -42,12 +42,12 @@ public class ThirdTest {
     @DisplayName("범위 초과로 인한 라인 생성 불가 확인2")
     void drawlineOutOfLimitTest2() {
         //given
-        LadderWrapper ladder = new LadderWrapper(3, 3);
-        LadderGameController controller = new LadderGameController(ladder);
+        LadderWrapper ladder = LadderWrapper.rowPersonOf(3, 3);
+        LadderGameController controller = LadderGameController.ladderFrom(ladder);
 
         //when
         //then
-        assertThatThrownBy(()->controller.drawline(new Position(2,3), new Position(2,4)))
+        assertThatThrownBy(()->controller.drawline(Position.rowColOf(2,3), Position.rowColOf(2,4)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -55,12 +55,12 @@ public class ThirdTest {
     @DisplayName("미인접 좌표로 설정으로 인한 라인 생성 불가 확인")
     void drawlineNotAvailPairTest() {
         //given
-        LadderWrapper ladder = new LadderWrapper(3, 3);
-        LadderGameController controller = new LadderGameController(ladder);
+        LadderWrapper ladder = LadderWrapper.rowPersonOf(3, 3);
+        LadderGameController controller = LadderGameController.ladderFrom(ladder);
 
         //when
         //then
-        assertThatThrownBy(()->controller.drawline(new Position(1,1), new Position(2,3)))
+        assertThatThrownBy(()->controller.drawline(Position.rowColOf(1,1), Position.rowColOf(2,3)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -68,14 +68,14 @@ public class ThirdTest {
     @DisplayName("중복으로 인한 라인 생성 불가 확인")
     void drawDupLineTest() {
         //given
-        LadderWrapper ladder = new LadderWrapper(4, 3);
-        LadderGameController controller = new LadderGameController(ladder);
+        LadderWrapper ladder = LadderWrapper.rowPersonOf(4, 3);
+        LadderGameController controller = LadderGameController.ladderFrom(ladder);
 
         //when
-        controller.drawline(new Position(1,1), new Position(1,2));
+        controller.drawline(Position.rowColOf(1,1), Position.rowColOf(1,2));
 
         //then
-        assertThatThrownBy(()->controller.drawline(new Position(1,2), new Position(1,3)))
+        assertThatThrownBy(()->controller.drawline(Position.rowColOf(1,2), Position.rowColOf(1,3)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -83,8 +83,8 @@ public class ThirdTest {
     @DisplayName("runTest1")
     void runTest1() {
         //given
-        LadderWrapper ladder = new LadderWrapper(1, 1);
-        LadderGameController controller = new LadderGameController(ladder);
+        LadderWrapper ladder = LadderWrapper.rowPersonOf(1, 1);
+        LadderGameController controller = LadderGameController.ladderFrom(ladder);
         //when
         int end = controller.run(1);
 
@@ -96,10 +96,10 @@ public class ThirdTest {
     @DisplayName("runTest2")
     void runTest2() {
         //given
-        LadderWrapper ladder = new LadderWrapper(4, 3);
-        LadderGameController controller = new LadderGameController(ladder);
+        LadderWrapper ladder = LadderWrapper.rowPersonOf(4, 3);
+        LadderGameController controller = LadderGameController.ladderFrom(ladder);
 
-        controller.drawline(new Position(0,0), new Position(0,1));
+        controller.drawline(Position.rowColOf(0,0), Position.rowColOf(0,1));
 
         //when
         int end = controller.run(1);
@@ -112,11 +112,11 @@ public class ThirdTest {
     @DisplayName("runTest3")
     void runTest3() {
         //given
-        LadderWrapper ladder = new LadderWrapper(4, 3);
-        LadderGameController controller = new LadderGameController(ladder);
+        LadderWrapper ladder = LadderWrapper.rowPersonOf(4, 3);
+        LadderGameController controller = LadderGameController.ladderFrom(ladder);
 
-        controller.drawline(new Position(0,0), new Position(0,1));
-        controller.drawline(new Position(1,1), new Position(1,2));
+        controller.drawline(Position.rowColOf(0,0), Position.rowColOf(0,1));
+        controller.drawline(Position.rowColOf(1,1), Position.rowColOf(1,2));
 
         //when
         int end1 = controller.run(1);

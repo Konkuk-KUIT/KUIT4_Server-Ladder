@@ -1,10 +1,14 @@
 package third;
 
 public class LadderWrapper {
-    public final int[][] rows;
+    private final int[][] rows;
 
-    public LadderWrapper(int row, int numberOfPerson) {
+    private LadderWrapper(int row, int numberOfPerson) {
         rows = new int[row][numberOfPerson];
+    }
+
+    public static LadderWrapper rowPersonOf(int row, int numberOfPerson){
+        return new LadderWrapper(row, numberOfPerson);
     }
 
     public int getValue(Position pos){

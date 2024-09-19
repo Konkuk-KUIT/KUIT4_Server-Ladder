@@ -4,8 +4,12 @@ public class LadderGameController {
     private Position nowPosition;
     private LadderWrapper ladder; //게임판 역할을 하는 LadderWrapper 객체
 
-    public LadderGameController(LadderWrapper ladder) {
+    private LadderGameController(LadderWrapper ladder) {
         this.ladder = ladder;
+    }
+
+    public static LadderGameController ladderFrom(LadderWrapper ladder){
+        return new LadderGameController(ladder);
     }
 
     public void drawline(Position pos1, Position pos2){
@@ -21,7 +25,7 @@ public class LadderGameController {
     }
 
     public int run(int startCol){
-        this.nowPosition = new Position(0, startCol-1);
+        this.nowPosition = Position.rowColOf(0, startCol-1);
         while(!isGameEnd()) {
             move();
         }
