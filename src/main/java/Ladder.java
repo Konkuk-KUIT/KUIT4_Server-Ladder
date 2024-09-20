@@ -1,9 +1,11 @@
 public class Ladder {
 
-    private final int[][] rows;
+    private Rows rows;
+
+    static final int hasLine = 1;
 
     private Ladder(gameEntry entry) {
-        this.rows = new int[entry.getRow()][entry.getColumn()];
+        this.rows = Rows.of(entry.getRow(),entry.getColumn());
     }
 
     public static Ladder of(int row, int column) {
@@ -12,43 +14,79 @@ public class Ladder {
 
     public void drawLine (Position position) {
         //이미 가로줄이 있을 경우
-        if(rows[position.getRow()][position.getColumn()] == 1) {
+        if(rows.currentState(position) == hasLine) {
             throw new IllegalArgumentException();
         }
 
-        rows[position.getRow()][position.getColumn()] = 1;
-
-        if(position.getDirection() == Direction.LEFT){
-            rows[position.getRow()][position.getColumn()-1] = 1;
-        }
-
-        if(position.getDirection() == Direction.RIGHT){
-            rows[position.getRow()][position.getColumn()+1] = 1;
-        }
+        rows.drawLineAt(position);
 
     }
 
-    public int run (int startingLadder) {
+    public int run (int startingLadderIndex) {
 
-        int rowCount = 0;
-        int currentLadder = startingLadder;
+        int currentDepth = 0;
+        int currentLadderIndex = startingLadderIndex;
         
-        while (rowCount < rows.length) {
+        while (currentDepth < rows.maxLadderDepth()) {
 
-            if (rows[rowCount][currentLadder] == 1) {
+            if (rows.currentState(currentDepth,currentLadderIndex) == hasLine) {
                 //옆으로 향하는 다리가 있을 경우 양 옆을 탐색함
                 
                 //오른쪽에 있을 경우
-                if(rows[rowCount][currentLadder + 1] == 1) {
-                    currentLadder++;
-                } else {
-                    currentLadder--;
+                if(rows.rightSideOfCurrentState(currentDepth,currentLadderIndex) == hasLine) {
+                    currentLadderIndex++;
+                } else if (rows.leftSideOfCurrentState(currentDepth,currentLadderIndex) == hasLine){
+                    currentLadderIndex--;
                 }
             }
 
-            rowCount++;
+            currentDepth++;
         }
         
-        return currentLadder;
+        return currentLadderIndex;
+    }
+
+}
+
+class Rows {
+    private int[][] rows;
+    public Rows(int row, int column) {
+        rows = new int[row][column];
+    }
+    public static Rows of(int row, int column) {
+        return new Rows(row, column);
+    }
+
+    public int currentState(Position position) {
+        return rows[position.getRow()][position.getColumn()];
+    }
+
+    public int currentState(int row, int column) {
+        return rows[row][column];
+    }
+
+    public int rightSideOfCurrentState(int row, int column) {
+        return rows[row][column+1];
+    }
+
+    public int leftSideOfCurrentState(int row, int column) {
+        return rows[row][column-1];
+    }
+
+    public void drawLineAt(Position position) {
+
+        rows[position.getRow()][position.getColumn()] = Ladder.hasLine;
+
+        if(position.getDirection() == Direction.LEFT){
+            rows[position.getRow()][position.getColumn()-1] = Ladder.hasLine;
+        }
+
+        if(position.getDirection() == Direction.RIGHT){
+            rows[position.getRow()][position.getColumn()+1] = Ladder.hasLine;
+        }
+    }
+
+    public int maxLadderDepth() {
+        return rows.length;
     }
 }
