@@ -13,6 +13,8 @@ public class Ladder {
         int endRow = setIndexToZeroBased(end.getRow());
         int endCol = setIndexToZeroBased(end.getCol());
 
+        checkContinuousLines(startRow, startCol);
+
         if (startRow != endRow || (startCol != endCol - 1 && startCol != endCol + 1)) {
             throw new IllegalArgumentException("row가 서로 다르거나, col이 1 차이가 아니어서 가로줄을 그릴 수 없음");
         }
@@ -44,7 +46,17 @@ public class Ladder {
         return position;
     }
 
-    // position이 유효한 범위 안에 있는지 확인 - 사다리 범위 벗어났을 때 테스트 실패
+    // 가로줄이 가로 연속으로 그려질 수 없게 처리
+    private void checkContinuousLines(int row, int position) {
+        if (position > 0 && rows[row][position - 1] == 1) {
+            throw new IllegalArgumentException("왼쪽에 이미 가로줄이 있어서 이어지는 가로줄을 그릴 수 없음");
+        }
+        if (position < rows[0].length - 1 && rows[row][position + 1] == 1) {
+            throw new IllegalArgumentException("오른쪽에 이미 가로줄이 있어서 이어지는 가로줄을 그릴 수 없음");
+        }
+    }
+
+    // position이 유효한 범위 안에 있는지 확인 -> 사다리 범위 벗어났을 때 테스트 실패
     private void checkPositionValidation(int position) {
         if (position < 1 || position > rows[0].length) {
             throw new IllegalArgumentException("유효하지 않은 position : " + position);
