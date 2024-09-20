@@ -26,9 +26,10 @@ class LadderTest {
 
         //given
         Ladder ladder = new Ladder(Row.from(2), NumberOfPerson.from(3));
+        ladder.drawLine(new Position(Row.from(1), Col.from(3)));
 
         //when
-        ladder.drawLine(new Position(Row.from(1), Col.from(3)));
+
 
         //then
         assertThatThrownBy(() -> ladder.drawLine(new Position(Row.from(1), Col.from(2))))
@@ -38,8 +39,12 @@ class LadderTest {
     @Test
     @DisplayName("실행 함수 실패 사례 검증")
     void runFailedTest() {
+        //given
         Ladder ladder = new Ladder(Row.from(5), NumberOfPerson.from(5));
 
+        //when
+
+        //then
         assertThatThrownBy(() -> ladder.run(Col.from(6))).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -49,17 +54,16 @@ class LadderTest {
 
         //given
         Ladder ladder = new Ladder(Row.from(5), NumberOfPerson.from(5));
-
-
-        //when
         ladder.drawLine(new Position(Row.from(1), Col.from(2)));
         ladder.drawLine(new Position(Row.from(2), Col.from(3)));
         ladder.drawLine(new Position(Row.from(3), Col.from(4)));
         ladder.drawLine(new Position(Row.from(4), Col.from(5)));
 
+        //when
+        int endLadder = ladder.run(Col.from(1));
 
         //then
-        assertThat(ladder.run(Col.from(1))).isEqualTo(5);
+        assertThat(endLadder).isEqualTo(5);
 
     }
 
@@ -69,6 +73,9 @@ class LadderTest {
         //given
         Ladder ladder = new Ladder(Row.from(1), NumberOfPerson.from(1));
 
+        //when
+
+        //then
         assertThat(ladder.run(Col.from(1))).isEqualTo(1);
     }
 

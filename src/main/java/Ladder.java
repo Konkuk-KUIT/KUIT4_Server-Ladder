@@ -20,7 +20,7 @@ public class Ladder {
 
     }
 
-    public void continuousLineVerify(Position position) {
+    private void continuousLineVerify(Position position) {
         // 선을 긋고자 하는 좌표의 오른쪽에 이미 사다리가 놓여져있는 경우
         if (position.getY() < rows[0].length - 1 && rows[position.getX()][position.getY() + 1] == -1) {
             throw new IllegalArgumentException("사다리는 연달아서 놓을 수 없습니다.");
@@ -32,7 +32,7 @@ public class Ladder {
         }
     }
 
-    public void outOfRangeVerify(Position position) {
+    private void outOfRangeVerify(Position position) {
 
         // 사다리의 높이를 벗어난 위치에 사다리를 놓고자 하는 경우
         if (position.getX() > rows.length) {
