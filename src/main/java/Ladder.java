@@ -19,6 +19,12 @@ public class Ladder {
     }
 
     public int run(int position) {
+
+        // position이 유효한 범위 안에 있는지 확인 - 사다리 범위 벗어났을 때 테스트 실패하게
+        if (position < 1 || position > rows[0].length) {
+            throw new IllegalArgumentException("유효하지 않은 position : " + position);
+        }
+
         position = position - 1;
 
         for (int i = 0; i < rows.length; i++) {
