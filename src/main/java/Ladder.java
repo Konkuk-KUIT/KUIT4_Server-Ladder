@@ -18,15 +18,19 @@ public class Ladder {
         for (int row = 0; row < rows.length; row++) {
             currentColumn = moveLeftOrRight(row, currentColumn);
         }
+
         return currentColumn;
     }
 
     private int moveLeftOrRight(int row, int currentColumn) {
         if (canMoveLeft(row, currentColumn)) {
             return currentColumn - 1;
-        } else if (canMoveRight(row, currentColumn)) {
+        }
+
+        if (canMoveRight(row, currentColumn)) {
             return currentColumn + 1;
         }
+
         return currentColumn;
     }
 
