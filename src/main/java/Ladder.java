@@ -15,14 +15,26 @@ public class Ladder {
     public int run(int startColumn) {
         int currentColumn = startColumn;
 
-        // 각 줄을 내려가면서 이동
         for (int row = 0; row < rows.length; row++) {
-            if (currentColumn > 0 && rows[row][currentColumn - 1] == 1) {
-                currentColumn--; // 왼쪽으로 이동
-            } else if (currentColumn < rows[0].length - 1 && rows[row][currentColumn] == 1) {
-                currentColumn++; // 오른쪽으로 이동
-            }
+            currentColumn = moveLeftOrRight(row, currentColumn);
         }
         return currentColumn;
+    }
+
+    private int moveLeftOrRight(int row, int currentColumn) {
+        if (canMoveLeft(row, currentColumn)) {
+            return currentColumn - 1;
+        } else if (canMoveRight(row, currentColumn)) {
+            return currentColumn + 1;
+        }
+        return currentColumn;
+    }
+
+    private boolean canMoveLeft(int row, int currentColumn) {
+        return currentColumn > 0 && rows[row][currentColumn - 1] == 1;
+    }
+
+    private boolean canMoveRight(int row, int currentColumn) {
+        return currentColumn < rows[0].length - 1 && rows[row][currentColumn] == 1;
     }
 }
