@@ -4,10 +4,9 @@ public class Ladder {
 
     private final Row[] rows;
 
-//    todo 자연수 래퍼 클래스
-    public Ladder(int numberOfRow, int numberOfPerson) {
-        rows = new Row[numberOfRow];
-        for (int i = 0; i < numberOfRow; i++) {
+    public Ladder(GreaterThanOne numberOfRow, GreaterThanOne numberOfPerson) {
+        rows = new Row[numberOfRow.getNumber()];
+        for (int i = 0; i < numberOfRow.getNumber(); i++) {
             rows[i] = new Row(numberOfPerson);
         }
     }

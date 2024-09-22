@@ -8,9 +8,9 @@ public class Row {
     private final int[] row;
 
 
-    public Row(int numberOfPerson) {
+    public Row(GreaterThanOne numberOfPerson) {
         validateNumberOfPerson(numberOfPerson);
-        row = new int[numberOfPerson];
+        row = new int[numberOfPerson.getNumber()];
     }
 
 //    사다리 가로줄을 그을 때 해당 좌표에는 1을 넣고 오른쪽 값은 -1을 해줘서
@@ -43,8 +43,8 @@ public class Row {
         return row[position] == RIGHT.getValue();
     }
 
-    private void validateNumberOfPerson(int numberOfPerson) {
-        if (numberOfPerson < 1) {
+    private void validateNumberOfPerson(GreaterThanOne numberOfPerson) {
+        if (numberOfPerson.getNumber() < 1) {
             throw new IllegalArgumentException("참여 인원은 1명 이상이어야 합니다.");
         }
     }
