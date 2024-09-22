@@ -4,47 +4,41 @@ import static ladder.Direction.*;
 
 public class Row {
 
-//    todo Node 클래스 분리
-    private final int[] row;
+    Node[] nodes;
 
 
     public Row(GreaterThanOne numberOfPerson) {
-        row = new int[numberOfPerson.getNumber()];
+        nodes = new Node[numberOfPerson.getNumber()];
+
+        for (int i = 0; i < numberOfPerson.getNumber(); i++) {
+            nodes[i] = Node.from(NONE);
+        }
     }
 
-//    사다리 가로줄을 그을 때 해당 좌표에는 1을 넣고 오른쪽 값은 -1을 해줘서
+    //    사다리 가로줄을 그을 때 해당 좌표에는 1을 넣고 오른쪽 값은 -1을 해줘서
 //    입력한 좌표의 오른쪽에 라인이 생기게끔 만듦
 //    이런식으로 상수가 하드코딩이 돼있는건 좋지 않음
     public void drawLine(Position startPosition) {
         validateDrawLinePosition(startPosition);
-        row[startPosition.getPosition()] = RIGHT.getValue();
-        row[startPosition.getPosition() + 1] = LEFT.getValue();
+
+        setDirectionBetweenNextPosition(startPosition);
     }
 
-//    자신의 상태가 무엇인지에 따라서 다음 좌표를 계산하고 반환을 함
+    private void setDirectionBetweenNextPosition(Position position) {
+        nodes[position.getPosition()].setRightNode(position);
+        position.next();
+        nodes[position.getPosition()].setLeftNode(position);
+    }
+
+    //    자신의 상태가 무엇인지에 따라서 다음 좌표를 계산하고 반환을 함
     public void nextPosition(Position position) {
         validatePosition(position);
 
-        if (isRight(position)) {
-            position.next();
-            return;
-        }
-        if (isLeft(position)) {
-            position.prev();
-            return;
-        }
-    }
-
-    private boolean isLeft(Position position) {
-        return row[position.getPosition()] == LEFT.getValue();
-    }
-
-    private boolean isRight(Position position) {
-        return row[position.getPosition()] == RIGHT.getValue();
+        nodes[position.getPosition()].move(position);
     }
 
     private void validatePosition(Position position) {
-        if (position.isBiggerThan(row.length - 1)) {
+        if (position.isBiggerThan(nodes.length - 1)) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_POSITION.getMessage());
         }
     }
@@ -56,14 +50,17 @@ public class Row {
     }
 
     private boolean isInvalidPosition(Position startPosition) {
-        return startPosition.isBiggerThan(row.length - 1);
+        return startPosition.isBiggerThan(nodes.length - 1);
     }
 
     private boolean isLineAtPosition(Position startPosition) {
-        return row[startPosition.getPosition()] == RIGHT.getValue() || row[startPosition.getPosition()] == LEFT.getValue();
+        return !nodes[startPosition.getPosition()].isAlreadySetDirection();
     }
 
     private boolean isLineAtNextPosition(Position startPosition) {
-        return row[startPosition.getPosition() + 1] == RIGHT.getValue() || row[startPosition.getPosition() + 1] == LEFT.getValue();
+        startPosition.next();
+        boolean isLineAtPosition = !nodes[startPosition.getPosition()].isAlreadySetDirection();
+        startPosition.prev();
+        return isLineAtPosition;
     }
 }
