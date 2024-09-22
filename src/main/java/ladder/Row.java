@@ -1,6 +1,8 @@
 package ladder;
 
 public class Row {
+
+//    todo Node 클래스 분리
     private final int[] row;
 
     public Row(int numberOfPerson) {
@@ -10,6 +12,8 @@ public class Row {
 
 //    사다리 가로줄을 그을 때 해당 좌표에는 1을 넣고 오른쪽 값은 -1을 해줘서
 //    입력한 좌표의 오른쪽에 라인이 생기게끔 만듦
+//    이런식으로 상수가 하드코딩이 돼있는건 좋지 않음
+//    todo 상수 리팩토링 0, -1, 1
     public void drawLine(int startPosition) {
         validateDrawLinePosition(startPosition);
         row[startPosition] = 1;
