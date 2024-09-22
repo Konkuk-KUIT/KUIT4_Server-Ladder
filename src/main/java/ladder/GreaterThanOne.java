@@ -10,7 +10,7 @@ public class GreaterThanOne {
 
     public static GreaterThanOne from(int number) {
         if (!isGreaterThanOne(number)) {
-            throw new IllegalArgumentException("2 이상의 수가 아닙니다.");
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_LADDER_NUMBER.getMessage());
         }
         
         return new GreaterThanOne(number);
