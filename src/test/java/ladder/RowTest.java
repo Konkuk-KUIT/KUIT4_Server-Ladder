@@ -16,7 +16,7 @@ class RowTest {
         Position position = Position.from(0);
         row.nextPosition(position);
         //then
-        assertThat(position.getValue()).isEqualTo(0);
+        assertThat(position.getX()).isEqualTo(0);
     }
 
     @Test
@@ -31,14 +31,14 @@ class RowTest {
         row.nextPosition(position);
 
         //then
-        assertThat(position.getValue()).isEqualTo(1);
+        assertThat(position.getX()).isEqualTo(1);
 
         //given
         position = Position.from(1);
         row.nextPosition(position);
 
         //then
-        assertThat(position.getValue()).isEqualTo(0);
+        assertThat(position.getX()).isEqualTo(0);
     }
 
     @Test
@@ -53,21 +53,21 @@ class RowTest {
         row.nextPosition(position);
 
         //then
-        assertThat(position.getValue()).isEqualTo(1);
+        assertThat(position.getX()).isEqualTo(1);
 
         //given
         position = Position.from(1);
         row.nextPosition(position);
 
         //then
-        assertThat(position.getValue()).isEqualTo(0);
+        assertThat(position.getX()).isEqualTo(0);
 
         //given
         position = Position.from(2);
         row.nextPosition(position);
 
         //then
-        assertThat(position.getValue()).isEqualTo(2);
+        assertThat(position.getX()).isEqualTo(2);
     }
 
     @Test
