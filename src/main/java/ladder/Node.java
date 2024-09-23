@@ -14,13 +14,14 @@ public class Node {
         return new Node(direction);
     }
 
-    public void move(Position position) {
+    public void moveRow(Position position) {
+
         if (isRight()) {
-            position.next();
+            position.nextX();
             return;
         }
         if (isLeft()) {
-            position.prev();
+            position.prevX();
             return;
         }
     }
@@ -37,15 +38,15 @@ public class Node {
         return !isNone();
     }
 
-    private boolean isRight() {
+    public boolean isRight() {
         return direction == RIGHT;
     }
 
-    private boolean isLeft() {
+    public boolean isLeft() {
         return direction == LEFT;
     }
 
-    private boolean isNone() {
+    public boolean isNone() {
         return direction == NONE;
     }
 }

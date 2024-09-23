@@ -20,14 +20,13 @@ public class Row {
 
     public void nextPosition(Position position) {
         validatePosition(position);
-
-        nodes[position.getValue()].move(position);
+        nodes[position.getX()].moveRow(position);
     }
 
     private void setDirectionBetweenNextPosition(Position position) {
-        nodes[position.getValue()].setRightNode();
-        position.next();
-        nodes[position.getValue()].setLeftNode();
+        nodes[position.getX()].setRightNode();
+        position.nextX();
+        nodes[position.getX()].setLeftNode();
     }
 
     private void validatePosition(Position position) {
@@ -44,18 +43,21 @@ public class Row {
     }
 
     private boolean isInvalidPosition(Position position) {
-        return position.isBiggerThan(nodes.length - 1) ;
+        return position.xIsBiggerThan(nodes.length - 1) ;
     }
 
     private boolean isLineAtPosition(Position position) {
-        return nodes[position.getValue()].isAlreadySetDirection();
+        return nodes[position.getX()].isAlreadySetDirection();
     }
 
     private boolean isLineAtNextPosition(Position position) {
-        position.next();
+        position.nextX();
         boolean lineAtPosition = isLineAtPosition(position);
-        position.prev();
+        position.prevX();
         return lineAtPosition;
     }
 
+    public Node[] getNodes() {
+        return nodes;
+    }
 }

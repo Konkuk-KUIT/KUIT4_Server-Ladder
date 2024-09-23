@@ -8,49 +8,15 @@ public class LadderRunner {
         this.rows = rows;
     }
 
-    public void drawLadderState(Position position,int rowcnt) {
+    public int run(Position x) {
 
-        StringBuilder line = new StringBuilder();
+        LadderDraw ladderDraw = new LadderDraw(rows);
+
         for (int i = 0; i < rows.length; i++) {
-            Node[] nodes = rows[i].getNodes();
-            //LadderStateUpdate(line,position,nodes);
-            for(int j = 0; j < nodes.length; j++) {
-                if (nodes[j].isRight())
-                    line.append(1);
-                if (nodes[j].isLeft())
-                    line.append(-1);
-                if (nodes[j].isNone())
-                    line.append(0);
-                if(position.getValue() == j && rowcnt==i)
-                    line.append("*");
-                line.append(" ");
-            }
-            line.append("\n");
+            ladderDraw.drawLadderState(x.getX(),i,"Before");
+            rows[i].nextPosition(x);
+            ladderDraw.drawLadderState(x.getX(),i,"After");
         }
-        System.out.println(line.toString());
-    }
-
-//    public void LadderStateUpdate(StringBuilder line,Position position,Node[] nodes) {
-//        for(int j = 0; j < nodes.length; j++) {
-//            if (nodes[j].isRight())
-//                line.append(1);
-//            if (nodes[j].isLeft())
-//                line.append(-1);
-//            if (nodes[j].isNone())
-//                line.append(0);
-//            if(position.getValue() == j)
-//                line.append("*");
-//            line.append(" ");
-//        }
-//
-//    }
-
-    public int run(Position position) {
-        for (int i = 0; i < rows.length; i++) {
-            drawLadderState(position,i);
-            rows[i].nextPosition(position);
-            drawLadderState(position,i);
-        }
-        return position.getValue();
+        return x.getX();
     }
 }
