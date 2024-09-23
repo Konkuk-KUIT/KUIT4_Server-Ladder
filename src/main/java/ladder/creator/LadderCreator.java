@@ -1,17 +1,17 @@
 package ladder.creator;
 
-import ladder.GreaterThanOne;
 import ladder.LadderPosition;
+import ladder.LadderSize;
 import ladder.Row;
 
 public class LadderCreator {
 
     private final Row[] rows;
 
-    public LadderCreator(GreaterThanOne numberOfRow, GreaterThanOne numberOfPerson) {
-        rows = new Row[numberOfRow.getNumber()];
-        for (int i = 0; i < numberOfRow.getNumber(); i++) {
-            rows[i] = new Row(numberOfPerson);
+    public LadderCreator(LadderSize ladderSize) {
+        rows = new Row[ladderSize.getHeightValue()];
+        for (int i = 0; i < ladderSize.getHeightValue(); i++) {
+            rows[i] = new Row(ladderSize.getNumberOfPerson());
         }
     }
 
