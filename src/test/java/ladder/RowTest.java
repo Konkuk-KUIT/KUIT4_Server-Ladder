@@ -70,6 +70,57 @@ class RowTest {
         assertThat(position.getValue()).isEqualTo(2);
     }
 
+
+    @Test
+    void generateRowWithoutLine() {
+        //when
+        GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
+        Row row = new Row(numberOfPerson);
+        StringBuilder sb = new StringBuilder();
+
+        //given
+        Position position = Position.from(0);
+        LadderPosition ladderPosition = LadderPosition.of(Position.from(1), Position.from(1));
+        row.generateRow(sb, position, ladderPosition);
+
+        //then
+        assertThat(sb.toString()).isEqualTo("0 0 0 \n");
+    }
+
+    @Test
+    void generateRowWithLine() {
+        //when
+        GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
+        Row row = new Row(numberOfPerson);
+        row.drawLine(Position.from(0));
+        StringBuilder sb = new StringBuilder();
+
+        //given
+        Position position = Position.from(0);
+        LadderPosition ladderPosition = LadderPosition.of(Position.from(1), Position.from(1));
+        row.generateRow(sb, position, ladderPosition);
+
+        //then
+        assertThat(sb.toString()).isEqualTo("1 -1 0 \n");
+    }
+
+    @Test
+    void generateRowWithCurrentNode() {
+        //when
+        GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
+        Row row = new Row(numberOfPerson);
+        row.drawLine(Position.from(0));
+        StringBuilder sb = new StringBuilder();
+
+        //given
+        Position position = Position.from(0);
+        LadderPosition ladderPosition = LadderPosition.of(Position.from(0), Position.from(0));
+        row.generateRow(sb, position, ladderPosition);
+
+        //then
+        assertThat(sb.toString()).isEqualTo("1* -1 0 \n");
+    }
+
     @Test
     void 사다리_사람수_예외_처리() {
         assertThatThrownBy(() -> new Row(GreaterThanOne.from(1)))

@@ -40,4 +40,28 @@ class NodeTest {
         assertThat(position.getValue()).isEqualTo(0);
     }
 
+
+    @Test
+    void 오른쪽_노드_심볼_추가() {
+        StringBuilder sb = new StringBuilder();
+        Node node = Node.from(RIGHT);
+        node.appendSymbol(sb);
+        assertThat(sb.toString()).isEqualTo("1");
+    }
+
+    @Test
+    void 왼쪽_노드_심볼_추가() {
+        StringBuilder sb = new StringBuilder();
+        Node node = Node.from(LEFT);
+        node.appendSymbol(sb);
+        assertThat(sb.toString()).isEqualTo("-1");
+    }
+
+    @Test
+    void 노드_심볼_추가() {
+        StringBuilder sb = new StringBuilder();
+        Node node = Node.from(NONE);
+        node.appendSymbol(sb);
+        assertThat(sb.toString()).isEqualTo("0");
+    }
 }
