@@ -1,6 +1,6 @@
 package ladder;
 
-class Row {
+public class Row {
     private Node[] nodes;
 
     public Row(int column) {
@@ -28,14 +28,16 @@ class Row {
 
     public void drawLineAt(int position, Direction direction) {
 
-        nodes[position].setLine();
+
 
         if (direction == Direction.LEFT) {
-            nodes[position - 1].setLine();
+            nodes[position].setLine(nodeState.LEFT);
+            nodes[position - 1].setLine(nodeState.RIGHT);
         }
 
         if (direction == Direction.RIGHT) {
-            nodes[position + 1].setLine();
+            nodes[position].setLine(nodeState.LEFT);
+            nodes[position + 1].setLine(nodeState.RIGHT);
         }
     }
 

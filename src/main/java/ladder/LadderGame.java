@@ -3,13 +3,13 @@ package ladder;
 import ladder.creator.LadderCreator;
 import ladder.runner.LadderRunner;
 
-public class Ladder {
+public class LadderGame {
 
     private final LadderCreator ladderCreator;
 
     static final int hasLine = 1;
 
-    public Ladder(LadderCreator ladderCreator) {
+    public LadderGame(LadderCreator ladderCreator) {
         this.ladderCreator = ladderCreator;
     }
 

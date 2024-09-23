@@ -2,16 +2,23 @@ package ladder;
 
 public enum nodeState {
 
-    hasLine(1), empty(0);
+    LEFT("L"), RIGHT("R") ,empty("0");
 
-    private int state;
+    private String state;
 
-    nodeState(int state) {
+    nodeState(String state) {
         this.state = state;
     }
 
-    public int getState() {
+    public String getState() {
         return state;
     }
 
+    public boolean hasLine(){
+        if(state.equals("L") || state.equals("R")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

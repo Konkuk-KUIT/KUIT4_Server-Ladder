@@ -12,8 +12,8 @@ public class Node {
         return new Node(state);
     }
 
-    public void setLine(){
-        state = nodeState.hasLine;
+    public void setLine(nodeState state){
+        this.state = state;
     }
 
     public nodeState getState() {
