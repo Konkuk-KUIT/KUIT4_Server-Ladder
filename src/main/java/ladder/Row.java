@@ -12,6 +12,10 @@ public class Row {
         }
     }
 
+    public Node[] getNodes() {
+        return this.nodes;
+    }
+
     public void drawLine(Position startPosition) {
         validateDrawLinePosition(startPosition);
 
@@ -24,6 +28,35 @@ public class Row {
         nodes[position.getValue()].move(position);
     }
 
+
+    // 별표를 추가한 행 출력
+    public StringBuilder printAsteroidLine(Position col) {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < nodes.length; i++) {
+            if(i == col.getValue()) {
+                sb.append(nodes[i].getDirection()).append("* ");
+                continue;
+            }
+
+            sb.append(nodes[i].getDirection()).append(" ");
+        }
+
+        return sb;
+    }
+
+    // 별표를 추가하지 않는 행 출력
+    public StringBuilder printNormalLine() {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < nodes.length; i++) {
+            sb.append(nodes[i].getDirection()).append(" ");
+        }
+
+        return sb;
+    }
+
+
     private void setDirectionBetweenNextPosition(Position position) {
         nodes[position.getValue()].setRightNode();
         position.next();
@@ -31,7 +64,7 @@ public class Row {
     }
 
     private void validatePosition(Position position) {
-        if (isInvalidPosition(position) ) {
+        if (isInvalidPosition(position)) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_POSITION.getMessage());
         }
     }
@@ -44,7 +77,7 @@ public class Row {
     }
 
     private boolean isInvalidPosition(Position position) {
-        return position.isBiggerThan(nodes.length - 1) ;
+        return position.isBiggerThan(nodes.length - 1);
     }
 
     private boolean isLineAtPosition(Position position) {
