@@ -21,6 +21,7 @@ public class LadderRunner {
         return position.getValue();
     }
 
+    // 전체 라인 출력
     private void printWholeLine(Position row, Position col) {
         StringBuilder sb = new StringBuilder();
 

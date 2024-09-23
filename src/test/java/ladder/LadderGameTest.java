@@ -1,6 +1,8 @@
 package ladder;
 
+import ladder.creator.AutoLadderCreatorImpl;
 import ladder.creator.LadderCreator;
+import ladder.creator.LadderCreatorImpl;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -14,7 +16,7 @@ class LadderGameTest {
         GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
 
         //when
-        LadderCreator ladderCreator = new LadderCreator(numberOfRow, numberOfPerson);
+        LadderCreator ladderCreator = new LadderCreatorImpl(numberOfRow, numberOfPerson);
 
         //then
         assertThat(ladderCreator).isNotNull();
@@ -24,7 +26,7 @@ class LadderGameTest {
     void 사다리_사람_예외_처리_확인() {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
-        LadderCreator ladderCreator = new LadderCreator(GreaterThanOne.from(2), numberOfPerson);
+        LadderCreator ladderCreator = new LadderCreatorImpl(GreaterThanOne.from(2), numberOfPerson);
         LadderGame ladderGame = new LadderGame(ladderCreator);
 
         //given
@@ -40,7 +42,7 @@ class LadderGameTest {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(4);
         GreaterThanOne row = GreaterThanOne.from(3);
-        LadderCreator ladderCreator = new LadderCreator(row, numberOfPerson);
+        LadderCreator ladderCreator = new LadderCreatorImpl(row, numberOfPerson);
         LadderGame ladderGame = new LadderGame(ladderCreator);
 
         ladderCreator.drawLine(Position.from(0),Position.from(0));
