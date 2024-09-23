@@ -1,7 +1,7 @@
 package ladder.creator;
 
 import ladder.GreaterThanOne;
-import ladder.Position;
+import ladder.LadderPosition;
 import ladder.Row;
 
 public class LadderCreator {
@@ -15,8 +15,8 @@ public class LadderCreator {
         }
     }
 
-    public void drawLine(Position row, Position col) {
-        rows[row.getValue()].drawLine(col);
+    public void drawLine(LadderPosition ladderPosition) {
+        rows[ladderPosition.getRowPosition()].drawLine(ladderPosition.getCol());
     }
 
     public Row[] getRows() {
