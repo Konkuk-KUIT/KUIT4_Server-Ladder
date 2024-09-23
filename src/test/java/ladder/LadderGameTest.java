@@ -17,9 +17,11 @@ class LadderGameTest {
 
         //when
         LadderCreator ladderCreator = new LadderCreatorImpl(numberOfRow, numberOfPerson);
+        LadderCreator autoLadderCreator = new AutoLadderCreatorImpl(numberOfRow, numberOfPerson);
 
         //then
         assertThat(ladderCreator).isNotNull();
+        assertThat(autoLadderCreator).isNotNull();
     }
 
     @Test

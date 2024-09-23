@@ -26,4 +26,18 @@ public class LadderPrintTest {
         Assertions.assertThat(ladderGame.run(position)).isEqualTo(2);
     }
 
+    @Test
+    void 랜덤_생성_사다리_출력_테스트() {
+        // given
+        GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
+        GreaterThanOne row = GreaterThanOne.from(5);
+        LadderCreator ladderCreator = new AutoLadderCreatorImpl(row, numberOfPerson);
+        LadderGame ladderGame = new LadderGame(ladderCreator);
+
+        ladderCreator.drawLine(Position.from(0), Position.from(0));
+
+        // when
+        ladderGame.run(Position.from(0));
+    }
+
 }
