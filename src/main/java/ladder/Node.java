@@ -1,8 +1,10 @@
 package ladder;
 import static ladder.Direction.*;
 
+// 사다리의 세로줄 (열), numberOFPerson
+// 사다리의 실제 값 (방향)을 담는 클래스
 public class Node {
-    private Direction direction;
+    private Direction direction; // 사다리의 실제 값
 
     private Node(Direction direction) {
         this.direction = direction;

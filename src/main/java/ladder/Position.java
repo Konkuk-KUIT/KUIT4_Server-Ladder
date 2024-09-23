@@ -1,5 +1,6 @@
 package ladder;
-// 사다리의 값 : 0, 1, -1
+
+// 사다리의 인덱스 값 관리 클래스
 public class Position {
 
     private int position;

@@ -100,7 +100,7 @@ class RowTest {
         Row row = new Row(numberOfPerson);
 
         //given
-        Position position = Position.from(-1);
+        //Position position = Position.from(-1);
 
         //then
         assertThatThrownBy(() -> row.nextPosition(Position.from(-1)))
@@ -128,7 +128,7 @@ class RowTest {
         Row row = new Row(numberOfPerson);
 
         //given
-        Position position = Position.from(-1);
+        //Position position = Position.from(-1);
 
         //then
         assertThatThrownBy(() -> row.drawLine(Position.from(-1)))

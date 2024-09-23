@@ -4,12 +4,13 @@ package ladder;
 
 import static ladder.Direction.*;
 
+// 사다리의 하나의 가로줄 (행)
 public class Row {
     // todo Node 클래스로 분리(row 배열에서 값을 하나씩 꺼내서 볼 필요가 없다..?)
     Node[] nodes;
 
     public Row(GreaterThanOne numberOfPerson) {
-        nodes = new Node[numberOfPerson.getNumber()];
+        nodes = new Node[numberOfPerson.getNumber()]; // 노드 배열개수할당
         for (int i = 0; i < numberOfPerson.getNumber(); i++) {
             nodes[i] = Node.from(NONE);
         }
@@ -17,15 +18,15 @@ public class Row {
 
     // todo : 상수 리팩토링 (1,-1, 0)
     public void drawLine(Position startPosition) {
-        validateDrawLinePosition(startPosition); // 유효성 처리
+        validateDrawLinePosition(startPosition); // 선 그리기 유효성 검사 통합
 
         setDirectionBetweenNextPosition(startPosition);
     }
 
     private void setDirectionBetweenNextPosition(Position position) {
-        nodes[position.getPosition()].setRightNode(position);
+        nodes[position.getPosition()].setRightNode(position); // 현재 노드에 1대입 (오른쪽 이동)
         position.next();
-        nodes[position.getPosition()].setLeftNode(position);
+        nodes[position.getPosition()].setLeftNode(position); // 그 다음 노드에 -1대입 (왼쪽 이동)
     }
 
     // run 메소드의 다음 상태
@@ -35,18 +36,8 @@ public class Row {
 
         nodes[position.getPosition()].move(position);
     }
-// Node의 Move 메소드로 이동
-//    private boolean isLeft(Position position) {
-//
-//        return nodes[position.getPosition()] == LEFT.getValue();
-//    }
-//
-//    private boolean isRight(Position position) {
-//
-//        return nodes[position.getPosition()] == RIGHT.getValue();
-//    }
 
-    // Todo 상수 하드코딩도 enum으로 클래스단위로 관리하자 //
+    // Todo 상수 하드코딩도 enum으로 클래스단위로 관리하자
 
     private void validatePosition(Position position) {
         if (position.isBiggerThan(nodes.length - 1)) { // 위치값과 실제 인덱스값 동일시
@@ -54,6 +45,7 @@ public class Row {
         }
     }
 
+    // 선그리기 유효성 검사 통합
     private void validateDrawLinePosition(Position startPosition) {
         if (isInvalidPosition(startPosition) || isLineAtPosition(startPosition) || isLineAtNextPosition(startPosition)) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_DRAW_POSITION.getMessage());
