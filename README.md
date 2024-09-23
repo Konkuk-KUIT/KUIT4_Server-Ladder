@@ -1,4 +1,4 @@
-# KUIT4_Server-Ladder
+# KUIT4_Server-ladder.Ladder
 
 ## 미션 제출 방법
 1. 해당 프로젝트를 fork 한다.

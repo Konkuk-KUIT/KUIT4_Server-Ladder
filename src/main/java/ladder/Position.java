@@ -1,3 +1,5 @@
+package ladder;
+
 public class Position {
     private gameEntry entry;
     private Direction direction;

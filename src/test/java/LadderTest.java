@@ -1,9 +1,11 @@
+import ladder.Direction;
+import ladder.Ladder;
+import ladder.Position;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LadderTest {
     @Test
@@ -40,7 +42,7 @@ class LadderTest {
     void drawingOutOfRangeLine() {
         Ladder ladder = Ladder.of(5,5);
 
-        ladder.drawLine(Position.of(2,3,Direction.LEFT));
+        ladder.drawLine(Position.of(2,3, Direction.LEFT));
         assertThatThrownBy(() -> ladder.drawLine(Position.of(4,4,Direction.RIGHT))).isInstanceOf(ArrayIndexOutOfBoundsException.class);
 
     }

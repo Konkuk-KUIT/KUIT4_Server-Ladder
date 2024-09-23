@@ -1,3 +1,5 @@
+package ladder;
+
 public class gameEntry {
     unsignedInteger row;
     unsignedInteger column;
