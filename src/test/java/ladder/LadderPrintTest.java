@@ -13,7 +13,8 @@ public class LadderPrintTest {
         // given
         GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
         GreaterThanOne row = GreaterThanOne.from(5);
-        LadderCreator ladderCreator = new BasicLadderCreatorImpl(row, numberOfPerson);
+        LadderSize ladderSize = LadderSize.from(row, numberOfPerson);
+        LadderCreator ladderCreator = new BasicLadderCreatorImpl(ladderSize);
         LadderGame ladderGame = new LadderGame(ladderCreator);
 
         ladderCreator.drawLine(Position.from(0), Position.from(0));
@@ -31,7 +32,8 @@ public class LadderPrintTest {
         // given
         GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
         GreaterThanOne row = GreaterThanOne.from(5);
-        LadderCreator ladderCreator = new AutoLadderCreatorImpl(row, numberOfPerson);
+        LadderSize ladderSize = LadderSize.from(row, numberOfPerson);
+        LadderCreator ladderCreator = new AutoLadderCreatorImpl(ladderSize);
         LadderGame ladderGame = new LadderGame(ladderCreator);
 
         ladderCreator.drawLine(Position.from(0), Position.from(0));

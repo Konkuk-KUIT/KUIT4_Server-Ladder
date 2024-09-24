@@ -11,7 +11,8 @@ public class LadderFactoryTest {
         // given
         LadderGame ladderGame = LadderGameFactory.createBasicLadderGame();
         LadderCreator ladderCreator = ladderGame.getLadderCreator();
-        ladderCreator.setRowsAndPersons(GreaterThanOne.from(5), GreaterThanOne.from(5));
+        LadderSize ladderSize = LadderSize.from(GreaterThanOne.from(5), GreaterThanOne.from(5));
+        ladderCreator.setRowsAndPersons(ladderSize);
         ladderGame.getLadderCreator().drawLine(Position.from(0), Position.from(0));
 
         // then
@@ -25,7 +26,8 @@ public class LadderFactoryTest {
         // given
         LadderGame ladderGame = LadderGameFactory.createRandomLadderGame();
         LadderCreator ladderCreator = ladderGame.getLadderCreator();
-        ladderCreator.setRowsAndPersons(GreaterThanOne.from(5), GreaterThanOne.from(5));
+        LadderSize ladderSize = LadderSize.from(GreaterThanOne.from(5), GreaterThanOne.from(5));
+        ladderCreator.setRowsAndPersons(ladderSize);
         ladderGame.getLadderCreator().drawLine(Position.from(0), Position.from(0));
 
         // then

@@ -14,9 +14,10 @@ class LadderGameTest {
         //given
         GreaterThanOne numberOfRow = GreaterThanOne.from(3);
         GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
+        LadderSize ladderSize = LadderSize.from(numberOfRow, numberOfPerson);
 
         //when
-        LadderCreator ladderCreator = new BasicLadderCreatorImpl(numberOfRow, numberOfPerson);
+        LadderCreator ladderCreator = new BasicLadderCreatorImpl(ladderSize);
 
         //then
         assertThat(ladderCreator).isNotNull();
@@ -27,9 +28,10 @@ class LadderGameTest {
         //given
         GreaterThanOne numberOfRow = GreaterThanOne.from(3);
         GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
+        LadderSize ladderSize = LadderSize.from(numberOfRow, numberOfPerson);
 
         //when
-        LadderCreator autoLadderCreator = new AutoLadderCreatorImpl(numberOfRow, numberOfPerson);
+        LadderCreator autoLadderCreator = new AutoLadderCreatorImpl(ladderSize);
 
         //then
         assertThat(autoLadderCreator).isNotNull();
@@ -39,8 +41,11 @@ class LadderGameTest {
     @Test
     void 사다리_사람_예외_처리_확인() {
         //when
+        GreaterThanOne numberOfRow = GreaterThanOne.from(2);
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
-        LadderCreator ladderCreator = new BasicLadderCreatorImpl(GreaterThanOne.from(2), numberOfPerson);
+        LadderSize ladderSize = LadderSize.from(numberOfRow, numberOfPerson);
+
+        LadderCreator ladderCreator = new BasicLadderCreatorImpl(ladderSize);
         LadderGame ladderGame = new LadderGame(ladderCreator);
 
         //given
@@ -55,8 +60,9 @@ class LadderGameTest {
     void 사다리_결과_확인() {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(4);
-        GreaterThanOne row = GreaterThanOne.from(3);
-        LadderCreator ladderCreator = new BasicLadderCreatorImpl(row, numberOfPerson);
+        GreaterThanOne numberOfRow = GreaterThanOne.from(3);
+        LadderSize ladderSize = LadderSize.from(numberOfRow, numberOfPerson);
+        LadderCreator ladderCreator = new BasicLadderCreatorImpl(ladderSize);
         LadderGame ladderGame = new LadderGame(ladderCreator);
 
         ladderCreator.drawLine(Position.from(0),Position.from(0));
