@@ -2,7 +2,7 @@ package ladder;
 
 import ladder.creator.AutoLadderCreatorImpl;
 import ladder.creator.LadderCreator;
-import ladder.creator.LadderCreatorImpl;
+import ladder.creator.BasicLadderCreatorImpl;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -16,19 +16,31 @@ class LadderGameTest {
         GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
 
         //when
-        LadderCreator ladderCreator = new LadderCreatorImpl(numberOfRow, numberOfPerson);
-        LadderCreator autoLadderCreator = new AutoLadderCreatorImpl(numberOfRow, numberOfPerson);
+        LadderCreator ladderCreator = new BasicLadderCreatorImpl(numberOfRow, numberOfPerson);
 
         //then
         assertThat(ladderCreator).isNotNull();
+    }
+
+    @Test
+    void 랜덤사다리_생성_확인() {
+        //given
+        GreaterThanOne numberOfRow = GreaterThanOne.from(3);
+        GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
+
+        //when
+        LadderCreator autoLadderCreator = new AutoLadderCreatorImpl(numberOfRow, numberOfPerson);
+
+        //then
         assertThat(autoLadderCreator).isNotNull();
+
     }
 
     @Test
     void 사다리_사람_예외_처리_확인() {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
-        LadderCreator ladderCreator = new LadderCreatorImpl(GreaterThanOne.from(2), numberOfPerson);
+        LadderCreator ladderCreator = new BasicLadderCreatorImpl(GreaterThanOne.from(2), numberOfPerson);
         LadderGame ladderGame = new LadderGame(ladderCreator);
 
         //given
@@ -44,7 +56,7 @@ class LadderGameTest {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(4);
         GreaterThanOne row = GreaterThanOne.from(3);
-        LadderCreator ladderCreator = new LadderCreatorImpl(row, numberOfPerson);
+        LadderCreator ladderCreator = new BasicLadderCreatorImpl(row, numberOfPerson);
         LadderGame ladderGame = new LadderGame(ladderCreator);
 
         ladderCreator.drawLine(Position.from(0),Position.from(0));

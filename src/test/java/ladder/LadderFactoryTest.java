@@ -9,7 +9,7 @@ public class LadderFactoryTest {
     void 정적_팩토리_메소드_기본사다리_검증() {
 
         // given
-        LadderGame ladderGame = LadderGameFactory.createLadderGame();
+        LadderGame ladderGame = LadderGameFactory.createBasicLadderGame();
         LadderCreator ladderCreator = ladderGame.getLadderCreator();
         ladderCreator.setRowsAndPersons(GreaterThanOne.from(5), GreaterThanOne.from(5));
         ladderGame.getLadderCreator().drawLine(Position.from(0), Position.from(0));

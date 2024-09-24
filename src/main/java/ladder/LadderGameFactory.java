@@ -1,8 +1,7 @@
 package ladder;
 
 import ladder.creator.AutoLadderCreatorImpl;
-import ladder.creator.LadderCreator;
-import ladder.creator.LadderCreatorImpl;
+import ladder.creator.BasicLadderCreatorImpl;
 
 public class LadderGameFactory {
 
@@ -10,8 +9,8 @@ public class LadderGameFactory {
         return new LadderGame(new AutoLadderCreatorImpl());
     }
 
-    public static LadderGame createLadderGame() {
-        return new LadderGame(new LadderCreatorImpl());
+    public static LadderGame createBasicLadderGame() {
+        return new LadderGame(new BasicLadderCreatorImpl());
     }
 }
 

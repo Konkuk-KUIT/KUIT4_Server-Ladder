@@ -1,7 +1,6 @@
 package ladder;
 
 import ladder.creator.LadderCreator;
-import ladder.creator.LadderCreatorImpl;
 
 public class LadderGame {
 
