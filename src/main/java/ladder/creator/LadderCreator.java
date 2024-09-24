@@ -16,7 +16,7 @@ public class LadderCreator {
     }
 
     public void drawLine(Position row, Position col) {
-        rows[row.getX()].drawLine(col);
+        rows[row.getPosition()].drawLine(col);
     }
 
     public Row[] getRows() {

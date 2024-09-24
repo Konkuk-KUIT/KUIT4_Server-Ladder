@@ -15,7 +15,7 @@ class NodeTest {
 
         node.moveRow(position);
 
-        assertThat(position.getX()).isEqualTo(1);
+        assertThat(position.getPosition()).isEqualTo(1);
     }
 
     @Test
@@ -26,7 +26,7 @@ class NodeTest {
 
         node.moveRow(position);
 
-        assertThat(position.getX()).isEqualTo(0);
+        assertThat(position.getPosition()).isEqualTo(0);
     }
 
     @Test
@@ -37,7 +37,7 @@ class NodeTest {
 
         node.moveRow(position);
 
-        assertThat(position.getX()).isEqualTo(0);
+        assertThat(position.getPosition()).isEqualTo(0);
     }
 
 }

@@ -9,22 +9,19 @@ public class LadderDraw {
         this.rows=rows;
     }
 
-    public void drawLadderState(int x, int y,String State) {
+    public void drawLadderState(Position positionX,Position positionY,String State) {
 
         line.append(State+"\n");
         for (int i = 0; i < rows.length; i++) {
-
-            Position position = Position.of(x, y);
-            LadderStateUpdate(position, i);
-            line.append("\n");
+            LadderStateUpdate(positionX,positionY, i);
         }
         System.out.println(line.toString());
         line.setLength(0);
     }
 
-    private void LadderStateUpdate(Position position, int i) {
+    private void LadderStateUpdate(Position positionX,Position positionY, int currentY) {
 
-        Node[] nodes = rows[i].getNodes();
+        Node[] nodes = rows[currentY].getNodes();
 
         for (int j = 0; j < nodes.length; j++) {
 
@@ -34,11 +31,11 @@ public class LadderDraw {
                 line.append(-1);
             if (nodes[j].isNone())
                 line.append(0);
-            if (position.isCorrectPosition(j,i))
+            if (positionX.isCurrentPosition(j) && positionY.isCurrentPosition(currentY))
                 line.append("*");
             line.append(" ");
-
         }
+        line.append("\n");
     }
 
 

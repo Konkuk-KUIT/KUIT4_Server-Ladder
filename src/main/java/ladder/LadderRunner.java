@@ -8,15 +8,15 @@ public class LadderRunner {
         this.rows = rows;
     }
 
-    public int run(Position x) {
+    public int run(Position positionX) {
 
         LadderDraw ladderDraw = new LadderDraw(rows);
 
         for (int i = 0; i < rows.length; i++) {
-            ladderDraw.drawLadderState(x.getX(),i,"Before");
-            rows[i].nextPosition(x);
-            ladderDraw.drawLadderState(x.getX(),i,"After");
+            ladderDraw.drawLadderState(positionX,Position.from(i),"Before");
+            rows[i].nextPosition(positionX);
+            ladderDraw.drawLadderState(positionX,Position.from(i),"After");
         }
-        return x.getX();
+        return positionX.getPosition();
     }
 }

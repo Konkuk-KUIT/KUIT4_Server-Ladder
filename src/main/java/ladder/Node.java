@@ -17,11 +17,11 @@ public class Node {
     public void moveRow(Position position) {
 
         if (isRight()) {
-            position.nextX();
+            position.next();
             return;
         }
         if (isLeft()) {
-            position.prevX();
+            position.prev();
             return;
         }
     }

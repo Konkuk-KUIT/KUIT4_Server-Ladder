@@ -4,20 +4,14 @@ import static ladder.ExceptionMessage.INVALID_LADDER_POSITION;
 
 public class Position {
 
-    private int x;
-    private int y;
+    private int position;
 
-    private Position(int x) {
-        this.x = x;
+    private Position(int position) {
+        this.position = position;
     }
 
-    private Position(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public int getX() {
-        return x;
+    public int getPosition() {
+        return position;
     }
 
 
@@ -26,28 +20,25 @@ public class Position {
         return new Position(position);
     }
 
-    public static Position of(int x, int y) {
-        return new Position(x,y);
+
+    public void prev() {
+        position--;
     }
 
-    public void prevX() {
-        x--;
+    public void next() {
+        position++;
     }
 
-    public void nextX() {
-        x++;
+    public boolean isSmallerThan(int position) {
+        return this.position < position;
     }
 
-    public boolean xIsSmallerThan(int x) {
-        return this.x < x;
+    public boolean isBiggerThan(int position) {
+        return this.position > position;
     }
 
-    public boolean xIsBiggerThan(int x) {
-        return this.x > x;
-    }
-
-    public boolean isCorrectPosition(int x, int y) {
-        return this.x == x && this.y == y;
+    public boolean isCurrentPosition(int position) {
+        return this.position == position;
     }
 
     private static void validatePosition(int position) {

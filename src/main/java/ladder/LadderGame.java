@@ -10,9 +10,9 @@ public class LadderGame {
         this.ladderCreator = ladderCreator;
     }
 
-    public int run(Position position) {
+    public int run(Position selectX) {
         LadderRunner ladderRunner = new LadderRunner(ladderCreator.getRows());
-        ladderRunner.run(position);
-        return position.getX();
+        ladderRunner.run(selectX);
+        return selectX.getPosition();
     }
 }
