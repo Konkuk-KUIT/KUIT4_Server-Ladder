@@ -13,7 +13,7 @@ public class LadderFactoryTest {
         LadderCreator ladderCreator = ladderGame.getLadderCreator();
         LadderSize ladderSize = LadderSize.from(GreaterThanOne.from(5), GreaterThanOne.from(5));
         ladderCreator.setRowsAndPersons(ladderSize);
-        ladderGame.getLadderCreator().drawLine(Position.from(0), Position.from(0));
+        ladderGame.getLadderCreator().drawLine(LadderPosition.from(Position.from(0), Position.from(0)));
 
         // then
         ladderGame.run(Position.from(0));
@@ -28,12 +28,14 @@ public class LadderFactoryTest {
         LadderCreator ladderCreator = ladderGame.getLadderCreator();
         LadderSize ladderSize = LadderSize.from(GreaterThanOne.from(5), GreaterThanOne.from(5));
         ladderCreator.setRowsAndPersons(ladderSize);
-        ladderGame.getLadderCreator().drawLine(Position.from(0), Position.from(0));
+        ladderGame.getLadderCreator().drawLine(LadderPosition.from(Position.from(0), Position.from(0)));
 
         // then
         ladderGame.run(Position.from(0));
 
     }
+
+    // todo LadderPosition, LadderSize 등등 좀 더 엄밀히 테스팅
 
 
 }

@@ -1,9 +1,6 @@
 package ladder.creator;
 
-import ladder.GreaterThanOne;
-import ladder.LadderSize;
-import ladder.Position;
-import ladder.Row;
+import ladder.*;
 
 import java.util.Random;
 
@@ -16,12 +13,8 @@ public class AutoLadderCreatorImpl implements LadderCreator {
     }
 
     public AutoLadderCreatorImpl(LadderSize ladderSize) {
-        rows = new Row[ladderSize.getNumberOfRow().getNumber()];
-        for (int i = 0; i < ladderSize.getNumberOfRow().getNumber(); i++) {
-            rows[i] = new Row(ladderSize.getNumberOfPerson());
-        }
+        setRowsAndPersons(ladderSize);
     }
-
 
     // 빈 껍데기인 랜덤 사다리에서, 사다리의 높이와 게임에 참여하는 사람 수를 설정해주는 메소드
     public void setRowsAndPersons(LadderSize ladderSize) {
@@ -32,52 +25,57 @@ public class AutoLadderCreatorImpl implements LadderCreator {
     }
 
     // 사다리 자동 생성 - 인터페이스를 활용하기 위해 가장 처음 선을 그리고 싶은 위치는 입력 받을 수 있도록 함
-    public void drawLine(Position row, Position col) {
+    public void drawLine(LadderPosition ladderPosition) {
 
-        rows[row.getValue()].drawLine(col);
+        rows[ladderPosition.getRow().getValue()].drawLine(ladderPosition.getCol());
 
-        int numberOfLines = getNumberOfLines();
-
-        while (numberOfLines > 0) {
-
-            row = selectRandomRow();
-            col = selectRandomCol();
-
-            // 사다리를 그릴 수 없다면 다시 반복
-            if (!canDrawLineValidation(row, col)) continue;
-
-            numberOfLines--;
-        }
+        drawRandomLines(getNumberOfLines());
 
     }
 
-    // 몇 개의 사다리를 자동으로 그릴지 결정
+    private void drawRandomLines(int numberOfLines) {
+        LadderPosition ladderPosition;
+
+        while (numberOfLines > 0) {
+
+            ladderPosition = selectRandomPosition();
+
+            // 사다리를 그릴 수 없다면 다시 반복
+            if (!canDrawLineValidation(ladderPosition)) continue;
+
+            rows[ladderPosition.getRow().getValue()].drawLine(ladderPosition.getCol());
+
+            numberOfLines--;
+        }
+    }
+
+    // 몇 개의 사다리를 자동으로 그릴지 결정. 우선 하나의 사다리를 그린 후 시작할 것이므로 계산 결과에서 1을 뺀 값을 반환함
     private int getNumberOfLines() {
         return (int) (rows.length * rows[0].getNodes().length * 0.3) - 1;
     }
 
 
+    // 무작위로 사다리를 그릴 위치 선정
+    private LadderPosition selectRandomPosition() {
+        Random rand = new Random();
+
+        Position row = Position.from(rand.nextInt(rows.length - 1));
+        Position col = Position.from(rand.nextInt((rows[0].getNodes().length - 1)));
+
+        return LadderPosition.from(row, col);
+    }
+
+
     // 사다리를 그릴 수 있는지 검증
-    private boolean canDrawLineValidation(Position row, Position col) {
+    private boolean canDrawLineValidation(LadderPosition ladderPosition) {
         try {
-            rows[row.getValue()].drawLine(col);
-        } catch (IllegalArgumentException e) {  //예외 처리 로직은 이미 존재하니, 예외가 발생하면 다시 사다리 그리기
+            rows[ladderPosition.getRow().getValue()].validateDrawLinePosition(ladderPosition.getCol());
+        } catch (IllegalArgumentException e) {
             return false;
         }
         return true;
     }
 
-    // 사다리를 그릴 행 랜덤하게 선택
-    private Position selectRandomRow() {
-        Random rand = new Random();
-        return Position.from(rand.nextInt(rows.length - 1));
-    }
-
-    // 사다리를 그릴 열 랜덤하게 선택
-    private Position selectRandomCol() {
-        Random rand = new Random();
-        return Position.from(rand.nextInt((rows[0].getNodes().length - 1)));
-    }
 
     public Row[] getRows() {
         return rows;

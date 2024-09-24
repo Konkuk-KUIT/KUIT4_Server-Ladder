@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 class LadderGameTest {
 
     @Test
-    void 사다리_생성_확인() {
+    void 기본_사다리_생성_확인() {
         //given
         GreaterThanOne numberOfRow = GreaterThanOne.from(3);
         GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
@@ -24,7 +24,7 @@ class LadderGameTest {
     }
 
     @Test
-    void 랜덤사다리_생성_확인() {
+    void 랜덤_사다리_생성_확인() {
         //given
         GreaterThanOne numberOfRow = GreaterThanOne.from(3);
         GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
@@ -61,13 +61,16 @@ class LadderGameTest {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(4);
         GreaterThanOne numberOfRow = GreaterThanOne.from(3);
+
         LadderSize ladderSize = LadderSize.from(numberOfRow, numberOfPerson);
+
         LadderCreator ladderCreator = new BasicLadderCreatorImpl(ladderSize);
+
         LadderGame ladderGame = new LadderGame(ladderCreator);
 
-        ladderCreator.drawLine(Position.from(0),Position.from(0));
-        ladderCreator.drawLine(Position.from(1),Position.from(1));
-        ladderCreator.drawLine(Position.from(2),Position.from(0));
+        ladderCreator.drawLine(LadderPosition.from(Position.from(0),Position.from(0)));
+        ladderCreator.drawLine(LadderPosition.from(Position.from(1),Position.from(1)));
+        ladderCreator.drawLine(LadderPosition.from(Position.from(2),Position.from(0)));
 
         //given
         Position position = Position.from(0);

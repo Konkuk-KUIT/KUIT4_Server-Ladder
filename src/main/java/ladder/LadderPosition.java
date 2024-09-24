@@ -25,8 +25,4 @@ public class LadderPosition {
     public boolean isCurrentRow(Position row) {
         return this.row.getValue() == row.getValue();
     }
-
-    public boolean isCurrentCol(Position col) {
-        return this.col.getValue() == col.getValue();
-    }
 }

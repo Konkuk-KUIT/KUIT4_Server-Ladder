@@ -1,9 +1,6 @@
 package ladder.creator;
 
-import ladder.GreaterThanOne;
-import ladder.LadderSize;
-import ladder.Position;
-import ladder.Row;
+import ladder.*;
 
 public class BasicLadderCreatorImpl implements LadderCreator {
 
@@ -14,10 +11,7 @@ public class BasicLadderCreatorImpl implements LadderCreator {
     }
 
     public BasicLadderCreatorImpl(LadderSize ladderSize) {
-        rows = new Row[ladderSize.getNumberOfRow().getNumber()];
-        for (int i = 0; i < ladderSize.getNumberOfRow().getNumber(); i++) {
-            rows[i] = new Row(ladderSize.getNumberOfPerson());
-        }
+        setRowsAndPersons(ladderSize);
     }
 
 
@@ -30,8 +24,8 @@ public class BasicLadderCreatorImpl implements LadderCreator {
     }
 
     // 원하는 좌표에 사다리를 그리는 메소드
-    public void drawLine(Position row, Position col) {
-        rows[row.getValue()].drawLine(col);
+    public void drawLine(LadderPosition ladderPosition) {
+        rows[ladderPosition.getRow().getValue()].drawLine(ladderPosition.getCol());
     }
 
     public Row[] getRows() {

@@ -69,7 +69,9 @@ public class Row {
         }
     }
 
-    private void validateDrawLinePosition(Position startPosition) {
+
+    // AutoLadderCreator에서도 메소드를 가져다 사용할 것이라서 public으로 변경
+    public void validateDrawLinePosition(Position startPosition) {
         validatePosition(startPosition);
         if (isLineAtPosition(startPosition) || isLineAtNextPosition(startPosition)) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_DRAW_POSITION.getMessage());

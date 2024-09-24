@@ -12,22 +12,23 @@ public class LadderRunner {
 
         for (int i = 0; i < rows.length; i++) {
 
-            printWholeLine(Position.from(i), position);
+            printWholeLine(LadderPosition.from(Position.from(i), position));
             rows[i].nextPosition(position);
-            printWholeLine(Position.from(i), position);
+            printWholeLine(LadderPosition.from(Position.from(i), position));
 
         }
 
         return position.getValue();
     }
 
+
     // 전체 라인 출력
-    private void printWholeLine(Position row, Position col) {
+    private void printWholeLine(LadderPosition ladderPosition) {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < rows.length; i++) {
-            if(i == row.getValue()) {
-                sb.append(rows[i].printAsteroidLine(col)).append("\n");
+            if(ladderPosition.isCurrentRow(Position.from(i))) {
+                sb.append(rows[i].printAsteroidLine(ladderPosition.getCol())).append("\n");
                 continue;
             }
 
