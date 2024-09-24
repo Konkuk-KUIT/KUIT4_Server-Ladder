@@ -12,6 +12,17 @@ public class Row {
         }
     }
 
+    public StringBuilder rowToString(int position, boolean currentRow) {
+        StringBuilder rowString = new StringBuilder();
+        for (int i = 0; i < nodes.length; i++) {
+            rowString.append(String.valueOf(nodes[i].getDirection().getValue()));
+            if(i == position && currentRow)
+                rowString.append("*");
+            rowString.append(" ");
+        }
+        return rowString;
+    }
+
     public void drawLine(Position startPosition) {
         validateDrawLinePosition(startPosition);
 

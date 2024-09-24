@@ -25,6 +25,10 @@ public class Node {
         }
     }
 
+    public Direction getDirection() {
+        return direction;
+    }
+
     public void setRightNode() {
         direction = RIGHT;
     }
