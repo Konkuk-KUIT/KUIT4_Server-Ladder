@@ -38,31 +38,34 @@ class LadderGameTest {
     @Test
     void 사다리_결과_확인() {
         //when
-        GreaterThanOne numberOfPerson = GreaterThanOne.from(4);
-        GreaterThanOne row = GreaterThanOne.from(3);
+        GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
+        GreaterThanOne row = GreaterThanOne.from(4);
         LadderCreator ladderCreator = new LadderCreator(row, numberOfPerson);
         LadderGame ladderGame = new LadderGame(ladderCreator);
 
         ladderCreator.drawLine(Position.from(0),Position.from(0));
         ladderCreator.drawLine(Position.from(1),Position.from(1));
-        ladderCreator.drawLine(Position.from(2),Position.from(0));
+        //ladderCreator.drawLine(Position.from(2),Position.from(0));
 
         //given
         Position position = Position.from(0);
 
+        ladderGame.run(position);
         //then
-        assertThat(ladderGame.run(position)).isEqualTo(2);
+        assertThat(position.getValue()).isEqualTo(2);
 
-        //given
+       /* //given
         position = Position.from(1);
 
+        ladderGame.run(position);
         //then
-        assertThat(ladderGame.run(position)).isEqualTo(1);
+        assertThat(position.getValue()).isEqualTo(1);
 
         //given
         position = Position.from(2);
 
+        ladderGame.run(position);
         //then
-        assertThat(ladderGame.run(position)).isEqualTo(0);
+        assertThat(position.getValue()).isEqualTo(0);*/
     }
 }

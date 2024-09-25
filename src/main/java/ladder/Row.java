@@ -12,6 +12,9 @@ public class Row {
         }
     }
 
+    public Node[] getNodes(){
+        return nodes;
+    }
     public void drawLine(Position startPosition) {
         validateDrawLinePosition(startPosition);
 
@@ -25,20 +28,21 @@ public class Row {
     }
 
     //String으로 바꾸는 메서드
-    @Override
+    /*@Override
     public String toString() {
         StringBuilder rowStr = new StringBuilder();
         for(Node node : nodes) {
             if(node.isRight()){
-                rowStr.append("1");
+                rowStr.append("1 ");
             }else if(node.isLeft()){
-                rowStr.append("-1");
+                rowStr.append("-1 ");
             }else{
-                rowStr.append("0");
+                rowStr.append("0 ");
             }
         }
         return rowStr.toString();
     }
+*/
 
     private void setDirectionBetweenNextPosition(Position position) {
         nodes[position.getValue()].setRightNode();

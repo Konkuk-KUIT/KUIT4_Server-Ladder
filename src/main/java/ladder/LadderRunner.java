@@ -8,10 +8,12 @@ public class LadderRunner {
         this.rows = rows;
     }
 
-    public int run(Position position) {
+    public void run(Position position) {
         for (int i = 0; i < rows.length; i++) {
+            System.out.println("Running row " + i + ", position: " + position.getValue());
             rows[i].nextPosition(position);
+
         }
-        return position.getValue();
+        //return position.getValue();
     }
 }

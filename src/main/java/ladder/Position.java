@@ -3,7 +3,7 @@ package ladder;
 import static ladder.ExceptionMessage.INVALID_LADDER_POSITION;
 
 public class Position {
-    private int position;
+    private int position=0;
 
     private Position(int position) {
         this.position = position;
@@ -14,7 +14,9 @@ public class Position {
     }
 
     public static Position from(int position) {
-        validatePosition(position);
+        if (position < 0) {
+            throw new IllegalArgumentException(INVALID_LADDER_POSITION.getMessage());
+        }
         return new Position(position);
     }
 
@@ -34,7 +36,7 @@ public class Position {
         return this.position > position;
     }
 
-    private static void validatePosition(int position) {
+   /* private static void validatePosition(int position) {
         if (!isPosition(position)) {
             throw new IllegalArgumentException(INVALID_LADDER_POSITION.getMessage());
         }
@@ -42,5 +44,5 @@ public class Position {
 
     private static boolean isPosition(int position) {
         return position >= 0;
-    }
+    }*/
 }

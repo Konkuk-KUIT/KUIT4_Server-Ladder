@@ -17,11 +17,18 @@ public class Node {
     public void move(Position position) {
         if (isRight()) {
             position.next();
-            return;
-        }
-        if (isLeft()) {
+        }else if (isLeft()) {
             position.prev();
-            return;
+        }
+    }
+    @Override
+    public String toString() {
+        if (isRight()) {
+            return "1 ";
+        } else if (isLeft()) {
+            return "-1 ";
+        } else {
+            return "0 ";
         }
     }
 
