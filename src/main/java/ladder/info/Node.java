@@ -1,4 +1,7 @@
-package ladder;
+package ladder.info;
+
+import ladder.Direction;
+import ladder.Position;
 
 import static ladder.Direction.*;
 
@@ -14,7 +17,7 @@ public class Node {
         return new Node(direction);
     }
 
-    public void moveRow(Position position) {
+    public void move(Position position) {
 
         if (isRight()) {
             position.next();
@@ -48,5 +51,9 @@ public class Node {
 
     public boolean isNone() {
         return direction == NONE;
+    }
+
+    public Direction getDirection() {
+        return direction;
     }
 }

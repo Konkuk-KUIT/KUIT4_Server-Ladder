@@ -15,4 +15,10 @@ public class OutputCapture {
         System.setOut(originalOut);
         return outputStream.toString();
     }
+
+    public static String normalizeOutput(String output) {
+        return output.replaceAll("\\s+", " ")
+                .replaceAll(" +", " ")
+                .trim();
+    }
 }
