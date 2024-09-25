@@ -24,6 +24,22 @@ public class Row {
         nodes[position.getValue()].move(position);
     }
 
+    //String으로 바꾸는 메서드
+    @Override
+    public String toString() {
+        StringBuilder rowStr = new StringBuilder();
+        for(Node node : nodes) {
+            if(node.isRight()){
+                rowStr.append("1");
+            }else if(node.isLeft()){
+                rowStr.append("-1");
+            }else{
+                rowStr.append("0");
+            }
+        }
+        return rowStr.toString();
+    }
+
     private void setDirectionBetweenNextPosition(Position position) {
         nodes[position.getValue()].setRightNode();
         position.next();

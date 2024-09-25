@@ -37,15 +37,15 @@ public class Node {
         return !isNone();
     }
 
-    private boolean isRight() {
+    public boolean isRight() {
         return direction == RIGHT;
     }
 
-    private boolean isLeft() {
+    public  boolean isLeft() {
         return direction == LEFT;
     }
 
-    private boolean isNone() {
+    public boolean isNone() {
         return direction == NONE;
     }
 }
