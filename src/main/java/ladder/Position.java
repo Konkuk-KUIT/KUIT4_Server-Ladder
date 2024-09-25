@@ -9,13 +9,13 @@ public class Position {
         this.position = position;
     }
 
-    public int getPosition() {
-        return position;
-    }
-
     public static Position from(int position) {
         validatePosition(position);
         return new Position(position);
+    }
+
+    public int getValue() {
+        return position;
     }
 
     public void prev() {

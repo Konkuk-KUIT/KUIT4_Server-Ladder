@@ -14,6 +14,10 @@ public class Node {
         return new Node(direction);
     }
 
+    public int getDirectionValue(){
+        return direction.getValue();
+    }
+
     public void move(Position position) {
         if (isRight()) {
             position.next();

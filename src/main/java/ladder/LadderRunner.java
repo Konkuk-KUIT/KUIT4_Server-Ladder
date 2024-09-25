@@ -1,30 +1,30 @@
 package ladder;
 
 public class LadderRunner {
-    private final Row[] rows;
+    LadderWrapper ladderWrapper;
 
-    public LadderRunner(Row[] rows) {
-        this.rows = rows;
+    private LadderRunner(LadderWrapper ladderWrapper) {
+        this.ladderWrapper = ladderWrapper;
+    }
+
+    public static LadderRunner from(LadderWrapper ladderWrapper) {
+        return new LadderRunner(ladderWrapper);
     }
 
     public int run(Position position) {
-        for (int i = 0; i < rows.length; i++) {
-            //System.out.println("Before");
-            //printLadder(i, position);
-            rows[i].nextPosition(position);
-            //System.out.println("After");
-            //printLadder(i, position);
-            //System.out.println();
+        LadderPosition ladderPosition = LadderPosition.of(Position.from(0), position);
+        while(!ladderWrapper.isLadderPositionAtLastRow(ladderPosition)){
+            moveTurnPrinting(ladderPosition);
         }
-        return position.getPosition();
+        Position lastColPosition = ladderPosition.getColPos();
+        return lastColPosition.getValue();
     }
-    /*
-    private void printLadder(int nowRowIndex, Position position){
-        for(int i=0; i<rows.length; i++){
-            if(i==nowRowIndex) rows[i].printStarLine(position);
-            else rows[i].printNonStarLine();
-            System.out.println();
-        }
+
+    private void moveTurnPrinting(LadderPosition ladderPosition){
+        ladderWrapper.printRowsWithLabel(ladderPosition, "Before");
+        ladderWrapper.changeLadderPositionHorizontally(ladderPosition);
+        ladderWrapper.printRowsWithLabel(ladderPosition, "After");
+        ladderWrapper.changeLadderPositionVertically(ladderPosition);
+        System.out.println();
     }
-     */
 }

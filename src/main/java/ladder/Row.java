@@ -5,11 +5,31 @@ import static ladder.Direction.*;
 public class Row {
     private final Node[] nodes;
 
-    public Row(GreaterThanOne numberOfPerson) {
+    private Row(GreaterThanOne numberOfPerson) {
         nodes = new Node[numberOfPerson.getNumber()];
         for (int i = 0; i < numberOfPerson.getNumber(); i++) {
             nodes[i] = Node.from(NONE);
         }
+    }
+
+    public static Row from(GreaterThanOne numberOfPerson){
+        return new Row(numberOfPerson);
+    }
+
+    public void printRow(){
+        for(Node node : nodes){
+            System.out.print(node.getDirectionValue() + " ");
+        }
+        System.out.println();
+    }
+
+    public void printStarRow(Position position){
+        for(int colIndex=0; colIndex<nodes.length; colIndex++){
+            System.out.print(nodes[colIndex].getDirectionValue());
+            if(colIndex == position.getValue()) System.out.print("*");
+            System.out.print(" ");
+        }
+        System.out.println();
     }
 
     public void drawLine(Position startPosition) {
@@ -21,13 +41,17 @@ public class Row {
     public void nextPosition(Position position) {
         validatePosition(position);
 
-        nodes[position.getPosition()].move(position);
+        nodes[position.getValue()].move(position);
+    }
+
+    public int getNodesSize(){
+        return nodes.length;
     }
 
     private void setDirectionBetweenNextPosition(Position position) {
-        nodes[position.getPosition()].setRightNode();
+        nodes[position.getValue()].setRightNode();
         position.next();
-        nodes[position.getPosition()].setLeftNode();
+        nodes[position.getValue()].setLeftNode();
     }
 
     private void validatePosition(Position position) {
@@ -48,7 +72,7 @@ public class Row {
     }
 
     private boolean isLineAtPosition(Position position) {
-        return nodes[position.getPosition()].isAlreadySetDirection();
+        return nodes[position.getValue()].isAlreadySetDirection();
     }
 
     private boolean isLineAtNextPosition(Position position) {
@@ -57,5 +81,4 @@ public class Row {
         position.prev();
         return lineAtPosition;
     }
-
 }
