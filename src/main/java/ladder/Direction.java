@@ -13,4 +13,8 @@ public enum Direction {
     public int getValue() {
         return value;
     }
+
+    public String getStringValue() {
+        return Integer.toString(value);
+    }
 }

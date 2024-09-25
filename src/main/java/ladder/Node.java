@@ -2,7 +2,7 @@ package ladder;
 import static ladder.Direction.*;
 
 // 사다리의 세로줄 (열), numberOFPerson
-// 사다리의 실제 값 (방향)을 담는 클래스
+// 사다리의 실제 값 (방향)을 지정하는 클래스
 public class Node {
     private Direction direction; // 사다리의 실제 값
 
@@ -42,7 +42,7 @@ public class Node {
     // 노드값을 보고 하는 것이므로 node의 책임 (from Row클래스)
     public void move(Position position) {
         if (isRight()) {
-            position.next(); // 이 곳에 return 삭제함 (1)
+            position.next(); // position (인덱스값 ++)
             return;
         }
         if (isLeft()) {
@@ -51,6 +51,9 @@ public class Node {
         }
     }
 
+    public String getDirection() {
+        return direction.getStringValue();
+    }
 
 
 

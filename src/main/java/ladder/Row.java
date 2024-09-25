@@ -8,6 +8,7 @@ import static ladder.Direction.*;
 public class Row {
     // todo Node 클래스로 분리(row 배열에서 값을 하나씩 꺼내서 볼 필요가 없다..?)
     Node[] nodes;
+    StringBuilder rowLadder = new StringBuilder(); // StringBuilder를 만들어두고 해당 클래스에 출력
 
     public Row(GreaterThanOne numberOfPerson) {
         nodes = new Node[numberOfPerson.getNumber()]; // 노드 배열개수할당
@@ -15,6 +16,22 @@ public class Row {
             nodes[i] = Node.from(NONE);
         }
     }
+
+    public void setStringLadder(LadderPosition xy) {
+        for (int i = 0; i < nodes.length; i++) { // 사람 수 만큼 순환
+
+            rowLadder.append(nodes[i].getDirection());// 받는 로직 추가
+            if (i == xy.getX()) {
+                rowLadder.append("*");
+            }
+            rowLadder.append(" ");
+        }
+
+    }
+
+//    public void printLadder() {
+//        System.out.println(rowLadder.toString());
+//    }
 
     // todo : 상수 리팩토링 (1,-1, 0)
     public void drawLine(Position startPosition) {
@@ -30,11 +47,13 @@ public class Row {
     }
 
     // run 메소드의 다음 상태
+    // 시작점이 될 수 있는지 판단하고
+    // Node 클래스의 move메소드로 넘겨서 실제 움직임을 동작한다
     public void nextPosition(Position position) {
+        // Position클래스 자체에서는 사다리의 크기를 모르므로 Row클래스에서 검증해야 함
         validatePosition(position); // 1-2. next, prev 이전에 다시 position 검증
-        // nextPosition method return type : Position -> void (1)
 
-        nodes[position.getPosition()].move(position);
+        nodes[position.getPosition()].move(position); // 검증이 완료된 position을 넘긴다.
     }
 
     // Todo 상수 하드코딩도 enum으로 클래스단위로 관리하자
