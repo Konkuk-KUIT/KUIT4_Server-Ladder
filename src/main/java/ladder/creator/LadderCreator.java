@@ -1,25 +1,12 @@
 package ladder.creator;
 
-import ladder.GreaterThanOne;
 import ladder.Position;
 import ladder.Row;
 
-public class LadderCreator {
+public interface LadderCreator {
 
-    private final Row[] rows;
+    void drawLine(Position row, Position col);
 
-    public LadderCreator(GreaterThanOne numberOfRow, GreaterThanOne numberOfPerson) {
-        rows = new Row[numberOfRow.getNumber()];
-        for (int i = 0; i < numberOfRow.getNumber(); i++) {
-            rows[i] = new Row(numberOfPerson);
-        }
-    }
+    Row[] getRows();
 
-    public void drawLine(Position row, Position col) {
-        rows[row.getValue()].drawLine(col);
-    }
-
-    public Row[] getRows() {
-        return rows;
-    }
 }

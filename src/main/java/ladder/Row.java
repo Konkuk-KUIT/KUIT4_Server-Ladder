@@ -12,6 +12,9 @@ public class Row {
         }
     }
 
+    public int getNodeLength(){
+        return nodes.length;
+    }
     public StringBuilder convertRowtoString(){
         StringBuilder sb = new StringBuilder();
         for(int i = 0 ; i < nodes.length ; i++){
@@ -36,7 +39,6 @@ public class Row {
 
     public void drawLine(Position startPosition) {
         validateDrawLinePosition(startPosition);
-
         setDirectionBetweenNextPosition(startPosition);
     }
 

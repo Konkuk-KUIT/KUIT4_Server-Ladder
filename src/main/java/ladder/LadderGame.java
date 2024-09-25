@@ -1,11 +1,11 @@
 package ladder;
 
 import ladder.creator.LadderCreator;
+import ladder.creator.LadderCreatorImpl;
 
 public class LadderGame {
 
     private final LadderCreator ladderCreator;
-
     public LadderGame(LadderCreator ladderCreator) {
         this.ladderCreator = ladderCreator;
     }

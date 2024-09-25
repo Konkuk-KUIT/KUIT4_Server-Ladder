@@ -34,7 +34,7 @@ public class Position {
         return this.position > position;
     }
 
-    private static void validatePosition(int position) {
+    public static void validatePosition(int position) {
         if (!isPosition(position)) {
             throw new IllegalArgumentException(INVALID_LADDER_POSITION.getMessage());
         }
