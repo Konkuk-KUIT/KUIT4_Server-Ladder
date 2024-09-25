@@ -12,6 +12,28 @@ public class Row {
         }
     }
 
+    public StringBuilder convertRowtoString(){
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0 ; i < nodes.length ; i++){
+            sb.append(nodes[i].getDirection().getValue()).append(" ");
+        }
+        return sb;
+    }
+
+    public StringBuilder convertPositionRowtoString(Position y){
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < nodes.length; i++) {
+            if(i == y.getValue()) {
+                sb.append(nodes[i].getDirection().getValue()).append("* ");
+                continue;
+            }
+            sb.append(nodes[i].getDirection().getValue()).append(" ");
+        }
+
+        return sb;
+    }
+
     public void drawLine(Position startPosition) {
         validateDrawLinePosition(startPosition);
 
