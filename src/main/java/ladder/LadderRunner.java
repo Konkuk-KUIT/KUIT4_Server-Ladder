@@ -1,5 +1,7 @@
 package ladder;
 
+import static ladder.TimeLine.*;
+
 public class LadderRunner {
 
     private final Row[] rows;
@@ -12,8 +14,10 @@ public class LadderRunner {
 
         for (int i = 0; i < rows.length; i++) {
 
+            System.out.println(BEFORE.getValue());
             printWholeLine(LadderPosition.from(Position.from(i), position));
             rows[i].nextPosition(position);
+            System.out.println(AFTER.getValue());
             printWholeLine(LadderPosition.from(Position.from(i), position));
 
         }
