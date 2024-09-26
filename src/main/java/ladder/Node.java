@@ -25,6 +25,8 @@ public class Node {
         }
     }
 
+
+
     public void setRightNode() {
         direction = RIGHT;
     }
@@ -47,5 +49,9 @@ public class Node {
 
     private boolean isNone() {
         return direction == NONE;
+    }
+
+    public Direction getDirection() {
+        return direction;
     }
 }

@@ -1,6 +1,6 @@
 package ladder;
 
-import ladder.creator.LadderCreator;
+import ladder.creator.LadderCreatorImpl;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -14,18 +14,18 @@ class LadderGameTest {
         GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
 
         //when
-        LadderCreator ladderCreator = new LadderCreator(numberOfRow, numberOfPerson);
+        LadderCreatorImpl ladderCreatorImpl = new LadderCreatorImpl(numberOfRow, numberOfPerson);
 
         //then
-        assertThat(ladderCreator).isNotNull();
+        assertThat(ladderCreatorImpl).isNotNull();
     }
 
     @Test
     void 사다리_사람_예외_처리_확인() {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
-        LadderCreator ladderCreator = new LadderCreator(GreaterThanOne.from(2), numberOfPerson);
-        LadderGame ladderGame = new LadderGame(ladderCreator);
+        LadderCreatorImpl ladderCreatorImpl = new LadderCreatorImpl(GreaterThanOne.from(2), numberOfPerson);
+        LadderGame ladderGame = new LadderGame(ladderCreatorImpl);
 
         //given
         Position position = Position.from(4);
@@ -40,12 +40,12 @@ class LadderGameTest {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(4);
         GreaterThanOne row = GreaterThanOne.from(3);
-        LadderCreator ladderCreator = new LadderCreator(row, numberOfPerson);
-        LadderGame ladderGame = new LadderGame(ladderCreator);
+        LadderCreatorImpl ladderCreatorImpl = new LadderCreatorImpl(row, numberOfPerson);
+        LadderGame ladderGame = new LadderGame(ladderCreatorImpl);
 
-        ladderCreator.drawLine(Position.from(0),Position.from(0));
-        ladderCreator.drawLine(Position.from(1),Position.from(1));
-        ladderCreator.drawLine(Position.from(2),Position.from(0));
+        ladderCreatorImpl.drawLine(Position.from(0),Position.from(0));
+        ladderCreatorImpl.drawLine(Position.from(1),Position.from(1));
+        ladderCreatorImpl.drawLine(Position.from(2),Position.from(0));
 
         //given
         Position position = Position.from(0);
