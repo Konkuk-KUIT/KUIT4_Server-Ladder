@@ -34,8 +34,8 @@ public class LadderWrapper {
     private void printRows(LadderPosition ladderPosition){
         Position nowRowPosition = ladderPosition.getRowPos();
         for(int rowIndex=0; rowIndex<rows.length; rowIndex++){
-            if(rowIndex != nowRowPosition.getValue()) { System.out.print(rows[rowIndex].printRow()); continue; }
-            System.out.print(rows[rowIndex].printStarRow(ladderPosition.getColPos()));
+            if(rowIndex != nowRowPosition.getValue()) { System.out.println(rows[rowIndex].buildRowString()); continue; }
+            System.out.println(rows[rowIndex].buildStarRowString(ladderPosition.getColPos()));
         }
     }
 

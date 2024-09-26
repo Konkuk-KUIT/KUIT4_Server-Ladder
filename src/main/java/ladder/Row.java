@@ -16,16 +16,15 @@ public class Row {
         return new Row(numberOfPerson);
     }
 
-    public StringBuilder printRow(){
+    public StringBuilder buildRowString(){
         StringBuilder stringBuilder = new StringBuilder();
         for(Node node : nodes){
             stringBuilder.append(node.getDirectionValue()).append(" ");
         }
-        stringBuilder.append("\n");
         return stringBuilder;
     }
 
-    public StringBuilder printStarRow(Position position){
+    public StringBuilder buildStarRowString(Position position){
         StringBuilder stringBuilder = new StringBuilder();
 
         for(int colIndex=0; colIndex<nodes.length; colIndex++){
@@ -33,7 +32,6 @@ public class Row {
             if(colIndex == position.getValue()) stringBuilder.append("*");
             stringBuilder.append(" ");
         }
-        stringBuilder.append("\n");
         return stringBuilder;
     }
 
