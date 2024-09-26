@@ -154,4 +154,20 @@ class RowTest {
                 .isInstanceOf(IllegalArgumentException.class);
 
     }
+
+    @Test
+    void 사다리_한_줄_출력() {
+        //when
+        GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
+        Row row = new Row(numberOfPerson);
+        row.drawLine(Position.from(1)); // result: 0 1 -1
+        int[] resultRow = row.getRowValue();
+
+        //then
+        // todo assert로 변경
+//        System.out.println(row.getRowAsString());
+        for (int i = 0; i < 3; i++) {
+            System.out.println(resultRow[i]);
+        }
+    }
 }

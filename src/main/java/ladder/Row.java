@@ -24,6 +24,18 @@ public class Row {
         nodes[position.getValue()].move(position);
     }
 
+    public int[] getRowValue() {
+        int[] resultNodes = new int[nodes.length];
+        for (int i = 0; i < nodes.length; i++) {
+            resultNodes[i] = nodes[i].getDirectionValue();
+        }
+        return resultNodes;
+    }
+
+    public int getSize() {
+        return nodes.length;
+    }
+
     private void setDirectionBetweenNextPosition(Position position) {
         nodes[position.getValue()].setRightNode();
         position.next();
