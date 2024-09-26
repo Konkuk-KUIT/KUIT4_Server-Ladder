@@ -25,6 +25,10 @@ public class Node {
         }
     }
 
+    public void printNode(StringBuilder sb) {
+        sb.append(direction.getValue());
+    }
+
     public void setRightNode() {
         direction = RIGHT;
     }
