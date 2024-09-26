@@ -18,6 +18,26 @@ public class Row {
         setDirectionBetweenNextPosition(startPosition);
     }
 
+    public String toString(LadderPosition currentPosition){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < nodes.length; i++) {
+            sb.append(nodes[i].getDirection().getValue());
+            if (i == currentPosition.getCol().getValue()){
+                sb.append("*");
+            }
+            sb.append(" ");
+        }
+        return sb.toString();
+    }
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < nodes.length; i++) {
+            sb.append(nodes[i].getDirection().getValue());
+            sb.append(" ");
+        }
+        return sb.toString();
+    }
+
     public void nextPosition(Position position) {
         validatePosition(position);
 
