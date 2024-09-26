@@ -15,12 +15,8 @@ public class Row {
         }
     }
 
-    //    사다리 가로줄을 그을 때 해당 좌표에는 1을 넣고 오른쪽 값은 -1을 해줘서
-//    입력한 좌표의 오른쪽에 라인이 생기게끔 만듦
-//    이런식으로 상수가 하드코딩이 돼있는건 좋지 않음
     public void drawLine(Position startPosition) {
         validateDrawLinePosition(startPosition);
-
         setDirectionBetweenNextPosition(startPosition);
     }
 
@@ -54,17 +50,36 @@ public class Row {
     }
 
     private boolean isLineAtPosition(Position startPosition) {
-        return !nodes[startPosition.getPosition()].isAlreadySetDirection();
+        return nodes[startPosition.getPosition()].isAlreadySetDirection();
     }
 
     private boolean isLineAtNextPosition(Position startPosition) {
         startPosition.next();
-        boolean isLineAtPosition = !nodes[startPosition.getPosition()].isAlreadySetDirection();
+        boolean isLineAtPosition = nodes[startPosition.getPosition()].isAlreadySetDirection();
         startPosition.prev();
         return isLineAtPosition;
     }
 
-    public Node[] getNodes() {
-        return nodes;
+
+    // 한 행을 출력하는 메서드 (별 표시 없이)
+    public void printRow() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < nodes.length; i++) {
+            sb.append(nodes[i].getDirectionValue()).append(" ");
+        }
+        System.out.println(sb);
+    }
+
+    // 사용자 위치에 *를 표시하여 한 행을 출력하는 메서드
+    public void printUserRow(Position position) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < nodes.length; i++) {
+            if (i == position.getPosition()) {
+                sb.append(nodes[i].getDirectionValue()).append("* ");
+            } else {
+                sb.append(nodes[i].getDirectionValue()).append(" ");
+            }
+        }
+        System.out.println(sb);
     }
 }

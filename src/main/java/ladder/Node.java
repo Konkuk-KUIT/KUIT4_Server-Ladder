@@ -35,7 +35,7 @@ public class Node {
     }
 
     public boolean isAlreadySetDirection() {
-        return isNone();
+        return !isNone();
     }
 
     private boolean isRight() {
@@ -52,10 +52,10 @@ public class Node {
 
     // 방향 값을 반환하는 메서드
     public int getDirectionValue() {
-        switch (direction) {
-            case LEFT: return -1;
-            case RIGHT: return 1;
-            default: return 0;
-        }
+        return switch (direction) {
+            case LEFT -> -1;
+            case RIGHT -> 1;
+            default -> 0;
+        };
     }
 }

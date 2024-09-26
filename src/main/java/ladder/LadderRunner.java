@@ -12,7 +12,7 @@ public class LadderRunner {
         for (int i = 0; i < rows.length; i++) {
             // Before 출력
             System.out.println("Before");
-            printLadderState(position, i);
+            printLadder(position, i);  // 사다리 상태 출력
             System.out.println();
 
             // 현재 행에서 위치 이동 (왼쪽 또는 오른쪽으로)
@@ -20,7 +20,7 @@ public class LadderRunner {
 
             // After 출력
             System.out.println("After");
-            printLadderState(position, i);
+            printLadder(position, i);  // 사다리 상태 출력
             System.out.println();
         }
 
@@ -28,18 +28,13 @@ public class LadderRunner {
     }
 
     // 사다리 상태를 출력하는 메서드
-    private void printLadderState(Position userPosition, int currentRow) {
+    private void printLadder(Position position, int currentRow) {
         for (int i = 0; i < rows.length; i++) {
-            StringBuilder rowRepresentation = new StringBuilder();
-            for (int j = 0; j < rows[i].getNodes().length; j++) {
-                // 사용자 위치인 경우 숫자와 *를 함께 출력
-                if (i == currentRow && j == userPosition.getPosition()) {
-                    rowRepresentation.append(rows[i].getNodes()[j].getDirectionValue()).append("* ");
-                } else {
-                    rowRepresentation.append(rows[i].getNodes()[j].getDirectionValue()).append(" ");
-                }
+            if (currentRow == i) {
+                rows[i].printUserRow(position);  // 사용자 위치를 표시하여 출력
+            } else {
+                rows[i].printRow();  // 일반 행 출력
             }
-            System.out.println(rowRepresentation.toString());
         }
     }
 
