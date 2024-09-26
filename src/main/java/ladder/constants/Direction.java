@@ -1,4 +1,4 @@
-package ladder;
+package ladder.constants;
 
 public enum Direction {
     LEFT , RIGHT

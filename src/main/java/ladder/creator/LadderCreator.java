@@ -1,35 +1,26 @@
 package ladder.creator;
 
-import ladder.Position;
+import ladder.Line;
 import ladder.Row;
+import ladder.wrapper.unsignedInt;
 
-public class LadderCreator {
+public abstract class LadderCreator {
+    Row[] rows;
 
-    private Row[] rows;
+    LadderCreator(unsignedInt row, unsignedInt column) {
+        this.rows = new Row[row.getValue()];
 
-    private LadderCreator(int row, int column) {
-        this.rows = new Row[row];
-
-        for(int i=0;i<row;i++){
-            rows[i] = new Row(column);
+        for(int i=0;i<row.getValue();i++){
+            rows[i] = new Row(column.getValue());
         }
     }
 
-    public static LadderCreator from(int row, int column){
-        return new LadderCreator(row, column);
-    }
-
-    public void drawLine (Position position) {
-        //이미 가로줄이 있을 경우
-//        if(rows[position.getRow()].currentState(position.getColumn()) == hasLine) {
-//            throw new IllegalArgumentException();
-//        }
-
-        rows[position.getRow()].drawLineAt(position.getColumn(), position.getDirection());
-
+    public void drawLine (Line line) {
+        rows[line.getRow()].drawLineAt(line.getColumn(), line.getDirection());
     }
 
     public Row[] getRows() {
         return rows;
     }
+
 }

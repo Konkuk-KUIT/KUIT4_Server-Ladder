@@ -1,5 +1,7 @@
 package ladder;
 
+import ladder.constants.nodeState;
+
 public class Node {
 
     private nodeState state;

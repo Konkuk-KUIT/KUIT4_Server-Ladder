@@ -1,4 +1,4 @@
-package ladder;
+package ladder.constants;
 
 public enum nodeState {
 
@@ -14,11 +14,4 @@ public enum nodeState {
         return state;
     }
 
-    public boolean hasLine(){
-        if(state.equals("L") || state.equals("R")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 }

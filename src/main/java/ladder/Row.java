@@ -1,5 +1,9 @@
 package ladder;
 
+import ladder.constants.Direction;
+import ladder.constants.nodeState;
+import ladder.wrapper.ArrayIndex;
+
 public class Row {
     private Node[] nodes;
 
@@ -18,26 +22,48 @@ public class Row {
         return nodes[index].getState();
     }
 
-    public nodeState rightSideOfCurrentState(int index) {
-        return currentState(index+1);
-    }
-
-    public nodeState leftSideOfCurrentState(int index) {
-        return currentState(index-1);
-    }
-
     public void drawLineAt(int position, Direction direction) {
 
-
-
-        if (direction == Direction.LEFT) {
-            nodes[position].setLine(nodeState.LEFT);
-            nodes[position - 1].setLine(nodeState.RIGHT);
+        if (isLineToLeft(direction)) {
+            drawLeftLine(position);
         }
 
-        if (direction == Direction.RIGHT) {
-            nodes[position].setLine(nodeState.LEFT);
-            nodes[position + 1].setLine(nodeState.RIGHT);
+        if (isLineToRight(direction)) {
+            drawRightLine(position);
+        }
+    }
+
+    private static boolean isLineToLeft(Direction direction) {
+        return direction == Direction.LEFT;
+    }
+
+    private static boolean isLineToRight(Direction direction) {
+        return direction == Direction.RIGHT;
+    }
+
+    private void drawLeftLine(int position) {
+        nodes[position].setLine(nodeState.LEFT);
+        nodes[position - 1].setLine(nodeState.RIGHT);
+    }
+
+    private void drawRightLine(int position) {
+        nodes[position].setLine(nodeState.LEFT);
+        nodes[position + 1].setLine(nodeState.RIGHT);
+    }
+
+    public boolean hasRightLine(ArrayIndex currentLadderIndex){
+        if(currentLadderIndex.getIndex() == nodes.length){
+            return false;
+        } else {
+            return currentState(currentLadderIndex.getIndex()+1) == nodeState.RIGHT;
+        }
+    }
+
+    public boolean hasLeftLine(ArrayIndex currentLadderIndex){
+        if(currentLadderIndex.getIndex() == 0){
+            return false;
+        } else {
+            return currentState(currentLadderIndex.getIndex()-1) == nodeState.LEFT;
         }
     }
 

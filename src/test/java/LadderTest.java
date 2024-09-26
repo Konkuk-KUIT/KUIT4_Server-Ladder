@@ -1,7 +1,9 @@
-import ladder.Direction;
+import ladder.creator.LadderGameFactory;
+import ladder.wrapper.ArrayIndex;
 import ladder.LadderGame;
-import ladder.Position;
-import ladder.creator.LadderCreator;
+import ladder.creator.pureLadderCreator;
+import ladder.wrapper.unsignedInt;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -9,20 +11,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LadderTest {
     @Test
+    @DisplayName("hello")
     void normalGameTest() {
-        LadderGameFactory.setLadderCreator(LadderCreator.from(9,9));
-        LadderGame laddergame2 = LadderGameFactory.createRandomLadderGame();
-        assertThat(laddergame2.run(1)).isEqualTo(4);
+        LadderGame laddergame2 = LadderGameFactory.createRandomLadderGame(9,9);
 
-
-//        LadderCreator ladderCreator= LadderCreator.from(5,5);
-//        LadderGame ladderGame = new LadderGame(ladderCreator);
-//
-//        ladderCreator.drawLine(Position.of(2,3,Direction.LEFT));
-//        ladderCreator.drawLine(Position.of(3,3,Direction.RIGHT));
-//        ladderCreator.drawLine(Position.of(1,1,Direction.RIGHT));
-//
-//        assertThat(ladderGame.run(1)).isEqualTo(4);
+        assertThat(laddergame2.run(ArrayIndex.of(1))).isEqualTo(4);
 
     }
 
