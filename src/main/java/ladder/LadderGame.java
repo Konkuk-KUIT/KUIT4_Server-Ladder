@@ -13,6 +13,10 @@ public class LadderGame {
         this.ladderCreator = ladderCreator;
     }
 
+    public void drawLine(Line line){
+        ladderCreator.drawLine(line);
+    }
+
     public int run (ArrayIndex startingLadderIndex) {
         LadderRunner ladderRunner = new LadderRunner(ladderCreator.getRows());
         return ladderRunner.run(startingLadderIndex);

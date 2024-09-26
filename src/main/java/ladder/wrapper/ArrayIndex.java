@@ -1,5 +1,7 @@
 package ladder.wrapper;
 
+import ladder.constants.ExceptionMessage;
+
 public class ArrayIndex {
     int index;
 
@@ -14,7 +16,7 @@ public class ArrayIndex {
 
     private static void validateIndex(int index) {
         if (isInvalid(index)) {
-            throw new IllegalArgumentException("index should be greater than or equal to zero");
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_NATURAL_NUMBER.getMessage());
         }
     }
 

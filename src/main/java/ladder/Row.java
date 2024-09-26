@@ -1,8 +1,10 @@
 package ladder;
 
 import ladder.constants.Direction;
+import ladder.constants.ExceptionMessage;
 import ladder.constants.nodeState;
 import ladder.wrapper.ArrayIndex;
+import ladder.wrapper.unsignedInt;
 
 public class Row {
     private Node[] nodes;
@@ -22,7 +24,8 @@ public class Row {
         return nodes[index].getState();
     }
 
-    public void drawLineAt(int position, Direction direction) {
+    public void drawLineAt(unsignedInt position, Direction direction) {
+        vaildateLine(position, direction);
 
         if (isLineToLeft(direction)) {
             drawLeftLine(position);
@@ -33,6 +36,23 @@ public class Row {
         }
     }
 
+    private void vaildateLine(unsignedInt position, Direction direction) {
+
+        if(position.getValue() < 0 || position.getValue() >= LineLength()) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_DRAW_POSITION.getMessage());
+        }
+
+        int lineEndingAt = position.getValue() + direction.getValue();
+        if(lineEndingAt < 0 || lineEndingAt >= LineLength()) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_DRAW_POSITION.getMessage());
+        }
+
+        if((nodes[position.getValue()].getState() != nodeState.empty) || (nodes[lineEndingAt].getState() != nodeState.empty)) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_DRAW_POSITION.getMessage());
+        }
+    }
+
+
     private static boolean isLineToLeft(Direction direction) {
         return direction == Direction.LEFT;
     }
@@ -41,18 +61,18 @@ public class Row {
         return direction == Direction.RIGHT;
     }
 
-    private void drawLeftLine(int position) {
-        nodes[position].setLine(nodeState.LEFT);
-        nodes[position - 1].setLine(nodeState.RIGHT);
+    private void drawLeftLine(unsignedInt position) {
+        nodes[position.getValue()].setLine(nodeState.RIGHT);
+        nodes[position.getValue() - 1].setLine(nodeState.LEFT);
     }
 
-    private void drawRightLine(int position) {
-        nodes[position].setLine(nodeState.LEFT);
-        nodes[position + 1].setLine(nodeState.RIGHT);
+    private void drawRightLine(unsignedInt position) {
+        nodes[position.getValue()].setLine(nodeState.LEFT);
+        nodes[position.getValue() + 1].setLine(nodeState.RIGHT);
     }
 
     public boolean hasRightLine(ArrayIndex currentLadderIndex){
-        if(currentLadderIndex.getIndex() == nodes.length){
+        if(currentLadderIndex.getIndex() == (nodes.length - 1)){
             return false;
         } else {
             return currentState(currentLadderIndex.getIndex()+1) == nodeState.RIGHT;

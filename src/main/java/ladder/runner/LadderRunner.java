@@ -1,6 +1,7 @@
 package ladder.runner;
 
 import ladder.*;
+import ladder.constants.ExceptionMessage;
 import ladder.printer.GameStatePrinter;
 import ladder.constants.PrintTiming;
 import ladder.wrapper.ArrayIndex;
@@ -13,6 +14,8 @@ public class LadderRunner {
     }
 
     public int run(ArrayIndex startingLadderIndex) {
+
+        validateLadderIndex(startingLadderIndex);
 
         Player player = Player.startingFrom(startingLadderIndex);
 
@@ -30,6 +33,12 @@ public class LadderRunner {
         }
 
         return player.getCurrentLadderIndex();
+    }
+
+    private void validateLadderIndex(ArrayIndex startingLadderIndex) {
+        if(rows[0].LineLength() <= startingLadderIndex.getIndex()){
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_STARTING_POSITION.getMessage());
+        }
     }
 
 }

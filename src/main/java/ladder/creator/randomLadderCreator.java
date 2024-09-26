@@ -49,7 +49,7 @@ public class randomLadderCreator extends LadderCreator {
     }
 
     private static boolean isEnoughRandomLine(ArrayList<Line> lineList, int numberOfRandomLines) {
-        return lineList.size() != numberOfRandomLines;
+        return lineList.size() == numberOfRandomLines;
     }
 
     public static randomLadderCreator from(unsignedInt row, unsignedInt column) {
