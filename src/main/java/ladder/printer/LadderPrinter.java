@@ -4,6 +4,7 @@ package ladder.printer;
 import ladder.component.LadderPosition;
 import ladder.component.Position;
 import ladder.component.Row;
+import ladder.constant.TimeLine;
 
 // 사다리를 출력해주는 클래스
 public class LadderPrinter {
@@ -19,8 +20,10 @@ public class LadderPrinter {
     }
 
 
-    public void printWholeLine(LadderPosition ladderPosition) {
+    public void printWholeLine(LadderPosition ladderPosition, TimeLine timeLine) {
         StringBuilder sb = new StringBuilder();
+
+        sb.append(timeLine.getValue()).append("\n");
 
         for (int i = 0; i < rows.length; i++) {
             if(ladderPosition.isCurrentRow(Position.from(i))) {

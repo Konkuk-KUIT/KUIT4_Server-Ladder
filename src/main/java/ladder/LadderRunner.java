@@ -21,13 +21,11 @@ public class LadderRunner {
 
         for (int i = 0; i < rows.length; i++) {
 
-            System.out.println(BEFORE.getValue());
-            ladderPrinter.printWholeLine(LadderPosition.from(Position.from(i), position));
+            ladderPrinter.printWholeLine(LadderPosition.from(Position.from(i), position), BEFORE);
 
             rows[i].nextPosition(position);
 
-            System.out.println(AFTER.getValue());
-            ladderPrinter.printWholeLine(LadderPosition.from(Position.from(i), position));
+            ladderPrinter.printWholeLine(LadderPosition.from(Position.from(i), position), AFTER);
 
         }
 
