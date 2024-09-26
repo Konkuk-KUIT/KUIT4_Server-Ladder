@@ -2,6 +2,8 @@ package ladder;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.*;
 
 class RowTest {
@@ -160,14 +162,13 @@ class RowTest {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
         Row row = new Row(numberOfPerson);
-        row.drawLine(Position.from(1)); // result: 0 1 -1
+        row.drawLine(Position.from(1));
         int[] resultRow = row.getRowValue();
+        int[] expected = { 0, 1, -1 };
 
         //then
-        // todo assert로 변경
-//        System.out.println(row.getRowAsString());
-        for (int i = 0; i < 3; i++) {
-            System.out.println(resultRow[i]);
+        if (!Arrays.equals(expected, resultRow)) {
+            throw new AssertionError("Row value do not match");
         }
     }
 }
