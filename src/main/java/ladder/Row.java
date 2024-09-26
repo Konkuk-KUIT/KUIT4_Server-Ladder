@@ -23,12 +23,24 @@ public class Row {
         for (int i = 0; i < nodes.length; i++) { // 사람 수 만큼 순환
 
             rowLadder.append(nodes[i].getDirection());// 받는 로직 추가
+            rowLadder.append(" ");
+        }
+        return rowLadder;
+
+    }
+
+    public StringBuilder setStringStarLadder(LadderPosition xy) {
+        StringBuilder rowLadder = new StringBuilder(); // 호출 될 때 마다 새로운 StringBuilder
+
+        for (int i = 0; i < nodes.length; i++) { // 사람 수 만큼 순환
+            // y좌표를 고려하여 *을 찍을 수 있는지 없는지 판단한다.
+
+            rowLadder.append(nodes[i].getDirection());// 받는 로직 추가
             if (i == xy.getX()) { // x좌표에 무조건 점을 찍게된다
                 rowLadder.append("*");
             }
             rowLadder.append(" ");
         }
-
         return rowLadder;
 
     }

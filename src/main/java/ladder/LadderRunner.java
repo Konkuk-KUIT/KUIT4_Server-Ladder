@@ -33,13 +33,22 @@ public class LadderRunner {
     }
 
     public void setStringLadder(LadderPosition xy) {
+        // 점을 한번 찍으면 특정 변수에 변화를 주어서, 다음 줄에서는 *을 찍지 않도록 조치..?
+
         for (int i = 0; i < rows.length; i++) { // 높이만큼 순환
-            ladder.append(rows[i].setStringLadder(xy)); // 한줄 씩 붙이기
+            // todo 여기서 xy의 y좌표랑 반복문 인자 i랑 같은지 확인하고
+            // 같을 때 만 *을 찍을 수 있도록 인자를 넘긴다.
+            if (xy.getY() == i) {
+                ladder.append(rows[i].setStringStarLadder(xy)); // *을 붙이는 라인
+            }
+            ladder.append(rows[i].setStringLadder(xy)); // 일반 사다리 붙이는 라인
+            ladder.append(System.lineSeparator());
         }
     }
 
     public void printLadder() {
         System.out.println(ladder);
+        // System.out.println();
         clearStringLadder();
     }
 
