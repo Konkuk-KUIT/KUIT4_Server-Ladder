@@ -1,6 +1,8 @@
 package ladder.creator;
 
-import ladder.*;
+import ladder.component.LadderPosition;
+import ladder.component.LadderSize;
+import ladder.component.Row;
 
 public class BasicLadderCreatorImpl implements LadderCreator {
 

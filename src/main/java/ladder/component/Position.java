@@ -1,6 +1,6 @@
-package ladder;
+package ladder.component;
 
-import static ladder.ExceptionMessage.INVALID_LADDER_POSITION;
+import static ladder.constant.ExceptionMessage.INVALID_LADDER_POSITION;
 
 public class Position {
     private int position;

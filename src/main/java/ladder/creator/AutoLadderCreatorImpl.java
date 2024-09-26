@@ -1,6 +1,9 @@
 package ladder.creator;
 
-import ladder.*;
+import ladder.component.LadderPosition;
+import ladder.component.LadderSize;
+import ladder.component.Position;
+import ladder.component.Row;
 
 import java.util.Random;
 

@@ -1,13 +1,20 @@
 package ladder;
 
-import static ladder.TimeLine.*;
+import ladder.component.LadderPosition;
+import ladder.component.Position;
+import ladder.component.Row;
+import ladder.printer.LadderPrinter;
+
+import static ladder.constant.TimeLine.*;
 
 public class LadderRunner {
 
     private final Row[] rows;
+    private final LadderPrinter ladderPrinter;
 
     public LadderRunner(Row[] rows) {
         this.rows = rows;
+        this.ladderPrinter = LadderPrinter.from(rows);
     }
 
     public int run(Position position) {
@@ -15,30 +22,16 @@ public class LadderRunner {
         for (int i = 0; i < rows.length; i++) {
 
             System.out.println(BEFORE.getValue());
-            printWholeLine(LadderPosition.from(Position.from(i), position));
+            ladderPrinter.printWholeLine(LadderPosition.from(Position.from(i), position));
+
             rows[i].nextPosition(position);
+
             System.out.println(AFTER.getValue());
-            printWholeLine(LadderPosition.from(Position.from(i), position));
+            ladderPrinter.printWholeLine(LadderPosition.from(Position.from(i), position));
 
         }
 
         return position.getValue();
     }
 
-
-    // 전체 라인 출력
-    private void printWholeLine(LadderPosition ladderPosition) {
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < rows.length; i++) {
-            if(ladderPosition.isCurrentRow(Position.from(i))) {
-                sb.append(rows[i].printAsteroidLine(ladderPosition.getCol())).append("\n");
-                continue;
-            }
-
-            sb.append(rows[i].printNormalLine()).append("\n");
-        }
-
-        System.out.println(sb);
-    }
 }

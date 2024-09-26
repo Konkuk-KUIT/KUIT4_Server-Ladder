@@ -1,5 +1,9 @@
 package ladder;
 
+import ladder.component.GreaterThanOne;
+import ladder.component.LadderPosition;
+import ladder.component.LadderSize;
+import ladder.component.Position;
 import ladder.creator.AutoLadderCreatorImpl;
 import ladder.creator.LadderCreator;
 import ladder.creator.BasicLadderCreatorImpl;

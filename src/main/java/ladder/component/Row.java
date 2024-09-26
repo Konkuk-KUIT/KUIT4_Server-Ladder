@@ -1,6 +1,8 @@
-package ladder;
+package ladder.component;
 
-import static ladder.Direction.*;
+import ladder.constant.ExceptionMessage;
+
+import static ladder.constant.Direction.*;
 
 public class Row {
     private final Node[] nodes;

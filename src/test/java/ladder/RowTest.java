@@ -1,5 +1,8 @@
 package ladder;
 
+import ladder.component.GreaterThanOne;
+import ladder.component.Position;
+import ladder.component.Row;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
