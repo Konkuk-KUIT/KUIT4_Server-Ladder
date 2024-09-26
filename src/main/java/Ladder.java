@@ -1,63 +1,56 @@
-import java.util.Random;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Ladder {
+class Ladder {
+private final int[][] rows;
+private final List<Line> lines;
 
-    Scanner scanner = new Scanner(System.in);
+public Ladder(int row, int column) {
+    validateLadderDimensions(row, column);
+    this.rows = new int[row][column];
+    lines = new ArrayList<>();
+}
 
-    private final int[][] rows;
-    private final int row;
-    private final int column;
+private void validateLadderDimensions(int row, int column) {
+    if(row < 2 || column < 2) {
+        throw new IllegalArgumentException(ExceptionMessage.INVALID_LADDER_SIZE.getMessage());
+    }
+}
 
-    public Ladder(int row, int numberOfPerson) {
-        this.row = row;
-        this.column = numberOfPerson;
-        this.rows = new int[row][numberOfPerson];
+public void addLine(int fromLine, int toLine, int currentRow) {
+    Line line = new Line(fromLine, toLine, currentRow, this.rows);
+    lines.add(line);
+}
+
+public boolean isLine(int row, int col) {
+    return rows[row][col] == 1 || rows[row][col] == -1;
+}
+
+public boolean isLineAtLeft(int row, int col) {
+    return col > 0 && rows[row][col - 1] == - 1;
+}
+
+public boolean isLineAtRight(int row, int col) {
+    return col + 1  < rows[row].length && rows[row][col + 1] == 1;
+}
+
+public int getHeight() {
+    return rows.length;
+}
+
+public int getWidth() {
+    return rows[0].length;
+}
+
+public int getRows(int row, int col) {
+    return rows[row][col];
+}
+
+    public boolean isLeftLine(int currentRow, int currentCol) {
+        return rows[currentRow][currentCol] == 1;
     }
 
-    public void drawLine(int numberOfLine) throws IllegalArgumentException {
-        int x, y;
-        for (int i = 0; i < numberOfLine; i++) {
-            System.out.print("Input your line (MAX 3), (Rule is 1 2, ExitCode is -1): ");
-            x = scanner.nextInt();
-            y = scanner.nextInt();
-
-            if (x == -1 || y == -1) {
-                throw new IllegalArgumentException("Exit code entered.");
-            }
-
-            if (x < 1 || x > rows.length || y < 1 || y > rows.length || Math.abs(x - y) != 1) {
-                throw new IllegalArgumentException("Invalid input. x and y must be between 1");
-            }
-
-            new Line(x, y, i, rows);
-        }
+    public boolean isRightLine(int currentRow, int currentCol) {
+        return rows[currentRow][currentCol] == - 1;
     }
-
-
-    int run(int start) {
-
-        int currentRow=0;
-        int currentCol=start;
-        while(true) {
-            if (rows[currentRow][currentCol]==1&&currentCol + 1 < rows[currentRow].length && rows[currentRow][currentCol + 1] == 1) {
-                // j+1이 배열의 범위를 벗어나지 않을 때만 실행
-                currentCol++;
-            }
-            else if (rows[currentRow][currentCol]==1&&currentCol - 1 >= 0 && rows[currentRow][currentCol- 1] == 1) {
-                // j-1이 음수가 아닐 때만 실행
-                currentCol--;
-            }
-            else if(currentRow==this.row-1) {
-                break;
-            }
-            currentRow++;
-        }
-        return currentCol;
-    }
-
-    public int[][] getRows() {
-        return rows;
-    }
-
 }
