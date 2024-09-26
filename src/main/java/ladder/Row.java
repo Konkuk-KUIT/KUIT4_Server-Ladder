@@ -23,7 +23,7 @@ public class Row {
         return sb;
     }
 
-    public StringBuilder convertPositionRowtoString(Position y){
+    public StringBuilder convertPositionRowToString(Position y){
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < nodes.length; i++) {
@@ -33,7 +33,6 @@ public class Row {
             }
             sb.append(nodes[i].getDirection().getValue()).append(" ");
         }
-
         return sb;
     }
 

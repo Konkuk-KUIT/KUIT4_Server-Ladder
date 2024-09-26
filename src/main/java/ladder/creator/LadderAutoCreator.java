@@ -1,17 +1,16 @@
 package ladder.creator;
 
 import ladder.GreaterThanOne;
+import ladder.LadderPosition;
 import ladder.Position;
 import ladder.Row;
 
 import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class LadderAutoCreator implements LadderCreator {
     private  Row[] rows;
-
-    public LadderAutoCreator() {
-    }
 
     public LadderAutoCreator(GreaterThanOne numberOfRow, GreaterThanOne numberOfPerson) {
         rows = new Row[numberOfRow.getNumber()];
@@ -22,22 +21,18 @@ public class LadderAutoCreator implements LadderCreator {
     public Row[] getRows() {return rows;}
 
     public void drawLine(Position row, Position col){
-        HashSet<Position> lines = new HashSet<>();
-
-        row = getRandomRow();
-        col = getRandomCol();
-
-        rows[row.getValue()].drawLine(col);
+        Set<LadderPosition> lines = new HashSet<>();
 
         int numberOfLines = (int)(rows.length * rows[0].getNodeLength() * 0.3) - 1;
 
         while(lines.size() < numberOfLines){
             row = getRandomRow();
             col = getRandomCol();
+            LadderPosition ladderPosition = new LadderPosition(row, col);
             if(!canDrawLine(row,col)){
                 continue;
             }
-            lines.add(row);
+            lines.add(ladderPosition);
 
         }
 

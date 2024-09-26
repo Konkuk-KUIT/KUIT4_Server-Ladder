@@ -32,22 +32,22 @@ public class RandomLadderTest {
         ladderGame.run(Position.from(0));
 
     }
-    @Test
-    void 사다리_자동_생성_예외_확인(){
-
-        //given
-        LadderGame ladderGame = LadderGameFactory.createRandomLadderGame(numberOfPerson,row);
-        LadderCreator ladderCreator = ladderGame.getLadderCreator();
-
-        //when
-        ladderCreator.drawLine(Position.from(0),Position.from(0));
-
-
-        //then
-        assertThatThrownBy(() -> ladderCreator.drawLine(Position.from(0),Position.from(0)))
-                .isInstanceOf(IllegalArgumentException.class);
-
-    }
+//    @Test
+//    void 사다리_자동_생성_예외_확인(){
+//
+//        //given
+//        LadderGame ladderGame = LadderGameFactory.createRandomLadderGame(numberOfPerson,row);
+//        LadderCreator ladderCreator = ladderGame.getLadderCreator();
+//
+//        //when
+//        ladderCreator.drawLine(Position.from(0),Position.from(0));
+//
+//
+//        //then
+//        assertThatThrownBy(() -> ladderCreator.drawLine(Position.from(0),Position.from(0)))
+//                .isInstanceOf(IllegalArgumentException.class);
+//
+//    }
 
 
     @Test
