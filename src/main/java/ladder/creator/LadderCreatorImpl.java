@@ -6,7 +6,10 @@ import ladder.Row;
 
 public class LadderCreatorImpl implements LadderCreator {
 
-    private final Row[] rows;
+    private Row[] rows;
+
+    public LadderCreatorImpl() {
+    }
 
     public LadderCreatorImpl(GreaterThanOne numberOfRow, GreaterThanOne numberOfPerson) {
         rows = new Row[numberOfRow.getNumber()];

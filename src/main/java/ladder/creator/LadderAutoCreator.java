@@ -8,7 +8,10 @@ import java.util.HashSet;
 import java.util.Random;
 
 public class LadderAutoCreator implements LadderCreator {
-    private final Row[] rows;
+    private  Row[] rows;
+
+    public LadderAutoCreator() {
+    }
 
     public LadderAutoCreator(GreaterThanOne numberOfRow, GreaterThanOne numberOfPerson) {
         rows = new Row[numberOfRow.getNumber()];
