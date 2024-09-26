@@ -49,4 +49,13 @@ public class Node {
     private boolean isNone() {
         return direction == NONE;
     }
+
+    // 방향 값을 반환하는 메서드
+    public int getDirectionValue() {
+        switch (direction) {
+            case LEFT: return -1;
+            case RIGHT: return 1;
+            default: return 0;
+        }
+    }
 }

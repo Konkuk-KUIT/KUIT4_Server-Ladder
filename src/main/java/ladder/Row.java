@@ -63,4 +63,8 @@ public class Row {
         startPosition.prev();
         return isLineAtPosition;
     }
+
+    public Node[] getNodes() {
+        return nodes;
+    }
 }
