@@ -34,8 +34,7 @@ public class LadderRunner {
 
     public void setStringLadder(LadderPosition xy) {
         for (int i = 0; i < rows.length; i++) { // 높이만큼 순환
-            rows[i].setStringLadder(xy);
-            ladder.append(rows[i].rowLadder); // 한줄 씩 붙이기
+            ladder.append(rows[i].setStringLadder(xy)); // 한줄 씩 붙이기
         }
     }
 
@@ -47,8 +46,8 @@ public class LadderRunner {
     public void clearStringLadder() {
         ladder.setLength(0); // 전체 사다리 초기화
 
-        for (int i = 0; i < rows.length; i++) { // 만들었던 사다리 줄 하나씩 초기화
-            rows[i].rowLadder.setLength(0);
-        }
+//        for (int i = 0; i < rows.length; i++) { // 만들었던 사다리 줄 하나씩 초기화
+//            rows[i].rowLadder.setLength(0);
+//        }
     }
 }

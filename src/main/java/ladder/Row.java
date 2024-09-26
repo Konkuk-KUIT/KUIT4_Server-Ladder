@@ -8,7 +8,7 @@ import static ladder.Direction.*;
 public class Row {
     // todo Node 클래스로 분리(row 배열에서 값을 하나씩 꺼내서 볼 필요가 없다..?)
     Node[] nodes;
-    StringBuilder rowLadder = new StringBuilder(); // StringBuilder를 만들어두고 해당 클래스에 출력
+
 
     public Row(GreaterThanOne numberOfPerson) {
         nodes = new Node[numberOfPerson.getNumber()]; // 노드 배열개수할당
@@ -17,21 +17,21 @@ public class Row {
         }
     }
 
-    public void setStringLadder(LadderPosition xy) {
+    public StringBuilder setStringLadder(LadderPosition xy) {
+        StringBuilder rowLadder = new StringBuilder(); // 호출 될 때 마다 새로운 StringBuilder
+
         for (int i = 0; i < nodes.length; i++) { // 사람 수 만큼 순환
 
             rowLadder.append(nodes[i].getDirection());// 받는 로직 추가
-            if (i == xy.getX()) {
+            if (i == xy.getX()) { // x좌표에 무조건 점을 찍게된다
                 rowLadder.append("*");
             }
             rowLadder.append(" ");
         }
 
-    }
+        return rowLadder;
 
-//    public void printLadder() {
-//        System.out.println(rowLadder.toString());
-//    }
+    }
 
     // todo : 상수 리팩토링 (1,-1, 0)
     public void drawLine(Position startPosition) {

@@ -55,6 +55,4 @@ public class Node {
         return direction.getStringValue();
     }
 
-
-
 }
