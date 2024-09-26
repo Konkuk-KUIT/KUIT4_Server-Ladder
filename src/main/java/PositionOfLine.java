@@ -1,31 +1,29 @@
 public class PositionOfLine {
-    private int x;
-    private int y;
+    private Index x;
+    private Index y;
 
-    private PositionOfLine(int x, int y) {
+    private PositionOfLine(Index x, Index y) {
         this.x = x;
         this.y = y;
     }
 
-    public static PositionOfLine of(int x, int y) {
+    public static PositionOfLine of(Index x, Index y) {
         return new PositionOfLine(x, y);
     }
 
-    public void canDrawLine(int[][] array) {
-        if (array[x][y] != 0 || x < 0 || y < 0 || x >= array.length || y >= array[0].length - 1) {
-            throw new IllegalArgumentException("Can't draw a line in this position");
-        }
+    public Index getX() {
+        return x;
     }
 
-    public void makeLine(int[][] array) {
-        canDrawLine(array);
-
-        array[x][y] = 1;
-        array[x][y+1] = -1;
+    public Index getY() {
+        return y;
     }
 
-    public boolean checkLine(int[][] array) {
-        if ((array[x][y] == 1) && (array[x][y+1] == -1)) { return true; }
-        return false;
-    }
+
+
+
+
 }
+
+
+//데이터를 감싸는 객체는 세터 게터가 불가피
