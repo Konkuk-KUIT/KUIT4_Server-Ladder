@@ -6,23 +6,17 @@ import ladder.*;
 
 public class RandomLadderCreator implements LadderCreator {
     private final LadderWrapper ladderWrapper;
-    int maxCreateLine;
 
     Random random = new Random();
+    private static final double ladderCreateRatio = 0.3; // enum?
 
-    private RandomLadderCreator(LadderWrapper ladderWrapper, int maxCreateLine) {
+    private RandomLadderCreator(LadderWrapper ladderWrapper) {
         this.ladderWrapper = ladderWrapper;
-        this.maxCreateLine = maxCreateLine;
     }
 
     public static RandomLadderCreator from(LadderSize ladderSize){
         LadderWrapper ladderWrapper = setFieldLadderWrapper(ladderSize);
-        int maxCreateLine = (int)Math.floor(ladderWrapper.getRowsSize() * ladderWrapper.getColsSize() * 0.3);
-
-        RandomLadderCreator randomLadderCreator = new RandomLadderCreator(ladderWrapper, maxCreateLine);
-        randomLadderCreator.createRandomLinesOnLadder();
-
-        return randomLadderCreator;
+        return makeRandomLadderCreator(ladderWrapper);
     }
 
     private static LadderWrapper setFieldLadderWrapper(LadderSize ladderSize){
@@ -35,6 +29,15 @@ public class RandomLadderCreator implements LadderCreator {
         return LadderWrapper.from(rows);
     }
 
+    public static RandomLadderCreator makeRandomLadderCreator(LadderWrapper ladderWrapper){
+        RandomLadderCreator randomLadderCreator = new RandomLadderCreator(ladderWrapper);
+
+        int maxCreateLine = (int)Math.floor(ladderWrapper.getRowsSize() * ladderWrapper.getColsSize() * ladderCreateRatio);
+        randomLadderCreator.createRandomLinesOnLadder(maxCreateLine);
+
+        return randomLadderCreator;
+    }
+
     public void drawLine(LadderPosition ladderPosition) {
         ladderWrapper.drawLine(ladderPosition);
     }
@@ -43,7 +46,7 @@ public class RandomLadderCreator implements LadderCreator {
         return ladderWrapper;
     }
 
-    private void createRandomLinesOnLadder(){
+    private void createRandomLinesOnLadder(int maxCreateLine){
         HashSet<LadderPosition> hashSet = new HashSet<LadderPosition>();
         while(hashSet.size() < maxCreateLine){
             LadderPosition newPosition = makeRandomLine();
@@ -52,6 +55,7 @@ public class RandomLadderCreator implements LadderCreator {
         }
     }
 
+    // todo 재귀로 구현해보기
     // LadderPosition에서 마지막 열을 제외한 좌표를 랜덤으로
     // 전체 칸수 *0.3 내림 정수 만큼 생길 때 까지 무한 반복
     private LadderPosition makeRandomLine(){
