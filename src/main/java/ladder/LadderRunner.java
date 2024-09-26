@@ -29,6 +29,8 @@ public class LadderRunner {
             printLadder();
         }
 
+        System.out.println("-".repeat(10));
+
         return position.getPosition();
     }
 
@@ -40,6 +42,8 @@ public class LadderRunner {
             // 같을 때 만 *을 찍을 수 있도록 인자를 넘긴다.
             if (xy.getY() == i) {
                 ladder.append(rows[i].setStringStarLadder(xy)); // *을 붙이는 라인
+                ladder.append(System.lineSeparator());
+                continue;
             }
             ladder.append(rows[i].setStringLadder(xy)); // 일반 사다리 붙이는 라인
             ladder.append(System.lineSeparator());

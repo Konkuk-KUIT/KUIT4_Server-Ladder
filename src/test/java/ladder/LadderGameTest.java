@@ -48,7 +48,7 @@ class LadderGameTest {
 
         ladderCreator.drawLine(Position.from(0),Position.from(0));
         ladderCreator.drawLine(Position.from(1),Position.from(1));
-        ladderCreator.drawLine(Position.from(2),Position.from(0));
+        // ladderCreator.drawLine(Position.from(2),Position.from(0));
 
         //given
         Position nthOfPerson = Position.from(0);
@@ -60,12 +60,12 @@ class LadderGameTest {
         nthOfPerson = Position.from(1);
 
         //then
-        assertThat(ladderRunner.run(nthOfPerson)).isEqualTo(1);
+        assertThat(ladderRunner.run(nthOfPerson)).isEqualTo(0);
 
         //given
         nthOfPerson = Position.from(2);
 
         //then
-        assertThat(ladderRunner.run(nthOfPerson)).isEqualTo(0);
+        assertThat(ladderRunner.run(nthOfPerson)).isEqualTo(1);
     }
 }
