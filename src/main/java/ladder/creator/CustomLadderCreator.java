@@ -2,33 +2,14 @@ package ladder.creator;
 
 import ladder.*;
 
-public class CustomLadderCreator implements LadderCreator {
-    private final LadderWrapper ladderWrapper;
+public class CustomLadderCreator extends WrapperLadderCreator {
 
     private CustomLadderCreator(LadderWrapper ladderWrapper) {
-        this.ladderWrapper = ladderWrapper;
+        super(ladderWrapper);
     }
 
-    public static CustomLadderCreator from(LadderSize ladderSize){
-        LadderWrapper ladderWrapper = setFieldLadderWrapper(ladderSize);
+    public static CustomLadderCreator from(LadderSize ladderSize) {
+        LadderWrapper ladderWrapper = createLadderWrapper(ladderSize);
         return new CustomLadderCreator(ladderWrapper);
-    }
-
-    private static LadderWrapper setFieldLadderWrapper(LadderSize ladderSize){
-        GreaterThanOne numberOfRow = ladderSize.getNumberOfRow();
-        GreaterThanOne numberOfPerson = ladderSize.getNumberOfPerson();
-        Row[] rows = new Row[numberOfRow.getNumber()];
-        for (int i = 0; i < numberOfRow.getNumber(); i++) {
-            rows[i] = Row.from(numberOfPerson);
-        }
-        return LadderWrapper.from(rows);
-    }
-
-    public void drawLine(LadderPosition ladderPosition) {
-        ladderWrapper.drawLine(ladderPosition);
-    }
-
-    public LadderWrapper getLadderWrapper() {
-        return ladderWrapper;
     }
 }

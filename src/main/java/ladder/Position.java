@@ -26,6 +26,14 @@ public class Position {
         position++;
     }
 
+    public Position prevPosition(){
+        return Position.from(position-1);
+    }
+
+    public Position nextPosition(){
+        return Position.from(position+1);
+    }
+
     public boolean isSmallerThan(int position) {
         return this.position < position;
     }

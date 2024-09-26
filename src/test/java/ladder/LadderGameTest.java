@@ -5,6 +5,9 @@ import ladder.creator.LadderCreator;
 import ladder.creator.RandomLadderCreator;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 class LadderGameTest {
@@ -107,5 +110,52 @@ class LadderGameTest {
 
         //then
         assertThat(result0).isNotEqualTo(result1);
+    }
+
+    @Test
+    void 랜덤_사다리_생성_시_주위_노드_정상_여부_확인() {
+        //when
+        GreaterThanOne numberOfRow = GreaterThanOne.from(3);
+        GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
+        LadderSize ladderSize = LadderSize.of(numberOfRow, numberOfPerson);
+        RandomLadderCreator ladderCreator = RandomLadderCreator.emptyLadderFrom(ladderSize);
+        LadderWrapper ladderWrapper = ladderCreator.getLadderWrapper();
+
+        LadderPosition existPos1 = LadderPosition.of(Position.from(0), Position.from(0));
+        ladderCreator.drawLine(existPos1);
+        LadderPosition existPos2 = LadderPosition.of(Position.from(2), Position.from(1));
+        ladderCreator.drawLine(existPos2);
+
+        //given
+        HashSet<LadderPosition> existHashSet = new HashSet<LadderPosition>(List.of(existPos1, existPos2));
+        LadderPosition createdLadderPosition = ladderCreator.makeRandomLine(existHashSet);
+        Position createdRowPosition = createdLadderPosition.getRowPos();
+        Position createdColPosition = createdLadderPosition.getColPos();
+
+        //then
+        // 중간 열에 라인이 생성되는지 확인
+        assertThat(createdLadderPosition.getRowPos().getValue()).isEqualTo(1);
+
+        // createdLadderPosition의 ladder value 값이 1인지 확인
+        assertThat(ladderCreator.getInLadderValue(createdLadderPosition)).isEqualTo(1);
+
+        // createdLadderPosition 우측 노드의 ladder value 값이 -1인지 확인
+        Position right1Position = createdColPosition.nextPosition();
+        LadderPosition right1LadderPosition = LadderPosition.of(createdRowPosition, right1Position);
+        assertThat(ladderCreator.getInLadderValue(right1LadderPosition)).isEqualTo(-1);
+
+        // createdLadderPosition 2칸 우측 노드의 ladder value 값이 -1이 아닌지 확인
+        if(right1Position.getValue() < ladderWrapper.getColsSize() - 1){
+            Position right2Position = right1Position.nextPosition();
+            LadderPosition right2LadderPosition = LadderPosition.of(createdRowPosition, right2Position);
+            assertThat(ladderCreator.getInLadderValue(right2LadderPosition)).isNotEqualTo(-1);
+        }
+
+        // createdLadderPosition 좌측 노드의 ladder value 값이 1이 아닌지 확인
+        if(createdColPosition.getValue() > 0) {
+            Position left1Position = createdColPosition.prevPosition();
+            LadderPosition left1LadderPosition = LadderPosition.of(createdRowPosition, left1Position);
+            assertThat(ladderCreator.getInLadderValue(left1LadderPosition)).isNotEqualTo(1);
+        }
     }
 }

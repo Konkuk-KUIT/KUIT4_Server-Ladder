@@ -16,20 +16,25 @@ public class Row {
         return new Row(numberOfPerson);
     }
 
-    public void printRow(){
+    public StringBuilder printRow(){
+        StringBuilder stringBuilder = new StringBuilder();
         for(Node node : nodes){
-            System.out.print(node.getDirectionValue() + " ");
+            stringBuilder.append(node.getDirectionValue()).append(" ");
         }
-        System.out.println();
+        stringBuilder.append("\n");
+        return stringBuilder;
     }
 
-    public void printStarRow(Position position){
+    public StringBuilder printStarRow(Position position){
+        StringBuilder stringBuilder = new StringBuilder();
+
         for(int colIndex=0; colIndex<nodes.length; colIndex++){
-            System.out.print(nodes[colIndex].getDirectionValue());
-            if(colIndex == position.getValue()) System.out.print("*");
-            System.out.print(" ");
+            stringBuilder.append(nodes[colIndex].getDirectionValue());
+            if(colIndex == position.getValue()) stringBuilder.append("*");
+            stringBuilder.append(" ");
         }
-        System.out.println();
+        stringBuilder.append("\n");
+        return stringBuilder;
     }
 
     public void drawLine(Position startPosition) {
@@ -52,6 +57,7 @@ public class Row {
         nodes[position.getValue()].setRightNode();
         position.next();
         nodes[position.getValue()].setLeftNode();
+        position.prev();
     }
 
     private void validatePosition(Position position) {
@@ -80,5 +86,9 @@ public class Row {
         boolean lineAtPosition = isLineAtPosition(position);
         position.prev();
         return lineAtPosition;
+    }
+
+    public int getRowValue(Position colPosition){
+        return nodes[colPosition.getValue()].getDirectionValue();
     }
 }
