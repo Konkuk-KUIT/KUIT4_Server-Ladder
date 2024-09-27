@@ -8,6 +8,7 @@ public class LadderRunner {
         this.rows = rows;
     }
 
+    // todo LadderPosition <- rowNumber + position
     public void printRow(int rowNumber, int position, int currentRow) {
         boolean isCurrent = (currentRow == rowNumber);
         System.out.println(rows[rowNumber].rowToString(position, isCurrent));

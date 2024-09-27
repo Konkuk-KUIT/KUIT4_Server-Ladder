@@ -1,17 +1,17 @@
 package ladder;
 
-import ladder.creator.LadderCreator;
+import ladder.creator.LadderManualCreator;
 
 public class LadderGame {
 
-    private final LadderCreator ladderCreator;
+    private final LadderManualCreator ladderManualCreator;
 
-    public LadderGame(LadderCreator ladderCreator) {
-        this.ladderCreator = ladderCreator;
+    public LadderGame(LadderManualCreator ladderManualCreator) {
+        this.ladderManualCreator = ladderManualCreator;
     }
 
     public int run(Position position) {
-        LadderRunner ladderRunner = new LadderRunner(ladderCreator.getRows());
+        LadderRunner ladderRunner = new LadderRunner(ladderManualCreator.getRows());
         ladderRunner.run(position);
         return position.getValue();
     }

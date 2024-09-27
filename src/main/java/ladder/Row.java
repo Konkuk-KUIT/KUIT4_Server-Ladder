@@ -23,10 +23,11 @@ public class Row {
         return rowString;
     }
 
-    public void drawLine(Position startPosition) {
-        validateDrawLinePosition(startPosition);
+    public boolean drawLine(Position startPosition) {
+        boolean validLine = validateDrawLinePosition(startPosition);
 
         setDirectionBetweenNextPosition(startPosition);
+        return validLine;
     }
 
     public void nextPosition(Position position) {
@@ -47,11 +48,10 @@ public class Row {
         }
     }
 
-    private void validateDrawLinePosition(Position startPosition) {
+    private boolean validateDrawLinePosition(Position startPosition) {
         validatePosition(startPosition);
-        if (isLineAtPosition(startPosition) || isLineAtNextPosition(startPosition)) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_DRAW_POSITION.getMessage());
-        }
+        // throw new IllegalArgumentException(ExceptionMessage.INVALID_DRAW_POSITION.getMessage());
+        return !isLineAtPosition(startPosition) && !isLineAtNextPosition(startPosition);
     }
 
     private boolean isInvalidPosition(Position position) {
