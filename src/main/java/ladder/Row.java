@@ -18,16 +18,22 @@ public class Row {
         setDirectionBetweenNextPosition(startPosition);
     }
 
-    public void nextPosition(Position position) {
-        validatePosition(position);
+    public void nextPosition(LadderPosition ladderPosition) {
+        validateLadderPosition(ladderPosition);
 
-        nodes[position.getValue()].move(position);
+        nodes[ladderPosition.getValueY()].move(ladderPosition);
     }
+
+
 
     private void setDirectionBetweenNextPosition(Position position) {
         nodes[position.getValue()].setRightNode();
         position.next();
         nodes[position.getValue()].setLeftNode();
+    }
+
+    private void validateLadderPosition(LadderPosition ladderPosition) {
+        validatePosition(ladderPosition.getY());
     }
 
     private void validatePosition(Position position) {
@@ -58,4 +64,14 @@ public class Row {
         return lineAtPosition;
     }
 
+    public String getRowString() {
+        StringBuilder rowStringBuilder = new StringBuilder();
+
+        for (Node node : nodes) {
+            rowStringBuilder.append(node.toString())
+                    .append(" ");
+
+        }
+        return rowStringBuilder.toString();
+    }
 }

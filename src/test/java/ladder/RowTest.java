@@ -8,66 +8,67 @@ class RowTest {
 
     @Test
     void 한_칸_사다리_이동() {
-        //when
+        //given
         GreaterThanOne numberOfPerson = GreaterThanOne.from(2);
         Row row = new Row(numberOfPerson);
 
-        //given
-        Position position = Position.from(0);
-        row.nextPosition(position);
+        //when
+        LadderPosition ladderPosition = new LadderPosition(0, 0);
+        row.nextPosition(ladderPosition);
+
         //then
-        assertThat(position.getValue()).isEqualTo(0);
+        assertThat(ladderPosition.getValueY()).isEqualTo(0);
     }
 
     @Test
     void 두_칸_사다리_선_이동() {
-        //when
+        //given
         GreaterThanOne numberOfPerson = GreaterThanOne.from(2);
         Row row = new Row(numberOfPerson);
         row.drawLine(Position.from(0));
 
-        //given
-        Position position = Position.from(0);
-        row.nextPosition(position);
+        //when
+        LadderPosition ladderPosition = new LadderPosition(0, 0);
+        row.nextPosition(ladderPosition);
 
         //then
-        assertThat(position.getValue()).isEqualTo(1);
+        assertThat(ladderPosition.getValueY()).isEqualTo(1);
 
-        //given
-        position = Position.from(1);
-        row.nextPosition(position);
+        //when
+        ladderPosition = new LadderPosition(0, 1);
+        row.nextPosition(ladderPosition);
 
         //then
-        assertThat(position.getValue()).isEqualTo(0);
+        assertThat(ladderPosition.getValueY()).isEqualTo(0);
     }
 
     @Test
     void 세_칸_사다리_선_이동() {
-        //when
+        //given
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
         Row row = new Row(numberOfPerson);
         row.drawLine(Position.from(0));
 
-        //given
-        Position position = Position.from(0);
-        row.nextPosition(position);
+        //when
+        LadderPosition ladderPosition = new LadderPosition(0, 0);
+        row.nextPosition(ladderPosition);
 
         //then
-        assertThat(position.getValue()).isEqualTo(1);
+        assertThat(ladderPosition.getValueY()).isEqualTo(1);
 
-        //given
-        position = Position.from(1);
-        row.nextPosition(position);
-
-        //then
-        assertThat(position.getValue()).isEqualTo(0);
-
-        //given
-        position = Position.from(2);
-        row.nextPosition(position);
+        //when
+        ladderPosition = new LadderPosition(0, 1);
+        row.nextPosition(ladderPosition);
 
         //then
-        assertThat(position.getValue()).isEqualTo(2);
+        assertThat(ladderPosition.getValueY()).isEqualTo(0);
+
+        //when
+        ladderPosition = new LadderPosition(0, 2);
+        row.nextPosition(ladderPosition);
+
+        //then
+        assertThat(ladderPosition.getValueY()).isEqualTo(2);
     }
 
     @Test
@@ -78,38 +79,39 @@ class RowTest {
 
     @Test
     void 사다리_최대_사람수_초과_예외() {
-        //when
+        //given
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
         Row row = new Row(numberOfPerson);
 
-        //given
-        Position position = Position.from(3);
+        LadderPosition ladderPosition = new LadderPosition(0, 3);
+
+        //when
 
         //then
-        assertThatThrownBy(() -> row.nextPosition(position))
+        assertThatThrownBy(() -> row.nextPosition(ladderPosition))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 사다리_최소_사람수_미만_예외() {
-        //when
+        //given
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
         Row row = new Row(numberOfPerson);
 
-        //given
+        //when
 
         //then
-        assertThatThrownBy(() -> row.nextPosition(Position.from(-1)))
+        assertThatThrownBy(() -> row.nextPosition(new LadderPosition(0, -1)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 사다리_그리기_위치_초과_예외() {
-        //when
+        //given
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
         Row row = new Row(numberOfPerson);
 
-        //given
+        //when
         Position position = Position.from(3);
 
         //then
@@ -119,11 +121,11 @@ class RowTest {
 
     @Test
     void 사다리_그리기_위치_미만_예외() {
-        //when
+        //given
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
         Row row = new Row(numberOfPerson);
 
-        //given
+        //when
 
         //then
         assertThatThrownBy(() -> row.drawLine(Position.from(-1)))
@@ -132,7 +134,7 @@ class RowTest {
 
     @Test
     void 사다리_그리기_좌측_선_중복_예외() {
-        //when
+        //given
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
         Row row = new Row(numberOfPerson);
         row.drawLine(Position.from(0));
@@ -144,7 +146,7 @@ class RowTest {
 
     @Test
     void 사다리_그리기_우측_선_중복_예외() {
-        //when
+        //given
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
         Row row = new Row(numberOfPerson);
         row.drawLine(Position.from(1));
@@ -153,5 +155,19 @@ class RowTest {
         assertThatThrownBy(() -> row.drawLine(Position.from(0)))
                 .isInstanceOf(IllegalArgumentException.class);
 
+    }
+
+    @Test
+    void rowString_확인() {
+        //given
+        GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
+        Row row = new Row(numberOfPerson);
+        row.drawLine(Position.from(1));
+
+        //when
+        String rowString = row.getRowString();
+
+        //then
+        assertThat(rowString).isEqualTo("0 1 -1 ");
     }
 }

@@ -14,13 +14,13 @@ public class Node {
         return new Node(direction);
     }
 
-    public void move(Position position) {
+    public void move(LadderPosition ladderPosition) {
         if (isRight()) {
-            position.next();
+            ladderPosition.goRight();
             return;
         }
         if (isLeft()) {
-            position.prev();
+            ladderPosition.goLeft();
             return;
         }
     }
@@ -47,5 +47,10 @@ public class Node {
 
     private boolean isNone() {
         return direction == NONE;
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(direction.getValue());
     }
 }

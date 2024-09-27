@@ -1,24 +1,30 @@
 package ladder.creator;
 
-import ladder.GreaterThanOne;
-import ladder.Position;
-import ladder.Row;
+import ladder.*;
 
-public class LadderCreator {
+
+public class LadderCreator implements LadderCreatorIF {
 
     private final Row[] rows;
 
-    public LadderCreator(GreaterThanOne numberOfRow, GreaterThanOne numberOfPerson) {
-        rows = new Row[numberOfRow.getNumber()];
-        for (int i = 0; i < numberOfRow.getNumber(); i++) {
-            rows[i] = new Row(numberOfPerson);
+    public LadderCreator(LadderSize ladderSize) {
+        int numberOfRow = ladderSize.getNumberOfRowValue();
+
+        rows = new Row[numberOfRow];
+        for (int i = 0; i < numberOfRow; i++) {
+            rows[i] = new Row(ladderSize.getNumberOfPerson());
         }
     }
 
-    public void drawLine(Position row, Position col) {
+    @Override
+    public void drawLine(LadderPosition ladderPosition) {
+        Position row = ladderPosition.getX();
+        Position col = ladderPosition.getY();
+
         rows[row.getValue()].drawLine(col);
     }
 
+    @Override
     public Row[] getRows() {
         return rows;
     }
