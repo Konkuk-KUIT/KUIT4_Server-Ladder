@@ -1,12 +1,13 @@
 package ladder;
 
-import ladder.creator.LadderCreator;
+import ladder.creator.CustomLadderCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import static ladder.creator.LadderLabel.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -26,32 +27,18 @@ public class LadderViewerTest {
         GreaterThanOne numberOfPerson = GreaterThanOne.from(4);
         LadderSize ladderSize = LadderSize.of(numberOfRow, numberOfPerson);
 
-        LadderCreator ladderCreator = new LadderCreator(ladderSize);
-        LadderViewer ladderViewer = new LadderViewer(ladderCreator.getRows());
+        CustomLadderCreator customLadderCreator = new CustomLadderCreator(ladderSize);
+        LadderViewer ladderViewer = new LadderViewer(customLadderCreator.getRows());
 
         Position currentRow = Position.from(2);
         Position currentCol = Position.from(1);
 
         //when
-        ladderViewer.printLadderStatus(LadderPosition.of(currentRow, currentCol));
+        ladderViewer.printLadderStatus(LadderPosition.of(currentRow, currentCol), BEFORE);
 
         //then
         String expectedOutput =
-                "Before\n" +
-                        "0 0 0 0 \n" +
-                        "0 0 0 0 \n" +
-                        "0 0* 0 0 \n" +
-                        "0 0 0 0 \n\n";
-        assertThat(outContent.toString()).isEqualTo(expectedOutput);
-
-        outContent.reset();
-
-        //when
-        ladderViewer.printLadderStatus(LadderPosition.of(currentRow, currentCol));
-
-        //then
-        expectedOutput =
-                "After\n" +
+                "BEFORE\n" +
                         "0 0 0 0 \n" +
                         "0 0 0 0 \n" +
                         "0 0* 0 0 \n" +

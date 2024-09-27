@@ -1,6 +1,7 @@
 package ladder;
 
 import static ladder.Direction.*;
+import static ladder.ExceptionMessage.*;
 
 public class Row {
     private final Node[] nodes;
@@ -45,21 +46,26 @@ public class Row {
         nodes[position.getValue()].setLeftNode();
     }
 
+    private void validateDrawLinePosition(Position startPosition) {
+        if (isInvalidPositionForDrawLine(startPosition) ||
+                isLineAtPosition(startPosition) ||
+                isLineAtNextPosition(startPosition)) {
+            throw new IllegalArgumentException(INVALID_DRAW_POSITION.getMessage());
+        }
+    }
+
     private void validatePosition(Position position) {
-        if (isInvalidPosition(position) ) {
+        if (isInvalidPosition(position)) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_POSITION.getMessage());
         }
     }
 
-    private void validateDrawLinePosition(Position startPosition) {
-        validatePosition(startPosition);
-        if (isLineAtPosition(startPosition) || isLineAtNextPosition(startPosition)) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_DRAW_POSITION.getMessage());
-        }
+    private boolean isInvalidPosition(Position position) {
+        return position.isBiggerThan(nodes.length - 1);
     }
 
-    private boolean isInvalidPosition(Position position) {
-        return position.isBiggerThan(nodes.length - 1) ;
+    private boolean isInvalidPositionForDrawLine(Position position) {
+        return position.isBiggerThan(nodes.length - 2);
     }
 
     private boolean isLineAtPosition(Position position) {
@@ -67,10 +73,8 @@ public class Row {
     }
 
     private boolean isLineAtNextPosition(Position position) {
-        position.next();
-        boolean lineAtPosition = isLineAtPosition(position);
-        position.prev();
-        return lineAtPosition;
+        Position nextPosition = Position.from(position.getValue());
+        nextPosition.next();
+        return isLineAtPosition(nextPosition);
     }
-
 }

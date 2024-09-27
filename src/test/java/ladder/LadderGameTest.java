@@ -1,6 +1,7 @@
 package ladder;
 
-import ladder.creator.LadderCreator;
+import ladder.creator.CustomLadderCreator;
+import ladder.creator.RandomLadderCreator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -14,10 +15,10 @@ class LadderGameTest {
         GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
 
         //when
-        LadderCreator ladderCreator = new LadderCreator(LadderSize.of(numberOfRow, numberOfPerson));
+        CustomLadderCreator customLadderCreator = new CustomLadderCreator(LadderSize.of(numberOfRow, numberOfPerson));
 
         //then
-        assertThat(ladderCreator).isNotNull();
+        assertThat(customLadderCreator).isNotNull();
     }
 
     @Test
@@ -27,8 +28,8 @@ class LadderGameTest {
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
         LadderSize ladderSize = LadderSize.of(numberOfRow, numberOfPerson);
 
-        LadderCreator ladderCreator = new LadderCreator(ladderSize);
-        LadderGame ladderGame = new LadderGame(ladderCreator);
+        CustomLadderCreator customLadderCreator = new CustomLadderCreator(ladderSize);
+        LadderGame ladderGame = new LadderGame(customLadderCreator);
 
         //given
         Position position = Position.from(4);
@@ -45,16 +46,16 @@ class LadderGameTest {
         GreaterThanOne numberOfPerson = GreaterThanOne.from(4);
         LadderSize ladderSize = LadderSize.of(row, numberOfPerson);
 
-        LadderCreator ladderCreator = new LadderCreator(ladderSize);
-        LadderGame ladderGame = new LadderGame(ladderCreator);
+        CustomLadderCreator customLadderCreator = new CustomLadderCreator(ladderSize);
+        LadderGame ladderGame = new LadderGame(customLadderCreator);
 
         LadderPosition ladderPosition1 = LadderPosition.of(Position.from(0), Position.from(0));
         LadderPosition ladderPosition2 = LadderPosition.of(Position.from(1), Position.from(1));
         LadderPosition ladderPosition3 = LadderPosition.of(Position.from(2), Position.from(0));
 
-        ladderCreator.drawLine(ladderPosition1);
-        ladderCreator.drawLine(ladderPosition2);
-        ladderCreator.drawLine(ladderPosition3);
+        customLadderCreator.drawLine(ladderPosition1);
+        customLadderCreator.drawLine(ladderPosition2);
+        customLadderCreator.drawLine(ladderPosition3);
 
         //given
         Position position = Position.from(0);
@@ -74,4 +75,20 @@ class LadderGameTest {
         //then
         assertThat(ladderGame.run(position)).isEqualTo(0);
     }
+
+
+    @Test
+    void 랜덤_사다리_생성_확인() {
+        // Given
+        GreaterThanOne numberOfRow = GreaterThanOne.from(5);
+        GreaterThanOne numberOfPerson = GreaterThanOne.from(30);
+        LadderSize ladderSize = LadderSize.of(numberOfRow, numberOfPerson);
+        CustomLadderCreator customLadderCreator = new CustomLadderCreator(ladderSize);
+        // When
+        LadderGame ladderGame = new LadderGame(new RandomLadderCreator(customLadderCreator));
+
+        // Then
+        assertThat(ladderGame).isNotNull();
+    }
+
 }
