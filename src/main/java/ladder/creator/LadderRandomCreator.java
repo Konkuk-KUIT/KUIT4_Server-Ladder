@@ -18,6 +18,7 @@ public class LadderRandomCreator implements LadderCreator {
             rows[i] = new Row(numberOfPerson);
         }
         ladderSize = new LadderSize(numberOfRow, numberOfPerson);
+        makeLineSet(numberOfRow,numberOfPerson);
     }
 
     @Override
@@ -29,7 +30,7 @@ public class LadderRandomCreator implements LadderCreator {
 
         LadderPosition ladderPos;
         while(lineCount.size() != ladderSize.getNumberOfRandomLine()) {
-            ladderPos = new LadderPosition(Position.from(random.nextInt(numberOfRow.getNumber())), Position.from(random.nextInt(numberOfPerson.getNumber())));
+            ladderPos = new LadderPosition(Position.from(random.nextInt(numberOfRow.getNumber())), Position.from(random.nextInt(numberOfPerson.getNumber())-1));
 
             boolean validLine = drawLine(ladderPos.getRow(), ladderPos.getColumn());
             if (validLine) {

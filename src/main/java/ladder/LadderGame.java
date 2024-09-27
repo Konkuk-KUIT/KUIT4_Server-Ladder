@@ -8,15 +8,19 @@ public class LadderGame {
 
     LadderCreator ladderCreator;
 
-    public LadderGame RandomGame(LadderRandomCreator ladderRandomCreator) {
-        this.ladderCreator = ladderRandomCreator;
-        return this;
+    public LadderGame(LadderCreator ladderCreator){
+        this.ladderCreator = ladderCreator;
     }
 
-    public LadderGame ManualGame(LadderManualCreator ladderManualCreator) {
-        this.ladderCreator = ladderManualCreator;
-        return this;
-    }
+//    public LadderGame RandomGame(LadderRandomCreator ladderRandomCreator) {
+//        this.ladderCreator = ladderRandomCreator;
+//        return this;
+//    }
+//
+//    public LadderGame ManualGame(LadderManualCreator ladderManualCreator) {
+//        this.ladderCreator = ladderManualCreator;
+//        return this;
+//    }
 
     public int run(Position position) {
         LadderRunner ladderRunner = new LadderRunner(ladderCreator.getRows());

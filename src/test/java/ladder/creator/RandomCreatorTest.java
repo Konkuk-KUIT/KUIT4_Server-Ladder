@@ -2,6 +2,7 @@ package ladder.creator;
 
 import ladder.GreaterThanOne;
 import ladder.LadderGame;
+import ladder.LadderGameFactory;
 import ladder.Position;
 import org.junit.jupiter.api.Test;
 
@@ -27,8 +28,8 @@ class RandomCreatorTest {
     void 랜덤_사다리_사람_예외_처리_확인() {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
-        LadderRandomCreator randomCreator = new LadderRandomCreator(GreaterThanOne.from(2), numberOfPerson);
-        LadderGame ladderGame = new LadderGame(randomCreator);
+        LadderRandomCreator ladderRandomCreator = new LadderRandomCreator(GreaterThanOne.from(2), numberOfPerson);
+        LadderGame ladderGame = LadderGameFactory.createManualLadderGame((ladderRandomCreator));
 
         //given
         Position position = Position.from(4);
