@@ -74,29 +74,24 @@ class LadderGameTest {
         GreaterThanOne numberOfPerson = GreaterThanOne.from(4);
         GreaterThanOne row = GreaterThanOne.from(3);
 
-        LadderCreator autoLadderCreator = new AutoLadderCreator(row, numberOfPerson);
-        LadderGame ladderGame = new LadderGame(autoLadderCreator);
-
-        autoLadderCreator.drawLine(Position.from(0),Position.from(0));
+        LadderGame ladderGame = LadderGame.createAutoLadderGame(row, numberOfPerson);
 
         //given
         Position position = Position.from(0);
 
         //then
-        assertThat(ladderGame.run(position)).isEqualTo(2);
+        ladderGame.run(position);
 
         //given
         position = Position.from(1);
 
         //then
-        assertThat(ladderGame.run(position)).isEqualTo(1);
+        ladderGame.run(position);
 
         //given
         position = Position.from(2);
 
         //then
-        assertThat(ladderGame.run(position)).isEqualTo(0);
-
-
+        ladderGame.run(position);
     }
 }

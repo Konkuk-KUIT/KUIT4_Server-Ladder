@@ -21,6 +21,11 @@ public class DefaultLadderCreator implements LadderCreator{
     }
 
     @Override
+    public void drawLine() {
+        throw new UnsupportedOperationException("DefaultLadder은 row, col이 없는 drawLine()을 지원하지 않습니다.");
+    }
+
+    @Override
     public Row[] getRows() {
         return rows;
     }
