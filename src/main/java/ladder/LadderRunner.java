@@ -12,13 +12,13 @@ public class LadderRunner {
         for (int i = 0; i < rows.length; i++) {
 
             StringBuilder sbBefore = new StringBuilder("Before\n");
-            printLadder(sbBefore, GreaterThanOne.from(rows.length), position, i);  // Pass current row index
+            printLadder(sbBefore, GreaterThanOne.from(rows.length), position, i);
             System.out.println(sbBefore);
 
             rows[i].nextPosition(position);
 
             StringBuilder sbAfter = new StringBuilder("After\n");
-            printLadder(sbAfter, GreaterThanOne.from(rows.length), position, i);  // Pass current row index
+            printLadder(sbAfter, GreaterThanOne.from(rows.length), position, i);
             System.out.println(sbAfter);
         }
 
