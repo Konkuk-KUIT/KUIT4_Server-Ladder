@@ -10,7 +10,7 @@ class LadderGameTest {
     @Test
     void 사다리_생성_확인() {
         //given
-        GreaterThanOne numberOfRow = GreaterThanOne.from(3);
+        GreaterThanOne numberOfRow = GreaterThanOne.from(5);
         GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
 
         //when
@@ -23,13 +23,13 @@ class LadderGameTest {
     @Test
     void 사다리_사람_예외_처리_확인() {
         //when
-        GreaterThanOne row = GreaterThanOne.from(2);
-        GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
+        GreaterThanOne row = GreaterThanOne.from(5);
+        GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
         LadderCreator ladderCreator = new LadderCreator(row, numberOfPerson);
         LadderRunner ladderRunner = new LadderRunner(ladderCreator.getRows());
 
         //given
-        Position nthOfPerson = Position.from(4);
+        Position nthOfPerson = Position.from(5);
 
         //then
         assertThatThrownBy(() -> ladderRunner.run(nthOfPerson))
@@ -39,20 +39,22 @@ class LadderGameTest {
     @Test
     void 사다리_결과_확인() {
         //when
-        GreaterThanOne numberOfPerson = GreaterThanOne.from(4);
-        GreaterThanOne row = GreaterThanOne.from(3);
+        GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
+        GreaterThanOne row = GreaterThanOne.from(5);
         LadderCreator ladderCreator = new LadderCreator(row, numberOfPerson);
         LadderRunner ladderRunner = new LadderRunner(ladderCreator.getRows());
 
         ladderCreator.drawLine(Position.from(0), Position.from(0));
         ladderCreator.drawLine(Position.from(1), Position.from(1));
         ladderCreator.drawLine(Position.from(2), Position.from(0));
+        ladderCreator.drawLine(Position.from(3), Position.from(2));
+        ladderCreator.drawLine(Position.from(2), Position.from(3));
 
         //given
         Position nthOfPerson = Position.from(0);
 
         //then
-        assertThat(ladderRunner.run(nthOfPerson)).isEqualTo(2);
+        assertThat(ladderRunner.run(nthOfPerson)).isEqualTo(3);
 
         //given
         nthOfPerson = Position.from(1);
@@ -70,6 +72,12 @@ class LadderGameTest {
         nthOfPerson = Position.from(3);
 
         //then
-        assertThat(ladderRunner.run(nthOfPerson)).isEqualTo(3);
+        assertThat(ladderRunner.run(nthOfPerson)).isEqualTo(4);
+
+        //given
+        nthOfPerson = Position.from(4);
+
+        //then
+        assertThat(ladderRunner.run(nthOfPerson)).isEqualTo(2);
     }
 }
