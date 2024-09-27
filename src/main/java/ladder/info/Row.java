@@ -1,33 +1,39 @@
-package ladder;
+package ladder.info;
+
+import ladder.GreaterThanOne;
+import ladder.Position;
+import ladder.exception.ExceptionMessage;
 
 import static ladder.Direction.*;
 
 public class Row {
     private final Node[] nodes;
 
-    public Row(GreaterThanOne numberOfPerson) {
-        nodes = new Node[numberOfPerson.getNumber()];
-        for (int i = 0; i < numberOfPerson.getNumber(); i++) {
+    public Row(GreaterThanOne col) {
+        nodes = new Node[col.getNumber()];
+        for (int i = 0; i < col.getNumber(); i++) {
             nodes[i] = Node.from(NONE);
         }
     }
 
-    public void drawLine(Position startPosition) {
-        validateDrawLinePosition(startPosition);
+    public void drawLine(Position position) {
+        validateDrawLinePosition(position);
+        setDirectionBetweenNextPosition(position);
+    }
 
-        setDirectionBetweenNextPosition(startPosition);
+    public void moveRow(Position position) {
+        position.UpdateRow();
     }
 
     public void nextPosition(Position position) {
         validatePosition(position);
-
-        nodes[position.getValue()].move(position);
+        nodes[position.getCol()].move(position);
     }
 
     private void setDirectionBetweenNextPosition(Position position) {
-        nodes[position.getValue()].setRightNode();
+        nodes[position.getCol()].setRightNode();
         position.next();
-        nodes[position.getValue()].setLeftNode();
+        nodes[position.getCol()].setLeftNode();
     }
 
     private void validatePosition(Position position) {
@@ -36,9 +42,9 @@ public class Row {
         }
     }
 
-    private void validateDrawLinePosition(Position startPosition) {
-        validatePosition(startPosition);
-        if (isLineAtPosition(startPosition) || isLineAtNextPosition(startPosition)) {
+    private void validateDrawLinePosition(Position position) {
+        validatePosition(position);
+        if (isLineAtPosition(position) || isLineAtNextPosition(position)) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_DRAW_POSITION.getMessage());
         }
     }
@@ -48,7 +54,7 @@ public class Row {
     }
 
     private boolean isLineAtPosition(Position position) {
-        return nodes[position.getValue()].isAlreadySetDirection();
+        return nodes[position.getCol()].isAlreadySetDirection();
     }
 
     private boolean isLineAtNextPosition(Position position) {
@@ -56,6 +62,10 @@ public class Row {
         boolean lineAtPosition = isLineAtPosition(position);
         position.prev();
         return lineAtPosition;
+    }
+
+    public Node[] getNodes() {
+        return nodes;
     }
 
 }

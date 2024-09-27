@@ -1,46 +1,77 @@
 package ladder;
 
-import static ladder.ExceptionMessage.INVALID_LADDER_POSITION;
+import java.util.Objects;
+
+import static ladder.exception.ExceptionMessage.INVALID_LADDER_POSITION;
 
 public class Position {
-    private int position;
 
-    private Position(int position) {
-        this.position = position;
+    private int row;
+    private int col;
+
+
+    private Position(int row,int col) {
+        this.row = row;
+        this.col = col;
     }
 
-    public int getValue() {
-        return position;
+    public int getCol() {
+        return col;
     }
 
-    public static Position from(int position) {
-        validatePosition(position);
-        return new Position(position);
+    public int getRow() {
+        return row;
     }
+
+    public static Position of(int row, int col) {
+        validatePosition(row, col);
+        return new Position(row,col);
+    }
+
 
     public void prev() {
-        position--;
+       col--;
     }
 
     public void next() {
-        position++;
+        col++;
     }
 
-    public boolean isSmallerThan(int position) {
-        return this.position < position;
+    public boolean isSmallerThan(int col) {
+        return this.col < col;
     }
 
-    public boolean isBiggerThan(int position) {
-        return this.position > position;
+    public boolean isBiggerThan(int col) { return this.col > col; }
+
+    public boolean isCurrentPosition(int row, int col) {
+        return this.row == row && this.col == col;
     }
 
-    private static void validatePosition(int position) {
-        if (!isPosition(position)) {
+
+    private static void validatePosition(int row, int col) {
+        if (!isPosition(row, col)) {
             throw new IllegalArgumentException(INVALID_LADDER_POSITION.getMessage());
         }
     }
 
-    private static boolean isPosition(int position) {
-        return position >= 0;
+    private static boolean isPosition(int row, int col) {
+        return row >= 0 && col>=0 ;
+    }
+
+    public void UpdateRow() {
+        (this.row)++;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Position position = (Position) obj;
+        return row == position.row && col == position.col;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(row, col);
     }
 }

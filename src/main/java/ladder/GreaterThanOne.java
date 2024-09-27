@@ -1,10 +1,12 @@
 package ladder;
 
+import ladder.exception.ExceptionMessage;
+
 public class GreaterThanOne {
 
     private final int number;
 
-    public GreaterThanOne(int number) {
+    private GreaterThanOne(int number) {
         validate(number);
         this.number = number;
     }
