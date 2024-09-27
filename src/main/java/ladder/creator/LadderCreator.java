@@ -1,6 +1,7 @@
 package ladder.creator;
 
 import ladder.GreaterThanOne;
+import ladder.LadderCreatorInterface;
 import ladder.Position;
 import ladder.Row;
 
