@@ -24,14 +24,17 @@ public class LadderRunner {
     }
 
     private void printRows(int moveX, int moveY) {
-        int[] values;
         for (int i = 0; i < rows.length; i++) {
-            values = rows[i].getRowValue();
-            for (int j = 0; j < rows[0].getSize(); j++) {
-                String moveCheck = (moveY == i && moveX == j) ? "* ": " ";
-                System.out.print(values[j] + moveCheck);
-            }
-            System.out.println();
+            printRow(i, moveX, moveY);
+        }
+        System.out.println();
+    }
+
+    private void printRow(int rowIndex, int moveX, int moveY) {
+        int[] values = rows[rowIndex].getRowValue();
+        for (int j = 0; j < rows[0].getSize(); j++) {
+            String moveCheck = (moveY == rowIndex && moveX == j) ? "* " : " ";
+            System.out.print(values[j] + moveCheck);
         }
         System.out.println();
     }
