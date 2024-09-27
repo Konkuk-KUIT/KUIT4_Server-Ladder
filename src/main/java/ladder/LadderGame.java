@@ -1,17 +1,23 @@
 package ladder;
 
 import ladder.creator.LadderCreator;
+import ladder.creator.LadderRandomCreator;
 
 // todo Ladder 클래스가 많은 책임 (사다리 생성 / 사다리 그리기 / 사다리 게임 진행)
 // 마지막으로 Ladder는 전체를 관장하는 클래스가 되었으므로
 // LadderGame으로 변경
+// todo <mission2> LadderGame에 의존성주입을 통해 LadderCreator를 변경해보기
+// todo <mission2> LadderGame클래스 자체도 정적메소드 패턴을 이용하여 생성
 public class LadderGame {
 
     private final LadderCreator ladderCreator;
+    // private final LadderRandomCreator ladderRandomCreator;
 
     public LadderGame(LadderCreator ladderCreator) {
         this.ladderCreator = ladderCreator;
     }
+
+
 
     // todo 포지션 wrapper 클래스 필요
     // todo LadderRunner로 분리 (Ladder 클래스 책임분산)

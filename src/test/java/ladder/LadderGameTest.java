@@ -36,10 +36,8 @@ class LadderGameTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    // todo 여기에 사다리 출력결과 메소드 -> 한번 Run으로 이동시마다 출력 (굳이 테스트로 안해도될지도..?)
-
     @Test
-    void 사다리_결과_확인() {
+    void 사다리_결과_확인() { // 출력결과 포함
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(4);
         GreaterThanOne row = GreaterThanOne.from(3);

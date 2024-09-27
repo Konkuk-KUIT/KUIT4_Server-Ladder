@@ -10,18 +10,14 @@ public class LadderRunner {
     }
 
     // todo 포지션 wrapper 클래스 필요
-    // todo LadderRunner로 분리 (Ladder 클래스 책임분산)
     // 매개변수 : 시작 x좌표 / 반복문 : y좌표
-    // todo <미션> 여기서 사다리의 움직임마다 출력해야 함
     public int run(Position position) {
         // position (x)좌표는 마지막 위치에 있고
         // for문의 반복으로 y좌표가 움직이면 좌표 다룰 수 있음
 
-        // todo 여기에 (position, 1)로 좌표보내주면 될듯 (setStringLadder()함수)
-
         for (int i = 0; i < rows.length; i++) {
-            // todo <미션1> 사다리 진행상황 출력위치
             // 사다리 (*포함) 세팅
+            // todo 매개변수로 넘기는 값이 x,y인지 구별될 수 있도록
             setStringLadder(new LadderPosition(position, Position.from(i)));
             printLadder();
             rows[i].nextPosition(position);
@@ -40,7 +36,7 @@ public class LadderRunner {
         for (int i = 0; i < rows.length; i++) { // 높이만큼 순환
             // todo 여기서 xy의 y좌표랑 반복문 인자 i랑 같은지 확인하고
             // 같을 때 만 *을 찍을 수 있도록 인자를 넘긴다.
-            if (xy.getY() == i) {
+            if (xy.getIntY() == i) {
                 ladder.append(rows[i].setStringStarLadder(xy)); // *을 붙이는 라인
                 ladder.append(System.lineSeparator());
                 continue;

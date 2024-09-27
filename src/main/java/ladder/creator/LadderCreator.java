@@ -4,7 +4,7 @@ import ladder.GreaterThanOne;
 import ladder.Position;
 import ladder.Row;
 
-public class LadderCreator {
+public class LadderCreator implements LadderCreation{
 
     private final Row[] rows; // 사다리의 한 행을 빼놓았다.
 

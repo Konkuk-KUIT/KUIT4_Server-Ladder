@@ -3,7 +3,7 @@ package ladder;
 // 1보다 큰지 검증하는 클래스
 public class GreaterThanOne {
 
-    private  final int number;
+    private final int number;
 
     private GreaterThanOne(int number) {
         this.number = number;

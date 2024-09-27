@@ -10,11 +10,19 @@ public class LadderPosition {
         this.y = y;
     }
 
-    public int getX() {
+    public Position getX() {
+        return x;
+    }
+
+    public Position getY() {
+        return y;
+    }
+
+    public int getIntX() {
         return x.getPosition();
     }
 
-    public int getY() {
+    public int getIntY() {
         return y.getPosition();
     }
 

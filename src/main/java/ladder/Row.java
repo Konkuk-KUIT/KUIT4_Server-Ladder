@@ -9,7 +9,6 @@ public class Row {
     // todo Node 클래스로 분리(row 배열에서 값을 하나씩 꺼내서 볼 필요가 없다..?)
     Node[] nodes;
 
-
     public Row(GreaterThanOne numberOfPerson) {
         nodes = new Node[numberOfPerson.getNumber()]; // 노드 배열개수할당
         for (int i = 0; i < numberOfPerson.getNumber(); i++) {
@@ -28,7 +27,7 @@ public class Row {
         return rowLadder;
 
     }
-
+    // *이 포함되게 찍히는 메소드
     public StringBuilder setStringStarLadder(LadderPosition xy) {
         StringBuilder rowLadder = new StringBuilder(); // 호출 될 때 마다 새로운 StringBuilder
 
@@ -36,7 +35,7 @@ public class Row {
             // y좌표를 고려하여 *을 찍을 수 있는지 없는지 판단한다.
 
             rowLadder.append(nodes[i].getDirection());// 받는 로직 추가
-            if (i == xy.getX()) { // x좌표에 무조건 점을 찍게된다
+            if (i == xy.getIntX()) { // x좌표에 무조건 점을 찍게된다
                 rowLadder.append("*");
             }
             rowLadder.append(" ");
@@ -83,18 +82,19 @@ public class Row {
         }
     }
 
-    // 숫자가 사다리 크기보다 커서 실패하는 경우
+    // 선그리기 유효성 검사
+    // 1. 숫자가 사다리 크기보다 커서 실패하는 경우
     private boolean isInvalidPosition(Position startPosition) {
         return startPosition.isBiggerThan(nodes.length - 1); // startPosition.getPosition() < 0 -> position 만들때 이미 검증했던 logic
     }
 
-    // 이미 그려진 경우
+    // 2. 이미 그려진 경우
     private boolean isLineAtPosition(Position startPosition) {
         return ! nodes[startPosition.getPosition()].isAlreadySetDirection(); // none이 아니면
         // return nodes[startPosition.getPosition()] == RIGHT.getValue() || row[startPosition.getPosition()] == LEFT.getValue();
     }
 
-    // 옆에 이미 그려진 경우
+    // 3. 옆에 이미 그려진 경우
     private boolean isLineAtNextPosition(Position startPosition) {
         startPosition.next();
         boolean IsLineAtPosition = !nodes[startPosition.getPosition()].isAlreadySetDirection();
