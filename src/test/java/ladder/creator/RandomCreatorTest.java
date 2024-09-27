@@ -29,7 +29,7 @@ class RandomCreatorTest {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
         LadderRandomCreator ladderRandomCreator = new LadderRandomCreator(GreaterThanOne.from(2), numberOfPerson);
-        LadderGame ladderGame = LadderGameFactory.createManualLadderGame((ladderRandomCreator));
+        LadderGame ladderGame = LadderGameFactory.createRandomLadderGame(ladderRandomCreator);
 
         //given
         Position position = Position.from(4);

@@ -26,11 +26,28 @@ public class LadderRandomCreator implements LadderCreator {
         return rows[row.getValue()].drawLine(col);
     }
 
+//    public void makeLineSet(GreaterThanOne numberOfRow, GreaterThanOne numberOfPerson) {
+//
+//        LadderPosition ladderPos;
+//        while(lineCount.size() != ladderSize.getNumberOfRandomLine()) {
+//            ladderPos = new LadderPosition(Position.from(random.nextInt(numberOfRow.getNumber())), Position.from(random.nextInt(numberOfPerson.getNumber())-1));
+//
+//            boolean validLine = drawLine(ladderPos.getRow(), ladderPos.getColumn());
+//            if (validLine) {
+//                lineCount.add(ladderPos);
+//            }
+//        }
+//    }
+
     public void makeLineSet(GreaterThanOne numberOfRow, GreaterThanOne numberOfPerson) {
 
         LadderPosition ladderPos;
-        while(lineCount.size() != ladderSize.getNumberOfRandomLine()) {
-            ladderPos = new LadderPosition(Position.from(random.nextInt(numberOfRow.getNumber())), Position.from(random.nextInt(numberOfPerson.getNumber())-1));
+        while (lineCount.size() != ladderSize.getNumberOfRandomLine()) {
+
+            int rowIndex = random.nextInt(numberOfRow.getNumber());
+            int columnIndex = random.nextInt(numberOfPerson.getNumber() - 1);
+
+            ladderPos = new LadderPosition(Position.from(rowIndex), Position.from(columnIndex));
 
             boolean validLine = drawLine(ladderPos.getRow(), ladderPos.getColumn());
             if (validLine) {
@@ -38,6 +55,9 @@ public class LadderRandomCreator implements LadderCreator {
             }
         }
     }
+
+
+
     @Override
     public Row[] getRows() {
         return rows;
