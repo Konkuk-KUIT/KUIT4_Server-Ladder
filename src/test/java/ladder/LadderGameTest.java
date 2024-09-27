@@ -1,5 +1,7 @@
 package ladder;
 
+import ladder.creator.AutoLadderCreator;
+import ladder.creator.DefaultLadderCreator;
 import ladder.creator.LadderCreator;
 import org.junit.jupiter.api.Test;
 
@@ -14,18 +16,18 @@ class LadderGameTest {
         GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
 
         //when
-        LadderCreator ladderCreator = new LadderCreator(numberOfRow, numberOfPerson);
+        DefaultLadderCreator defaultLadderCreator = new DefaultLadderCreator(numberOfRow, numberOfPerson);
 
         //then
-        assertThat(ladderCreator).isNotNull();
+        assertThat(defaultLadderCreator).isNotNull();
     }
 
     @Test
     void 사다리_사람_예외_처리_확인() {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
-        LadderCreator ladderCreator = new LadderCreator(GreaterThanOne.from(2), numberOfPerson);
-        LadderGame ladderGame = new LadderGame(ladderCreator);
+        DefaultLadderCreator defaultLadderCreator = new DefaultLadderCreator(GreaterThanOne.from(2), numberOfPerson);
+        LadderGame ladderGame = new LadderGame(defaultLadderCreator);
 
         //given
         Position position = Position.from(4);
@@ -40,12 +42,12 @@ class LadderGameTest {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(4);
         GreaterThanOne row = GreaterThanOne.from(3);
-        LadderCreator ladderCreator = new LadderCreator(row, numberOfPerson);
-        LadderGame ladderGame = new LadderGame(ladderCreator);
+        DefaultLadderCreator defaultLadderCreator = new DefaultLadderCreator(row, numberOfPerson);
+        LadderGame ladderGame = new LadderGame(defaultLadderCreator);
 
-        ladderCreator.drawLine(Position.from(0),Position.from(0));
-        ladderCreator.drawLine(Position.from(1),Position.from(1));
-        ladderCreator.drawLine(Position.from(2),Position.from(0));
+        defaultLadderCreator.drawLine(Position.from(0),Position.from(0));
+        defaultLadderCreator.drawLine(Position.from(1),Position.from(1));
+        defaultLadderCreator.drawLine(Position.from(2),Position.from(0));
 
         //given
         Position position = Position.from(0);
@@ -64,5 +66,37 @@ class LadderGameTest {
 
         //then
         assertThat(ladderGame.run(position)).isEqualTo(0);
+    }
+
+    @Test
+    void 자동_사다리_결과확인() {
+        //when
+        GreaterThanOne numberOfPerson = GreaterThanOne.from(4);
+        GreaterThanOne row = GreaterThanOne.from(3);
+
+        LadderCreator autoLadderCreator = new AutoLadderCreator(row, numberOfPerson);
+        LadderGame ladderGame = new LadderGame(autoLadderCreator);
+
+        autoLadderCreator.drawLine(Position.from(0),Position.from(0));
+
+        //given
+        Position position = Position.from(0);
+
+        //then
+        assertThat(ladderGame.run(position)).isEqualTo(2);
+
+        //given
+        position = Position.from(1);
+
+        //then
+        assertThat(ladderGame.run(position)).isEqualTo(1);
+
+        //given
+        position = Position.from(2);
+
+        //then
+        assertThat(ladderGame.run(position)).isEqualTo(0);
+
+
     }
 }
