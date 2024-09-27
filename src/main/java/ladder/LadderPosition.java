@@ -14,10 +14,5 @@ public class LadderPosition {
     public Position getColumn() {
         return column;
     }
-    public int getRowValue() {
-        return row.getValue();
-    }
-    public int getColumnValue() {
-        return column.getValue();
-    }
+
 }

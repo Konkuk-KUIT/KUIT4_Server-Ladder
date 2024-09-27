@@ -5,12 +5,12 @@ import ladder.*;
 import java.util.HashSet;
 import java.util.Random;
 
-public class LadderRandomCreator {
+public class LadderRandomCreator implements LadderCreator {
 
     private final Row[] rows;
     LadderSize ladderSize;
     Random random = new Random();
-    HashSet<LadderPosition> lineCount;
+    HashSet<LadderPosition> lineCount = new HashSet<>();
 
     public LadderRandomCreator(GreaterThanOne numberOfRow, GreaterThanOne numberOfPerson) {
         rows = new Row[numberOfRow.getNumber()];
@@ -20,18 +20,24 @@ public class LadderRandomCreator {
         ladderSize = new LadderSize(numberOfRow, numberOfPerson);
     }
 
-    public void drawLine(GreaterThanOne numberOfRow, GreaterThanOne numberOfPerson) {
+    @Override
+    public boolean drawLine(Position row, Position col) {
+        return rows[row.getValue()].drawLine(col);
+    }
+
+    public void makeLineSet(GreaterThanOne numberOfRow, GreaterThanOne numberOfPerson) {
 
         LadderPosition ladderPos;
         while(lineCount.size() != ladderSize.getNumberOfRandomLine()) {
             ladderPos = new LadderPosition(Position.from(random.nextInt(numberOfRow.getNumber())), Position.from(random.nextInt(numberOfPerson.getNumber())));
 
-            if (rows[ladderPos.getRowValue()].drawLine(ladderPos.getColumn())) {
+            boolean validLine = drawLine(ladderPos.getRow(), ladderPos.getColumn());
+            if (validLine) {
                 lineCount.add(ladderPos);
             }
         }
     }
-
+    @Override
     public Row[] getRows() {
         return rows;
     }

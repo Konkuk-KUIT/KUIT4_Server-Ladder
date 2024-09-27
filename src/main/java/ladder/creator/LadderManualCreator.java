@@ -4,7 +4,7 @@ import ladder.GreaterThanOne;
 import ladder.Position;
 import ladder.Row;
 
-public class LadderManualCreator {
+public class LadderManualCreator implements LadderCreator {
 
     private final Row[] rows;
 
@@ -15,10 +15,12 @@ public class LadderManualCreator {
         }
     }
 
-    public void drawLine(Position row, Position col) {
-        rows[row.getValue()].drawLine(col);
+    @Override
+    public boolean drawLine(Position row, Position col) {
+        return rows[row.getValue()].drawLine(col);
     }
 
+    @Override
     public Row[] getRows() {
         return rows;
     }
