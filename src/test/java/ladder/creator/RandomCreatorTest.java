@@ -38,4 +38,18 @@ class RandomCreatorTest {
         assertThatThrownBy(() -> ladderGame.run(position))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+    @Test
+    void 랜덤_사다리_결과_확인() {
+        //when
+        GreaterThanOne numberOfPerson = GreaterThanOne.from(4);
+        GreaterThanOne row = GreaterThanOne.from(3);
+        LadderRandomCreator ladderRandomCreator = new LadderRandomCreator(row, numberOfPerson);
+        LadderGame ladderGame = LadderGameFactory.createRandomLadderGame(ladderRandomCreator);
+
+        //given
+        Position position = Position.from(0);
+
+        //then
+        assertThat(ladderGame.run(position)).isNotNull();
+    }
 }
