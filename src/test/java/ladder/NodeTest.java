@@ -1,8 +1,10 @@
 package ladder;
 
+import ladder.core.Node;
+import ladder.position.Position;
 import org.junit.jupiter.api.Test;
 
-import static ladder.Direction.*;
+import static ladder.core.Direction.*;
 import static org.assertj.core.api.Assertions.*;
 
 class NodeTest {

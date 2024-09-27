@@ -1,6 +1,7 @@
-package ladder;
+package ladder.core;
 
-import ladder.creator.LadderLabel;
+import ladder.position.LadderPosition;
+import ladder.position.Position;
 
 public class LadderViewer {
 

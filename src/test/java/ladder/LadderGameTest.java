@@ -1,7 +1,12 @@
 package ladder;
 
+import ladder.core.LadderGame;
+import ladder.core.LadderGameFactory;
+import ladder.core.LadderSize;
 import ladder.creator.CustomLadderCreator;
-import ladder.creator.RandomLadderCreator;
+import ladder.position.LadderPosition;
+import ladder.position.Position;
+import ladder.utils.GreaterThanOne;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;

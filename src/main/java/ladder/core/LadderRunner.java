@@ -1,6 +1,9 @@
-package ladder;
+package ladder.core;
 
-import static ladder.creator.LadderLabel.*;
+import ladder.position.LadderPosition;
+import ladder.position.Position;
+
+import static ladder.core.LadderLabel.*;
 
 public class LadderRunner {
 

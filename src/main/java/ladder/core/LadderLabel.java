@@ -1,4 +1,4 @@
-package ladder.creator;
+package ladder.core;
 
 public enum LadderLabel {
 
