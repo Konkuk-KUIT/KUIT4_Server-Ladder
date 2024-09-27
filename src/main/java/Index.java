@@ -23,4 +23,8 @@ public class Index {
     public void move(Direction a) {
         this.index += a.getDirection();
     }
+
+    public Index nextIndex() {
+        return Index.from(this.index + 1);
+    }
 }

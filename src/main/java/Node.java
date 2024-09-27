@@ -25,7 +25,7 @@ public class Node {
         return direction == Direction.NONE;
     }
 
-    public void printDirection() {
-        System.out.print(direction);
+    public void printDirectionNumber() {
+        System.out.print(direction.getDirection());
     }
 }

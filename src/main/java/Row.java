@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Row {
     private Node[] cols;
 
@@ -8,7 +10,7 @@ public class Row {
 
     private void SetNodes() {
         for (int i=0; i < cols.length; i++) {
-            cols[i].SetNode(Direction.NONE);
+            cols[i] = new Node(Direction.NONE);
         }
     }
 
@@ -26,7 +28,7 @@ public class Row {
 
     public void PrintRow(int col) {
         for (int i=0; i < cols.length; i++) {
-            cols[i].printDirection();
+            cols[i].printDirectionNumber();
             System.out.print(" ");
         }
         System.out.println();
@@ -34,7 +36,7 @@ public class Row {
 
     public void PrintRowWithStar(int col) {
         for (int i=0; i < cols.length; i++) {
-            cols[i].printDirection();
+            cols[i].printDirectionNumber();
             if (CheckCurrentPosition(col, i)) {System.out.print("*");}
             System.out.print(" ");
         }

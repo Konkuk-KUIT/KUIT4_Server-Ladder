@@ -1,14 +1,32 @@
+import java.util.Random;
+
 public class LadderCreator {
     private Row[] rows;
 
-    public LadderCreator(Index rowNum, Index numberOfPerson) {
+    public LadderCreator(Index rowNum, Index numberOfPerson, boolean isRandom) {
         rows = new Row[rowNum.getNumber()];
         SetRows(numberOfPerson);
+        if (isRandom) {
+            MakeRandomLine(numberOfPerson);
+        }
     }
 
     private void SetRows(Index numberOfPerson) {
         for (int i=0; i < rows.length; i++) {
             rows[i] = new Row(numberOfPerson);
+        }
+    }
+
+    private void MakeRandomLine(Index numberOfPerson) {
+        int numberOfLines = (int) (rows.length * numberOfPerson.getNumber() * 0.3);
+        Index rowsLength = Index.from(rows.length);
+
+        for (int i=0; i < numberOfLines; i++) {
+            PositionOfLine position = PositionOfLine.randomPosition(rowsLength, numberOfPerson);
+            PositionOfLine nextPosition = PositionOfLine.of(position.getX(), position.getY().nextIndex());
+
+            if (canDrawLine(position) && !LineAlreadyExisting(position.getX(), position.getY().nextIndex())) { drawLine(position); continue;}
+            i--;
         }
     }
 
@@ -18,19 +36,21 @@ public class LadderCreator {
         Index y = position.getY();
 
         rows[x.getNumber()].setValue(y, Direction.RIGHT);
-        rows[x.getNumber()].setValue(y, Direction.LEFT);
+        rows[x.getNumber()].setValue(y.nextIndex(), Direction.LEFT);
     }
 
-    public void canDrawLine(PositionOfLine position) {
+    public boolean canDrawLine(PositionOfLine position) {
         Index x = position.getX();
         Index y = position.getY();
         
         if (LineAlreadyExisting(x, y) || validateRangeOfIndex(x, y)) {
-            throw new IllegalArgumentException("Can't draw a line in this position");
+            return false;
         }
+
+        return true;
     }
 
-    private boolean LineAlreadyExisting(Index x, Index y) {
+    public boolean LineAlreadyExisting(Index x, Index y) {
         Node node = rows[x.getNumber()].getValue(y);
         return node.isLeft() || node.isRight();
     }
@@ -42,8 +62,4 @@ public class LadderCreator {
     public Row[] getRow() {
         return rows;
     }
-
-
-
-
 }

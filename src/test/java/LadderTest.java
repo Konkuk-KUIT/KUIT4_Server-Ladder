@@ -1,47 +1,64 @@
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class LadderTest {
 
     @Test
     void createLadder() {
-        LadderCreator ladderCreator = new LadderCreator(Index.from(5), Index.from(7));
+        LadderCreator ladderCreator = new LadderCreator(Index.from(5), Index.from(7), false);
 
-        Assertions.assertThat(len[0]).isEqualTo(5);
-        Assertions.assertThat(len[1]).isEqualTo(7);
+        Row[] rows = ladderCreator.getRow();
 
-
+        Assertions.assertThat(rows.length).isEqualTo(5);
+        Assertions.assertThat(rows[0].getPeopleNum()).isEqualTo(7);
     }
 
     @Test
     void drawLine() {
-        LadderGame ladder = new LadderGame(5, 7);
+        LadderCreator ladderCreator = new LadderCreator(Index.from(5), Index.from(7), false);
 
-        PositionOfLine position = PositionOfLine.of(3, 2);
+        PositionOfLine position = PositionOfLine.of(Index.from(3), Index.from(2));
 
-        ladder.drawLine(position);
+        ladderCreator.drawLine(position);
 
-        Assertions.assertThat(ladder.isLine(position)).isEqualTo(true);
+        Assertions.assertThat(ladderCreator.LineAlreadyExisting(position.getX(), position.getY())).isEqualTo(true);
     }
 
     @Test
-    void arrive() {
-        LadderGame ladder = new LadderGame(5, 7);
+    void 줄_중복_생성_예외() {
+        LadderCreator ladderCreator = new LadderCreator(Index.from(5), Index.from(7), false);
 
-        ladder.drawLine(PositionOfLine.of(0, 0));
-        ladder.drawLine(PositionOfLine.of(1, 1));
-        ladder.drawLine(PositionOfLine.of(1, 3));
-        ladder.drawLine(PositionOfLine.of(2, 0));
-        ladder.drawLine(PositionOfLine.of(2, 2));
-        ladder.drawLine(PositionOfLine.of(3, 0));
-        ladder.drawLine(PositionOfLine.of(3, 4));
-        ladder.drawLine(PositionOfLine.of(4, 2));
-        ladder.drawLine(PositionOfLine.of(4, 5));
+        ladderCreator.drawLine(PositionOfLine.of(Index.from(0), Index.from(0)));
+        Assertions.assertThat(ladderCreator.canDrawLine(PositionOfLine.of(Index.from(0), Index.from(1)))).isEqualTo(false);
+    }
 
-        int end = ladder.run(6);
+    @Test
+    void LadderGame() {
+        LadderCreator ladderCreator = new LadderCreator(Index.from(5), Index.from(7), false);
 
-        Assertions.assertThat(end).isEqualTo(5);
+        ladderCreator.drawLine(PositionOfLine.of(Index.from(0), Index.from(0)));
+        ladderCreator.drawLine(PositionOfLine.of(Index.from(1), Index.from(1)));
+        ladderCreator.drawLine(PositionOfLine.of(Index.from(1), Index.from(3)));
+        ladderCreator.drawLine(PositionOfLine.of(Index.from(2), Index.from(0)));
+        ladderCreator.drawLine(PositionOfLine.of(Index.from(2), Index.from(2)));
+        ladderCreator.drawLine(PositionOfLine.of(Index.from(3), Index.from(0)));
+        ladderCreator.drawLine(PositionOfLine.of(Index.from(3), Index.from(4)));
+        ladderCreator.drawLine(PositionOfLine.of(Index.from(4), Index.from(2)));
+        ladderCreator.drawLine(PositionOfLine.of(Index.from(4), Index.from(5)));
+
+        RunGame gameRunner = new RunGame(ladderCreator.getRow());
+
+        int end = gameRunner.run(0);
+
+        Assertions.assertThat(end).isEqualTo(2);
+    }
+
+    @Test
+    void RandomLadderGame() {
+        LadderCreator ladderCreator = new LadderCreator(Index.from(5), Index.from(7), true);
+
+        RunGame gameRunner = new RunGame(ladderCreator.getRow());
+
+        gameRunner.run(0);
     }
 }
