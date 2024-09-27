@@ -17,7 +17,7 @@ public class Row {
         return nodes;
     }
     public void drawLine(LadderPosition position) {
-        validateDrawLinePosition(position);
+        //validateDrawLinePosition(position);
         setDirectionBetweenNextPosition(position); //현위치에 가로선
     }
 
@@ -28,16 +28,16 @@ public class Row {
 
     private void setDirectionBetweenNextPosition(LadderPosition position) {
         int currentIndex = position.getX();
-        if (currentIndex < nodes.length - 1) {
-            Node currentNode = nodes[currentIndex];
-            Node nextNode = nodes[currentIndex + 1];
-
-            if (!currentNode.isAlreadySetDirection() && !nextNode.isAlreadySetDirection()) {
-                currentNode.setDirection(Direction.RIGHT);
-                nextNode.setDirection(Direction.LEFT);
-            } else {
-                throw new IllegalArgumentException("Line already drawn between these positions.");
-            }
+        if (currentIndex < 0 || currentIndex >= nodes.length - 1) {
+            throw new IllegalArgumentException("선을 생성할 수 없는 위치입니다.");
+        }
+        Node currentNode = nodes[currentIndex];
+        Node nextNode = nodes[currentIndex + 1];
+        if (!currentNode.isAlreadySetDirection() && !nextNode.isAlreadySetDirection()) {
+            currentNode.setDirection(Direction.RIGHT);
+            nextNode.setDirection(Direction.LEFT);
+        } else {
+            throw new IllegalArgumentException("이미 생성된 선이 존재합니다.");
         }
     }
 
@@ -46,16 +46,7 @@ public class Row {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_POSITION.getMessage());
         }
     }
-    private void validateDrawLinePosition(LadderPosition position) {
-        int x = position.getX();
-        if (x < 0 || x >= nodes.length - 1) {
-            throw new IllegalArgumentException("Cannot draw line at this position.");
-        }
-        //현재 위치와 다음 위치가 이미 연결되었는지 확인
-        if (nodes[x].isAlreadySetDirection() || nodes[x + 1].isAlreadySetDirection()) {
-            throw new IllegalArgumentException("Line already drawn at this position or adjacent.");
-        }
-    }
+
     private boolean isValidPosition(LadderPosition position) {
         return position.getX() >= 0 && position.getX() < nodes.length;
     }

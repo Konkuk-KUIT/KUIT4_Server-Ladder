@@ -57,7 +57,7 @@ public class AutoLadderGameTest {
     void 라인_생성_유효성_검사() {
         //given
         LadderSize size = new LadderSize(5, 5);  // 사다리 5행 5열
-        LadderCreator ladderCreator = new LadderCreator(size);
+        AutoLadderCreator ladderCreator = new AutoLadderCreator(size);
 
         //when & then
         for (int y = 0; y < size.getNumberOfRows(); y++) {
