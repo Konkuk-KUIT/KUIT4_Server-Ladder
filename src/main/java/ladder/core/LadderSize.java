@@ -32,7 +32,7 @@ public class LadderSize {
         return getHeightValue() * getNumberOfPersonValue();
     }
 
-    static LadderSize of(GreaterThanOne height, GreaterThanOne numberOfPerson) {
+    public static LadderSize of(GreaterThanOne height, GreaterThanOne numberOfPerson) {
         return new LadderSize(height, numberOfPerson);
     }
 }
