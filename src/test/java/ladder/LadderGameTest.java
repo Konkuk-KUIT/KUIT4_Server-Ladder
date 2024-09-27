@@ -7,15 +7,16 @@ import static org.assertj.core.api.Assertions.*;
 
 class LadderGameTest {
 
-    @Test
 
+
+    @Test
     void 사다리_생성_확인() {
         //given
-        GreaterThanOne numberOfRow = GreaterThanOne.from(3);
-        GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
+        LadderSize size = new LadderSize(3, 5);  // 사다리의 행과 열
+
 
         //when
-        LadderCreator ladderCreator = new LadderCreator(numberOfRow, numberOfPerson);
+        LadderCreator ladderCreator = new LadderCreator(size);
 
         //then
         assertThat(ladderCreator).isNotNull();
@@ -24,8 +25,8 @@ class LadderGameTest {
     @Test
     void 사다리_사람_예외_처리_확인() {
         //when
-        GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
-        LadderCreator ladderCreator = new LadderCreator(GreaterThanOne.from(2), numberOfPerson);
+        LadderSize size = new LadderSize(2, 3);  // 사다리의 행과 열
+        LadderCreator ladderCreator = new LadderCreator(size);
         LadderGame ladderGame = new LadderGame(ladderCreator);
 
         //given
@@ -39,9 +40,8 @@ class LadderGameTest {
     @Test
     void 사다리_결과_확인() {
         //when
-        GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
-        GreaterThanOne row = GreaterThanOne.from(4);
-        LadderCreator ladderCreator = new LadderCreator(row, numberOfPerson);
+        LadderSize size = new LadderSize(4, 5);  // 사다리의 행과 열
+        LadderCreator ladderCreator = new LadderCreator(size);
         LadderGame ladderGame = new LadderGame(ladderCreator);
 
         ladderCreator.drawLine(LadderPosition.of(0, 0), LadderPosition.of(1, 0));
