@@ -1,5 +1,7 @@
 package ladder;
 
+import ladder.creator.AutoLadderCreator;
+import ladder.creator.DefaultLadderCreator;
 import ladder.creator.LadderCreator;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +16,7 @@ class LadderGameTest {
         GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
 
         //when
-        LadderCreator ladderCreator = new LadderCreator(numberOfRow, numberOfPerson);
+        LadderCreator ladderCreator = new DefaultLadderCreator(numberOfRow, numberOfPerson);
 
         //then
         assertThat(ladderCreator).isNotNull();
@@ -25,7 +27,7 @@ class LadderGameTest {
         //when
         GreaterThanOne row = GreaterThanOne.from(2);
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
-        LadderCreator ladderCreator = new LadderCreator(row, numberOfPerson);
+        LadderCreator ladderCreator = new DefaultLadderCreator(row, numberOfPerson);
         LadderRunner ladderRunner = new LadderRunner(ladderCreator.getRows());
 
         //given
@@ -41,7 +43,7 @@ class LadderGameTest {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(4);
         GreaterThanOne row = GreaterThanOne.from(3);
-        LadderCreator ladderCreator = new LadderCreator(row, numberOfPerson);
+        LadderCreator ladderCreator = new DefaultLadderCreator(row, numberOfPerson);
         LadderRunner ladderRunner = new LadderRunner(ladderCreator.getRows());
 
         ladderCreator.drawLine(Position.from(0),Position.from(0));
