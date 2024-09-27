@@ -11,33 +11,33 @@ class NodeTest {
     void 오른쪽_방향_위치_이동_확인() {
         Node node = Node.from(RIGHT);
 
-        Position position = Position.from(0);
+        LadderPosition position = LadderPosition.of(0, 0);
 
         node.move(position);
 
-        assertThat(position.getValue()).isEqualTo(1);
+        assertThat(position.getX()).isEqualTo(1);
     }
 
     @Test
     void NONE_방향_위치_이동_확인() {
         Node node = Node.from(NONE);
 
-        Position position = Position.from(0);
+        LadderPosition position = LadderPosition.of(0, 0);
 
         node.move(position);
 
-        assertThat(position.getValue()).isEqualTo(0);
+        assertThat(position.getX()).isEqualTo(0);
     }
 
     @Test
     void 왼쪽_방향_위치_이동_확인() {
         Node node = Node.from(LEFT);
 
-        Position position = Position.from(1);
+        LadderPosition position = LadderPosition.of(1, 0);
 
         node.move(position);
 
-        assertThat(position.getValue()).isEqualTo(0);
+        assertThat(position.getX()).isEqualTo(0);
     }
 
 }

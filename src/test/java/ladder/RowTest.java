@@ -13,10 +13,10 @@ class RowTest {
         Row row = new Row(numberOfPerson);
 
         //given
-        Position position = Position.from(0);
+        LadderPosition position = LadderPosition.of(0, 0);
         row.nextPosition(position);
         //then
-        assertThat(position.getValue()).isEqualTo(0);
+        assertThat(position.getX()).isEqualTo(0);
     }
 
     @Test
@@ -24,21 +24,21 @@ class RowTest {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(2);
         Row row = new Row(numberOfPerson);
-        row.drawLine(Position.from(0));
+        row.drawLine(LadderPosition.of(0, 0));
 
         //given
-        Position position = Position.from(0);
+        LadderPosition position = LadderPosition.of(0, 0);
         row.nextPosition(position);
 
         //then
-        assertThat(position.getValue()).isEqualTo(1);
+        assertThat(position.getX()).isEqualTo(1);
 
         //given
-        position = Position.from(1);
+        position = LadderPosition.of(1, 0);
         row.nextPosition(position);
 
         //then
-        assertThat(position.getValue()).isEqualTo(0);
+        assertThat(position.getX()).isEqualTo(0);
     }
 
     @Test
@@ -46,28 +46,28 @@ class RowTest {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
         Row row = new Row(numberOfPerson);
-        row.drawLine(Position.from(0));
+        row.drawLine(LadderPosition.of(0, 0));
 
         //given
-        Position position = Position.from(0);
+        LadderPosition position = LadderPosition.of(0, 0);
         row.nextPosition(position);
 
         //then
-        assertThat(position.getValue()).isEqualTo(1);
+        assertThat(position.getX()).isEqualTo(1);
 
         //given
-        position = Position.from(1);
+        position = LadderPosition.of(1, 0);
         row.nextPosition(position);
 
         //then
-        assertThat(position.getValue()).isEqualTo(0);
+        assertThat(position.getX()).isEqualTo(0);
 
         //given
-        position = Position.from(2);
+        position = LadderPosition.of(2, 0);
         row.nextPosition(position);
 
         //then
-        assertThat(position.getValue()).isEqualTo(2);
+        assertThat(position.getX()).isEqualTo(2);
     }
 
     @Test
@@ -83,7 +83,7 @@ class RowTest {
         Row row = new Row(numberOfPerson);
 
         //given
-        Position position = Position.from(3);
+        LadderPosition position = LadderPosition.of(3, 0);
 
         //then
         assertThatThrownBy(() -> row.nextPosition(position))
@@ -99,7 +99,7 @@ class RowTest {
         //given
 
         //then
-        assertThatThrownBy(() -> row.nextPosition(Position.from(-1)))
+        assertThatThrownBy(() -> row.nextPosition(LadderPosition.of(-1, 0)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -110,7 +110,7 @@ class RowTest {
         Row row = new Row(numberOfPerson);
 
         //given
-        Position position = Position.from(3);
+        LadderPosition position = LadderPosition.of(3, 0);
 
         //then
         assertThatThrownBy(() -> row.drawLine(position))
@@ -126,7 +126,7 @@ class RowTest {
         //given
 
         //then
-        assertThatThrownBy(() -> row.drawLine(Position.from(-1)))
+        assertThatThrownBy(() -> row.drawLine(LadderPosition.of(-1, 0)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -135,10 +135,10 @@ class RowTest {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
         Row row = new Row(numberOfPerson);
-        row.drawLine(Position.from(0));
+        row.drawLine(LadderPosition.of(0, 0));
 
         //then
-        assertThatThrownBy(() -> row.drawLine(Position.from(1)))
+        assertThatThrownBy(() -> row.drawLine(LadderPosition.of(1, 0)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -147,10 +147,10 @@ class RowTest {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
         Row row = new Row(numberOfPerson);
-        row.drawLine(Position.from(1));
+        row.drawLine(LadderPosition.of(1, 0));
 
         //then
-        assertThatThrownBy(() -> row.drawLine(Position.from(0)))
+        assertThatThrownBy(() -> row.drawLine(LadderPosition.of(0, 0)))
                 .isInstanceOf(IllegalArgumentException.class);
 
     }

@@ -14,14 +14,16 @@ public class Node {
         return new Node(direction);
     }
 
-    public void move(Position position) {
+    public void move(LadderPosition position) {
         if (isRight()) {
-            position.next();
+            position.moveRight();
+            return;
         }else if (isLeft()) {
-            position.prev();
+            position.moveLeft();
+            return;
         }
     }
-    @Override
+
     public String toString() {
         if (isRight()) {
             return "1 ";
@@ -31,7 +33,6 @@ public class Node {
             return "0 ";
         }
     }
-
     public void setRightNode() {
         direction = RIGHT;
     }

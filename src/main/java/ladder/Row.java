@@ -15,66 +15,49 @@ public class Row {
     public Node[] getNodes(){
         return nodes;
     }
-    public void drawLine(Position startPosition) {
-        validateDrawLinePosition(startPosition);
-
-        setDirectionBetweenNextPosition(startPosition);
+    public void drawLine(LadderPosition position) {
+        validateDrawLinePosition(position);
+        setDirectionBetweenNextPosition(position); //현위치에 가로선
     }
 
-    public void nextPosition(Position position) {
+    public void nextPosition(LadderPosition position) {
         validatePosition(position);
-
-        nodes[position.getValue()].move(position);
+        nodes[position.getX()].move(position);
     }
 
-    //String으로 바꾸는 메서드
-    /*@Override
-    public String toString() {
-        StringBuilder rowStr = new StringBuilder();
-        for(Node node : nodes) {
-            if(node.isRight()){
-                rowStr.append("1 ");
-            }else if(node.isLeft()){
-                rowStr.append("-1 ");
-            }else{
-                rowStr.append("0 ");
-            }
-        }
-        return rowStr.toString();
-    }
-*/
 
-    private void setDirectionBetweenNextPosition(Position position) {
-        nodes[position.getValue()].setRightNode();
-        position.next();
-        nodes[position.getValue()].setLeftNode();
+
+    private void setDirectionBetweenNextPosition(LadderPosition position) {
+        nodes[position.getX()].setRightNode();
+        position.moveRight();
+        nodes[position.getX()].setLeftNode();
     }
 
-    private void validatePosition(Position position) {
+    private void validatePosition(LadderPosition position) {
         if (isInvalidPosition(position) ) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_POSITION.getMessage());
         }
     }
 
-    private void validateDrawLinePosition(Position startPosition) {
+    private void validateDrawLinePosition(LadderPosition startPosition) {
         validatePosition(startPosition);
         if (isLineAtPosition(startPosition) || isLineAtNextPosition(startPosition)) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_DRAW_POSITION.getMessage());
         }
     }
 
-    private boolean isInvalidPosition(Position position) {
+    private boolean isInvalidPosition(LadderPosition position) {
         return position.isBiggerThan(nodes.length - 1) ;
     }
 
-    private boolean isLineAtPosition(Position position) {
-        return nodes[position.getValue()].isAlreadySetDirection();
+    private boolean isLineAtPosition(LadderPosition position) {
+        return nodes[position.getX()].isAlreadySetDirection();
     }
 
-    private boolean isLineAtNextPosition(Position position) {
-        position.next();
+    private boolean isLineAtNextPosition(LadderPosition position) {
+        position.moveRight();
         boolean lineAtPosition = isLineAtPosition(position);
-        position.prev();
+        position.moveLeft();
         return lineAtPosition;
     }
 

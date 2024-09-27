@@ -28,7 +28,7 @@ class LadderGameTest {
         LadderGame ladderGame = new LadderGame(ladderCreator);
 
         //given
-        Position position = Position.from(4);
+        LadderPosition position = LadderPosition.of(4,0);
 
         //then
         assertThatThrownBy(() -> ladderGame.run(position))
@@ -43,29 +43,15 @@ class LadderGameTest {
         LadderCreator ladderCreator = new LadderCreator(row, numberOfPerson);
         LadderGame ladderGame = new LadderGame(ladderCreator);
 
-        ladderCreator.drawLine(Position.from(0),Position.from(0));
-        ladderCreator.drawLine(Position.from(1),Position.from(1));
-        //ladderCreator.drawLine(Position.from(2),Position.from(0));
+        ladderCreator.drawLine(LadderPosition.of(0, 0), LadderPosition.of(1, 0));
+        ladderCreator.drawLine(LadderPosition.of(1, 1), LadderPosition.of(2, 1));
 
         //given
-        Position position = Position.from(0);
-
+        LadderPosition position = LadderPosition.of(0, 0);
         ladderGame.run(position);
         //then
-        assertThat(position.getValue()).isEqualTo(2);
+        assertThat(position.getX()).isEqualTo(2);
 
-       /* //given
-        position = Position.from(1);
 
-        ladderGame.run(position);
-        //then
-        assertThat(position.getValue()).isEqualTo(1);
-
-        //given
-        position = Position.from(2);
-
-        ladderGame.run(position);
-        //then
-        assertThat(position.getValue()).isEqualTo(0);*/
     }
 }
