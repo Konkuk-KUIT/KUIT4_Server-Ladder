@@ -65,5 +65,11 @@ class LadderGameTest {
 
         //then
         assertThat(ladderRunner.run(nthOfPerson)).isEqualTo(0);
+
+        //given
+        nthOfPerson = Position.from(3);
+
+        //then
+        assertThat(ladderRunner.run(nthOfPerson)).isEqualTo(3);
     }
 }

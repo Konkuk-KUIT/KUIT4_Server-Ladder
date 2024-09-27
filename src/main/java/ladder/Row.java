@@ -4,7 +4,6 @@ import static ladder.Direction.*;
 
 public class Row {
 
-    // todo Node 클래스 분리 -> 완
     Node[] nodes;
 
     public Row(GreaterThanOne numberOfPerson) {
@@ -14,7 +13,6 @@ public class Row {
         }
     }
 
-    // todo 1, -1, 0 상수 리팩토링 -> 완
     public void drawLine(Position startPosition) {
         validateDrawLinePosition(startPosition);
 
@@ -31,6 +29,17 @@ public class Row {
         validatePosition(position);
 
         nodes[position.getPosition()].move(position);
+    }
+
+    public String printRow(Position position, boolean isCurrentRow) {
+        StringBuilder rowBuilder = new StringBuilder();
+
+        for (int i = 0; i < nodes.length; i++) {
+            rowBuilder.append(getNodeIndex(i))
+                    .append((isCurrentRow && i == position.getPosition()) ? "*" : "")
+                    .append(i < nodes.length - 1 ? " " : "");
+        }
+        return rowBuilder.toString();
     }
 
     private void validatePosition(Position position) {
@@ -58,5 +67,17 @@ public class Row {
         boolean IsLineAtPosition = !nodes[startPosition.getPosition()].isAlreadySetDirection();
         startPosition.prev();
         return IsLineAtPosition;
+    }
+
+    private String getNodeIndex(int index) {
+        switch (nodes[index].getDirection()) {
+            case RIGHT:
+                return "1";
+            case LEFT:
+                return "-1";
+            case NONE:
+            default:
+                return "0";
+        }
     }
 }
