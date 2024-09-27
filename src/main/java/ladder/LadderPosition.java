@@ -8,11 +8,11 @@ public class LadderPosition {
         this.row = row;
         this.column = column;
     }
+
     public Position getRow() {
         return row;
     }
     public Position getColumn() {
         return column;
     }
-
 }

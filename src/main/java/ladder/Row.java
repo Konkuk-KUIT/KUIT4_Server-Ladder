@@ -23,11 +23,13 @@ public class Row {
         return rowString;
     }
 
+    // exception -> return false/true
     public boolean drawLine(Position startPosition) {
         boolean validLine = validateDrawLinePosition(startPosition);
-
+        if(!validLine)
+            return false;
         setDirectionBetweenNextPosition(startPosition);
-        return validLine;
+        return true;
     }
 
     public void nextPosition(Position position) {

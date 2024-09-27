@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RandomCreatorTest {
     @Test
-    void 랜덤_사다리_생성_확인() {
+    void 자동_사다리_생성_확인() {
         //given
         GreaterThanOne numberOfRow = GreaterThanOne.from(3);
         GreaterThanOne numberOfPerson = GreaterThanOne.from(5);
@@ -25,7 +25,7 @@ class RandomCreatorTest {
     }
 
     @Test
-    void 랜덤_사다리_사람_예외_처리_확인() {
+    void 자동_사다리_사람_예외_처리_확인() {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
         LadderRandomCreator ladderRandomCreator = new LadderRandomCreator(GreaterThanOne.from(2), numberOfPerson);
@@ -39,10 +39,10 @@ class RandomCreatorTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
     @Test
-    void 랜덤_사다리_결과_확인() {
+    void 자동_사다리_결과_확인() {
         //when
-        GreaterThanOne numberOfPerson = GreaterThanOne.from(4);
-        GreaterThanOne row = GreaterThanOne.from(3);
+        GreaterThanOne numberOfPerson = GreaterThanOne.from(8);
+        GreaterThanOne row = GreaterThanOne.from(8);
         LadderRandomCreator ladderRandomCreator = new LadderRandomCreator(row, numberOfPerson);
         LadderGame ladderGame = LadderGameFactory.createRandomLadderGame(ladderRandomCreator);
 
