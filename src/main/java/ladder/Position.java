@@ -22,8 +22,9 @@ public class Position {
         position--;
     }
 
-    public void next() {
+    public Position next() {
         position++;
+        return null;
     }
 
     public boolean isSmallerThan(int position) {

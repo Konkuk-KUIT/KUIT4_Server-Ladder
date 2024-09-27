@@ -16,12 +16,11 @@ public class Node {
 
     public void move(Position position) {
         if (isRight()) {
-            position.next();
+            position.prev();
             return;
         }
         if (isLeft()) {
-            position.prev();
-            return;
+            position.next();
         }
     }
 
@@ -48,4 +47,10 @@ public class Node {
     private boolean isNone() {
         return direction == NONE;
     }
+
+    public void printDirection(StringBuilder sb) {
+        sb.append(direction.getValue());
+        //sb.append(' ');
+    }
+
 }

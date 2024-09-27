@@ -3,6 +3,10 @@ package ladder;
 import static ladder.Direction.*;
 
 public class Row {
+    public Node[] getNodes() {
+        return nodes;
+    }
+
     private final Node[] nodes;
 
     public Row(GreaterThanOne numberOfPerson) {
@@ -18,20 +22,40 @@ public class Row {
         setDirectionBetweenNextPosition(startPosition);
     }
 
-    public void nextPosition(Position position) {
-        validatePosition(position);
-
-        nodes[position.getValue()].move(position);
-    }
-
     private void setDirectionBetweenNextPosition(Position position) {
         nodes[position.getValue()].setRightNode();
         position.next();
         nodes[position.getValue()].setLeftNode();
     }
 
+    public void printLine(Position position) {
+        validateDrawLinePosition(position);
+
+        setLineDirection(position, LEFT);
+        position.next();
+        setLineDirection(position, RIGHT);
+    }
+
+
+    private void setLineDirection(Position position, Direction direction) {
+        nodes[position.getValue()] = Node.from(direction);
+    }
+
+    public void nextPosition(Position position) {
+        validatePosition(position);
+
+        nodes[position.getValue()].move(position);
+    }
+
+//    private void setDirectionBetweenNextPosition(Position position) {
+//        nodes[position.getValue()].setRightNode();
+//        position.next();
+//        nodes[position.getValue()].setLeftNode();
+//    }
+
+
     private void validatePosition(Position position) {
-        if (isInvalidPosition(position) ) {
+        if (isInvalidPosition(position)) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_POSITION.getMessage());
         }
     }
@@ -44,7 +68,7 @@ public class Row {
     }
 
     private boolean isInvalidPosition(Position position) {
-        return position.isBiggerThan(nodes.length - 1) ;
+        return position.isBiggerThan(nodes.length - 1);
     }
 
     private boolean isLineAtPosition(Position position) {
@@ -58,4 +82,18 @@ public class Row {
         return lineAtPosition;
     }
 
+    public void printCurrentRow(StringBuilder sb, GreaterThanOne numberOfRow, Position position) {
+        for (int i = 0; i < numberOfRow.getNumber(); i++) {
+            nodes[i].printDirection(sb);
+            if (position.getValue() == i) {
+                sb.append('*');
+            }
+        }
+    }
+
+    public void printRow(StringBuilder sb, GreaterThanOne numberOfRow) {
+        for (int i = 0; i < numberOfRow.getNumber(); i++) {
+            nodes[i].printDirection(sb);
+        }
+    }
 }

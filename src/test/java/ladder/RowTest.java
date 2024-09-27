@@ -24,7 +24,7 @@ class RowTest {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(2);
         Row row = new Row(numberOfPerson);
-        row.drawLine(Position.from(0));
+        row.printLine(Position.from(0));
 
         //given
         Position position = Position.from(0);
@@ -46,7 +46,7 @@ class RowTest {
         //when
         GreaterThanOne numberOfPerson = GreaterThanOne.from(3);
         Row row = new Row(numberOfPerson);
-        row.drawLine(Position.from(0));
+        row.printLine(Position.from(0));
 
         //given
         Position position = Position.from(0);
@@ -113,7 +113,7 @@ class RowTest {
         Position position = Position.from(3);
 
         //then
-        assertThatThrownBy(() -> row.drawLine(position))
+        assertThatThrownBy(() -> row.printLine(position))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -126,7 +126,7 @@ class RowTest {
         //given
 
         //then
-        assertThatThrownBy(() -> row.drawLine(Position.from(-1)))
+        assertThatThrownBy(() -> row.printLine(Position.from(-1)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -138,7 +138,7 @@ class RowTest {
         row.drawLine(Position.from(0));
 
         //then
-        assertThatThrownBy(() -> row.drawLine(Position.from(1)))
+        assertThatThrownBy(() -> row.printLine(Position.from(1)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -150,7 +150,7 @@ class RowTest {
         row.drawLine(Position.from(1));
 
         //then
-        assertThatThrownBy(() -> row.drawLine(Position.from(0)))
+        assertThatThrownBy(() -> row.printLine(Position.from(0)))
                 .isInstanceOf(IllegalArgumentException.class);
 
     }
