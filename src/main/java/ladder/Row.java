@@ -8,54 +8,50 @@ public class Row {
     public Row(GreaterThanOne numberOfPerson) {
         nodes = new Node[numberOfPerson.getNumber()];
         for (int i = 0; i < numberOfPerson.getNumber(); i++) {
-            nodes[i] = Node.from(NONE);
+            //nodes[i] = Node.from(NONE);
+            nodes[i] = new Node();
         }
     }
 
-    public void drawLine(Position startPosition) {
-        validateDrawLinePosition(startPosition);
-
-        setDirectionBetweenNextPosition(startPosition);
+    public Node[] getNodes(){
+        return nodes;
+    }
+    public void drawLine(LadderPosition position) {
+        //validateDrawLinePosition(position);
+        setDirectionBetweenNextPosition(position); //현위치에 가로선
     }
 
-    public void nextPosition(Position position) {
+    public void nextPosition(LadderPosition position) {
         validatePosition(position);
-
-        nodes[position.getValue()].move(position);
+        nodes[position.getX()].move(position);
     }
 
-    private void setDirectionBetweenNextPosition(Position position) {
-        nodes[position.getValue()].setRightNode();
-        position.next();
-        nodes[position.getValue()].setLeftNode();
+    private void setDirectionBetweenNextPosition(LadderPosition position) {
+        int currentIndex = position.getX();
+        if (currentIndex < 0 || currentIndex >= nodes.length - 1) {
+            throw new IllegalArgumentException("선을 생성할 수 없는 위치입니다.");
+        }
+        Node currentNode = nodes[currentIndex];
+        Node nextNode = nodes[currentIndex + 1];
+        if (!currentNode.isAlreadySetDirection() && !nextNode.isAlreadySetDirection()) {
+            currentNode.setDirection(Direction.RIGHT);
+            nextNode.setDirection(Direction.LEFT);
+        } else {
+            throw new IllegalArgumentException("이미 생성된 선이 존재합니다.");
+        }
     }
 
-    private void validatePosition(Position position) {
-        if (isInvalidPosition(position) ) {
+    private void validatePosition(LadderPosition position) {
+        if (!isValidPosition(position) ) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_POSITION.getMessage());
         }
     }
 
-    private void validateDrawLinePosition(Position startPosition) {
-        validatePosition(startPosition);
-        if (isLineAtPosition(startPosition) || isLineAtNextPosition(startPosition)) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_DRAW_POSITION.getMessage());
-        }
+    private boolean isValidPosition(LadderPosition position) {
+        return position.getX() >= 0 && position.getX() < nodes.length;
     }
-
-    private boolean isInvalidPosition(Position position) {
-        return position.isBiggerThan(nodes.length - 1) ;
-    }
-
-    private boolean isLineAtPosition(Position position) {
-        return nodes[position.getValue()].isAlreadySetDirection();
-    }
-
-    private boolean isLineAtNextPosition(Position position) {
-        position.next();
-        boolean lineAtPosition = isLineAtPosition(position);
-        position.prev();
-        return lineAtPosition;
-    }
+    /*private boolean isValidDrawLinePosition(LadderPosition position) {
+        return isValidPosition(position) && position.getX() < nodes.length - 1;
+    }*/
 
 }
