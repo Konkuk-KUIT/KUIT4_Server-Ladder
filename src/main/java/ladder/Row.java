@@ -13,6 +13,13 @@ public class Row {
         }
     }
 
+    public boolean canDrawLineAt(int col) {
+        if (col < 0 || col >= nodes.length - 1) {
+            return false;
+        }
+        return nodes[col].isNone() && nodes[col + 1].isNone();
+    }
+
     public void drawLine(Position startPosition) {
         validateDrawLinePosition(startPosition);
 
