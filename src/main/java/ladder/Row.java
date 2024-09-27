@@ -82,4 +82,10 @@ public class Row {
         }
         System.out.println(sb);
     }
+
+    public boolean canDrawLineAtPosition(Position position) {
+        return !isInvalidPosition(position)
+                && !isLineAtPosition(position)
+                && !isLineAtNextPosition(position);  // 사전에 유효성 검사를 수행
+    }
 }

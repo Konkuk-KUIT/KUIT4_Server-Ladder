@@ -30,20 +30,20 @@ public class AutoLadderCreator implements LadderCreator {
 
             LadderPosition newPosition = new LadderPosition(row, col);
 
-            // 해당 위치에 선을 그릴 수 있는지 확인 (연속된 선 방지)
-            if (positions.contains(newPosition)) {
+            // 해당 위치에 선을 그릴 수 있는지 확인
+            if (positions.contains(newPosition) || !canDrawLine(Position.from(row), Position.from(col))) {
                 continue;
             }
 
-            try{
-                this.drawLine(Position.from(row), Position.from(col));
-                positions.add(newPosition);
-            } catch (IllegalArgumentException e){
-                continue;
-            }
+            this.drawLine(Position.from(row), Position.from(col));
+            positions.add(newPosition);
         }
     }
 
+    // 선을 그릴 수 있는지 확인하는 메소드
+    private boolean canDrawLine(Position row, Position col) {
+        return rows[row.getPosition()].canDrawLineAtPosition(col);  // 유효성 검사 메소드를 호출
+    }
 
     @Override
     public void drawLine(Position row, Position col) {
