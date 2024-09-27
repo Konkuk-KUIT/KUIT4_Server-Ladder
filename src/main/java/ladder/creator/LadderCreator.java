@@ -2,7 +2,7 @@ package ladder.creator;
 
 import ladder.GreaterThanOne;
 import ladder.LadderPosition;
-import ladder.Position;
+
 import ladder.Row;
 
 public class LadderCreator {
@@ -24,8 +24,7 @@ public class LadderCreator {
             throw new IllegalArgumentException("가로선은 인접한 열 사이에만 그릴 수 있습니다.");
         }
 
-        // start와 end의 x좌표를 기준으로 가로선 설정
-        rows[start.getY()].drawLine(start);  // 해당 행에서 좌표 처리
+        rows[start.getY()].drawLine(start);
     }
 
 

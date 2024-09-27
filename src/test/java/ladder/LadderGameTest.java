@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.*;
 class LadderGameTest {
 
     @Test
+
     void 사다리_생성_확인() {
         //given
         GreaterThanOne numberOfRow = GreaterThanOne.from(3);
@@ -28,7 +29,7 @@ class LadderGameTest {
         LadderGame ladderGame = new LadderGame(ladderCreator);
 
         //given
-        LadderPosition position = LadderPosition.of(4,0);
+        LadderPosition position = LadderPosition.of(4, 0);
 
         //then
         assertThatThrownBy(() -> ladderGame.run(position))

@@ -9,18 +9,18 @@ class NodeTest {
 
     @Test
     void 오른쪽_방향_위치_이동_확인() {
-        Node node = Node.from(RIGHT);
+        //Node node = Node.from(RIGHT);
+        Node node = new Node();
+        node.setDirection(RIGHT);
 
         LadderPosition position = LadderPosition.of(0, 0);
-
         node.move(position);
-
         assertThat(position.getX()).isEqualTo(1);
     }
 
     @Test
     void NONE_방향_위치_이동_확인() {
-        Node node = Node.from(NONE);
+        Node node = new Node();
 
         LadderPosition position = LadderPosition.of(0, 0);
 
@@ -31,7 +31,9 @@ class NodeTest {
 
     @Test
     void 왼쪽_방향_위치_이동_확인() {
-        Node node = Node.from(LEFT);
+        Node node = new Node();
+        node.setDirection(LEFT);
+        //Node node = Node.from(LEFT);
 
         LadderPosition position = LadderPosition.of(1, 0);
 

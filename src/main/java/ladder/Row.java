@@ -8,7 +8,8 @@ public class Row {
     public Row(GreaterThanOne numberOfPerson) {
         nodes = new Node[numberOfPerson.getNumber()];
         for (int i = 0; i < numberOfPerson.getNumber(); i++) {
-            nodes[i] = Node.from(NONE);
+            //nodes[i] = Node.from(NONE);
+            nodes[i] = new Node();
         }
     }
 
@@ -25,40 +26,41 @@ public class Row {
         nodes[position.getX()].move(position);
     }
 
-
-
     private void setDirectionBetweenNextPosition(LadderPosition position) {
-        nodes[position.getX()].setRightNode();
-        position.moveRight();
-        nodes[position.getX()].setLeftNode();
+        int currentIndex = position.getX();
+        if (currentIndex < nodes.length - 1) {
+            Node currentNode = nodes[currentIndex];
+            Node nextNode = nodes[currentIndex + 1];
+
+            if (!currentNode.isAlreadySetDirection() && !nextNode.isAlreadySetDirection()) {
+                currentNode.setDirection(Direction.RIGHT);
+                nextNode.setDirection(Direction.LEFT);
+            } else {
+                throw new IllegalArgumentException("Line already drawn between these positions.");
+            }
+        }
     }
 
     private void validatePosition(LadderPosition position) {
-        if (isInvalidPosition(position) ) {
+        if (!isValidPosition(position) ) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_POSITION.getMessage());
         }
     }
-
-    private void validateDrawLinePosition(LadderPosition startPosition) {
-        validatePosition(startPosition);
-        if (isLineAtPosition(startPosition) || isLineAtNextPosition(startPosition)) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_DRAW_POSITION.getMessage());
+    private void validateDrawLinePosition(LadderPosition position) {
+        int x = position.getX();
+        if (x < 0 || x >= nodes.length - 1) {
+            throw new IllegalArgumentException("Cannot draw line at this position.");
+        }
+        //현재 위치와 다음 위치가 이미 연결되었는지 확인
+        if (nodes[x].isAlreadySetDirection() || nodes[x + 1].isAlreadySetDirection()) {
+            throw new IllegalArgumentException("Line already drawn at this position or adjacent.");
         }
     }
-
-    private boolean isInvalidPosition(LadderPosition position) {
-        return position.isBiggerThan(nodes.length - 1) ;
+    private boolean isValidPosition(LadderPosition position) {
+        return position.getX() >= 0 && position.getX() < nodes.length;
     }
-
-    private boolean isLineAtPosition(LadderPosition position) {
-        return nodes[position.getX()].isAlreadySetDirection();
-    }
-
-    private boolean isLineAtNextPosition(LadderPosition position) {
-        position.moveRight();
-        boolean lineAtPosition = isLineAtPosition(position);
-        position.moveLeft();
-        return lineAtPosition;
-    }
+    /*private boolean isValidDrawLinePosition(LadderPosition position) {
+        return isValidPosition(position) && position.getX() < nodes.length - 1;
+    }*/
 
 }

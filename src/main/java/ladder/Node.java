@@ -5,55 +5,30 @@ import static ladder.Direction.*;
 public class Node {
 
     private Direction direction;
+    public Node() {
+        this.direction = Direction.NONE;
+    }
 
-    private Node(Direction direction) {
+    public void setDirection(Direction direction) {
         this.direction = direction;
     }
-
-    public static Node from(Direction direction) {
-        return new Node(direction);
-    }
-
     public void move(LadderPosition position) {
-        if (isRight()) {
-            position.moveRight();
-            return;
-        }else if (isLeft()) {
-            position.moveLeft();
-            return;
+        switch (direction) {
+            case RIGHT:
+                position.setX(position.getX() + 1);
+                break;
+            case LEFT:
+                position.setX(position.getX() - 1);
+                break;
+            default:
+                break;
         }
     }
-
     public String toString() {
-        if (isRight()) {
-            return "1 ";
-        } else if (isLeft()) {
-            return "-1 ";
-        } else {
-            return "0 ";
-        }
+        return direction == Direction.NONE ? "0 " : (direction == Direction.RIGHT ? "1 " : "-1 ");
     }
-    public void setRightNode() {
-        direction = RIGHT;
-    }
-
-    public void setLeftNode() {
-        direction = LEFT;
-    }
-
     public boolean isAlreadySetDirection() {
-        return !isNone();
+        return direction != Direction.NONE;
     }
 
-    public boolean isRight() {
-        return direction == RIGHT;
-    }
-
-    public  boolean isLeft() {
-        return direction == LEFT;
-    }
-
-    public boolean isNone() {
-        return direction == NONE;
-    }
 }

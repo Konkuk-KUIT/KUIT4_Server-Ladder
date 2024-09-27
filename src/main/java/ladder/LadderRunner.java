@@ -22,7 +22,7 @@ public class LadderRunner {
             printLadder(position, "AFTER");
 
             // 행을 한 칸 아래로 이동
-            position.moveDown();
+            PositionMover.moveDown(position);
         }
         return position.getX();
     }
