@@ -21,13 +21,16 @@ public class RandomLadderGameTest {
 
     @Test
     void 사다리_자동_생성_결과_확인() {
+        // given
         GreaterThanOne numberOfRow = GreaterThanOne.from(5);
         GreaterThanOne numberOfPerson = GreaterThanOne.from(4);
 
+        // when
         LadderGame ladderGame = LadderGameFactory.createRandomLadderGame(numberOfRow, numberOfPerson);
         Position startPosition = Position.from(0);
         int finalPosition = ladderGame.run(startPosition);
 
+        // then
         assertThat(finalPosition).isNotNegative();
     }
 }
