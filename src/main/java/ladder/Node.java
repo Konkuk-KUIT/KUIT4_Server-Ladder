@@ -25,6 +25,24 @@ public class Node {
         }
     }
 
+    public int getNodeValue(){
+        int get = 0;
+
+        if(isRight()){
+            get = 1;
+        }
+        if(isLeft()){
+            get = -1;
+        }
+
+        return get;
+    }
+
+    public void setNodeString(StringBuilder sb){
+        sb.append(getNodeValue()).append(" ");
+    }
+
+
     public void setRightNode() {
         direction = RIGHT;
     }
