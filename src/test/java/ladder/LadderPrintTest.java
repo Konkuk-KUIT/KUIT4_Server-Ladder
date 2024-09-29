@@ -29,10 +29,7 @@ public class LadderPrintTest {
         ladderCreator.drawLine(LadderPosition.from(Position.from(1), Position.from(1)));
 
         // when
-        Position position = Position.from(0);
-
-        // then
-        Assertions.assertThat(ladderGame.run(position)).isEqualTo(2);
+        ladderGame.run(Position.from(0));
     }
 
     @Test

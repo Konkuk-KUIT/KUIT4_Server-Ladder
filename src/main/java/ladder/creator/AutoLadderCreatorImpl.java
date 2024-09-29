@@ -12,16 +12,7 @@ public class AutoLadderCreatorImpl implements LadderCreator {
     private Row[] rows;
     private LadderSize ladderSize;
 
-    public AutoLadderCreatorImpl() {
-
-    }
-
     public AutoLadderCreatorImpl(LadderSize ladderSize) {
-        setRowsAndPersons(ladderSize);
-    }
-
-    // 빈 껍데기인 랜덤 사다리에서, 사다리의 높이와 게임에 참여하는 사람 수를 설정해주는 메소드
-    public void setRowsAndPersons(LadderSize ladderSize) {
         rows = new Row[ladderSize.getNumberOfRow().getNumber()];
         this.ladderSize = ladderSize;
 
@@ -35,7 +26,7 @@ public class AutoLadderCreatorImpl implements LadderCreator {
 
         rows[ladderPosition.getRow().getValue()].drawLine(ladderPosition.getCol());
 
-        drawRandomLines(ladderSize.getNumberOfLines());
+        drawRandomLines(getNumberOfLines());
 
     }
 
@@ -60,12 +51,16 @@ public class AutoLadderCreatorImpl implements LadderCreator {
     private LadderPosition selectRandomPosition() {
         Random rand = new Random();
 
-        Position row = Position.from(rand.nextInt(rows.length - 1));
-        Position col = Position.from(rand.nextInt((rows[0].getNodes().length - 1)));
+        Position row = Position.from(rand.nextInt(ladderSize.getNumberOfRow().getNumber() - 1));
+        Position col = Position.from(rand.nextInt((ladderSize.getNumberOfPerson().getNumber() - 1)));
 
         return LadderPosition.from(row, col);
     }
 
+    // 몇 개의 사다리를 자동으로 그릴지 결정. 우선 하나의 사다리를 그린 후 시작할 것이므로 계산 결과에서 1을 뺀 값을 반환함
+    private int getNumberOfLines() {
+        return (int) (ladderSize.getNumberOfRow().getNumber() * ladderSize.getNumberOfPerson().getNumber() * 0.3) - 1;
+    }
 
     // 사다리를 그릴 수 있는지 검증
     private boolean canDrawLineValidation(LadderPosition ladderPosition) {

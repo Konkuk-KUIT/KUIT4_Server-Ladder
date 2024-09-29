@@ -51,7 +51,7 @@ public class Node {
         return direction == NONE;
     }
 
-    public int getDirection() {
-        return this.direction.getValue();
+    public void appendNodeValue(StringBuilder sb) {
+        sb.append(this.direction.getValue());
     }
 }

@@ -36,12 +36,14 @@ public class Row {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < nodes.length; i++) {
-            if(i == col.getValue()) {
-                sb.append(nodes[i].getDirection()).append("* ");
+            if (i == col.getValue()) {
+                nodes[i].appendNodeValue(sb);
+                sb.append("* ");
                 continue;
             }
 
-            sb.append(nodes[i].getDirection()).append(" ");
+            nodes[i].appendNodeValue(sb);
+            sb.append(" ");
         }
 
         return sb;
@@ -52,7 +54,8 @@ public class Row {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < nodes.length; i++) {
-            sb.append(nodes[i].getDirection()).append(" ");
+            nodes[i].appendNodeValue(sb);
+            sb.append(" ");
         }
 
         return sb;

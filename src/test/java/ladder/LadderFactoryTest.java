@@ -13,10 +13,8 @@ public class LadderFactoryTest {
     void 정적_팩토리_메소드_기본사다리_검증() {
 
         // given
-        LadderGame ladderGame = LadderGameFactory.createBasicLadderGame();
-        LadderCreator ladderCreator = ladderGame.getLadderCreator();
         LadderSize ladderSize = LadderSize.from(GreaterThanOne.from(5), GreaterThanOne.from(5));
-        ladderCreator.setRowsAndPersons(ladderSize);
+        LadderGame ladderGame = LadderGameFactory.createBasicLadderGame(ladderSize);
         ladderGame.getLadderCreator().drawLine(LadderPosition.from(Position.from(0), Position.from(0)));
 
         // then
@@ -28,10 +26,9 @@ public class LadderFactoryTest {
     void 정적_팩토리_메소드_랜덤사다리_검증() {
 
         // given
-        LadderGame ladderGame = LadderGameFactory.createRandomLadderGame();
-        LadderCreator ladderCreator = ladderGame.getLadderCreator();
+
         LadderSize ladderSize = LadderSize.from(GreaterThanOne.from(5), GreaterThanOne.from(5));
-        ladderCreator.setRowsAndPersons(ladderSize);
+        LadderGame ladderGame = LadderGameFactory.createRandomLadderGame(ladderSize);
         ladderGame.getLadderCreator().drawLine(LadderPosition.from(Position.from(0), Position.from(0)));
 
         // then
