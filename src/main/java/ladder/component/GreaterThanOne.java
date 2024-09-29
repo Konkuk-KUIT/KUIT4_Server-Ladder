@@ -1,4 +1,6 @@
-package ladder;
+package ladder.component;
+
+import ladder.constant.ExceptionMessage;
 
 public class GreaterThanOne {
 

@@ -1,25 +1,15 @@
 package ladder.creator;
 
-import ladder.GreaterThanOne;
-import ladder.Position;
-import ladder.Row;
+import ladder.component.LadderPosition;
+import ladder.component.LadderSize;
+import ladder.component.Row;
 
-public class LadderCreator {
+public interface LadderCreator {
 
-    private final Row[] rows;
+    // 사다리를 그리는 메소드
+    void drawLine(LadderPosition ladderPosition);
 
-    public LadderCreator(GreaterThanOne numberOfRow, GreaterThanOne numberOfPerson) {
-        rows = new Row[numberOfRow.getNumber()];
-        for (int i = 0; i < numberOfRow.getNumber(); i++) {
-            rows[i] = new Row(numberOfPerson);
-        }
-    }
+    // 사다리의 높이(행의 개수)를 받아오는 메소드
+    Row[] getRows();
 
-    public void drawLine(Position row, Position col) {
-        rows[row.getValue()].drawLine(col);
-    }
-
-    public Row[] getRows() {
-        return rows;
-    }
 }

@@ -1,6 +1,8 @@
-package ladder;
+package ladder.component;
 
-import static ladder.Direction.*;
+import ladder.constant.Direction;
+
+import static ladder.constant.Direction.*;
 
 public class Node {
 
@@ -47,5 +49,9 @@ public class Node {
 
     private boolean isNone() {
         return direction == NONE;
+    }
+
+    public void appendNodeValue(StringBuilder sb) {
+        sb.append(this.direction.getValue());
     }
 }
