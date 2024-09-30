@@ -4,9 +4,22 @@ import static ladder.Direction.*;
 
 public class Row {
     private final Node[] nodes;
+    private final GreaterThanOne number;
+
+    public String rowToString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < number.getNumber(); i++) {
+            sb.append(nodes[i].getIntDirection());
+            sb.append(" ");
+        }
+
+        return sb.toString();
+    }
 
     public Row(GreaterThanOne numberOfPerson) {
         nodes = new Node[numberOfPerson.getNumber()];
+        number = numberOfPerson;
+
         for (int i = 0; i < numberOfPerson.getNumber(); i++) {
             nodes[i] = Node.from(NONE);
         }

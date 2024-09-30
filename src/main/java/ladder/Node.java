@@ -25,6 +25,16 @@ public class Node {
         }
     }
 
+    public int getIntDirection() {
+        if(direction == RIGHT) {
+            return 1;
+        }
+        if(direction == LEFT) {
+            return -1;
+        }
+        return 0;
+    }
+
     public void setRightNode() {
         direction = RIGHT;
     }

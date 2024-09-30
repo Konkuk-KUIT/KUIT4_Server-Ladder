@@ -3,10 +3,9 @@ package ladder;
 import ladder.creator.LadderCreator;
 
 public class LadderGame {
-
     private final LadderCreator ladderCreator;
 
-    public LadderGame(LadderCreator ladderCreator) {
+    LadderGame(LadderCreator ladderCreator) {
         this.ladderCreator = ladderCreator;
     }
 
